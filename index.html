@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Свадебное приглашение | Ива & Драга</title>
-    <!-- Шрифты и иконки -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -25,7 +24,7 @@
             padding: 20px;
         }
 
-        /* === СТИЛИ ДЛЯ КОНВЕРТА (ОБЛОЖКИ) === */
+        /* Конверт-обложка */
         .envelope-container {
             position: fixed;
             top: 0;
@@ -53,22 +52,18 @@
             height: 220px;
             background: #fffef7;
             border-radius: 12px;
-            box-shadow: 0 25px 45px rgba(89, 53, 46, 0.25), 0 0 0 1px rgba(255, 235, 220, 0.8);
+            box-shadow: 0 25px 45px rgba(89, 53, 46, 0.25);
             transition: transform 0.3s ease;
             animation: floatEnvelope 2s ease-in-out infinite;
         }
 
         @keyframes floatEnvelope {
-            0% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
         }
 
-        .envelope:hover {
-            transform: scale(1.02);
-        }
+        .envelope:hover { transform: scale(1.02); }
 
-        /* Клапан конверта */
         .envelope-flap {
             position: absolute;
             top: 0;
@@ -112,7 +107,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
             text-align: center;
         }
 
@@ -132,14 +126,12 @@
             font-family: 'Playfair Display', serif;
             font-size: 22px;
             color: #9b5a45;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
         }
 
         .envelope-sub {
             font-size: 13px;
             color: #ad7762;
-            margin-bottom: 20px;
+            margin: 8px 0 15px;
         }
 
         .envelope-tap {
@@ -148,14 +140,9 @@
             background: rgba(255, 235, 225, 0.9);
             padding: 6px 16px;
             border-radius: 30px;
-            display: inline-block;
         }
 
-        .envelope-tap i {
-            margin-right: 6px;
-        }
-
-        /* === СТИЛИ ДЛЯ ОСНОВНОГО ПРИГЛАШЕНИЯ (СКРЫТО ИЗНАЧАЛЬНО) === */
+        /* Основное приглашение */
         .invitation-wrapper {
             opacity: 0;
             transform: scale(0.95);
@@ -173,21 +160,9 @@
 
         .invitation-card {
             background: #fffef7;
-            border-radius: 58px 58px 68px 68px;
-            box-shadow: 0 35px 65px rgba(89, 53, 46, 0.2), 0 0 0 1px rgba(255, 245, 235, 0.8);
+            border-radius: 58px;
+            box-shadow: 0 35px 65px rgba(89, 53, 46, 0.2);
             overflow: hidden;
-            animation: floatGlow 0.8s ease-out;
-        }
-
-        @keyframes floatGlow {
-            0% {
-                opacity: 0;
-                transform: translateY(45px) scale(0.96);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
         }
 
         .hero {
@@ -198,54 +173,39 @@
             border-bottom: 2px solid #ffcfbc;
         }
 
-        .hero::before {
+        .hero::before, .hero::after {
             content: "❀";
             font-size: 2rem;
             color: #d9a78b;
             position: absolute;
             top: 15px;
-            left: 30px;
             opacity: 0.5;
-            font-family: serif;
         }
-
-        .hero::after {
-            content: "❀";
-            font-size: 2rem;
-            color: #d9a78b;
-            position: absolute;
-            top: 15px;
-            right: 30px;
-            opacity: 0.5;
-            font-family: serif;
-        }
+        .hero::before { left: 30px; }
+        .hero::after { right: 30px; }
 
         .flower-icon {
             font-size: 2rem;
             color: #e7b49e;
             margin-bottom: 1rem;
-            animation: sway 3s infinite ease-in-out;
+            animation: sway 3s infinite ease;
             display: inline-block;
         }
 
         @keyframes sway {
-            0% { transform: rotate(0deg); }
+            0%, 100% { transform: rotate(0deg); }
             50% { transform: rotate(6deg); }
-            100% { transform: rotate(0deg); }
         }
 
         .invitation-title {
             font-family: 'Playfair Display', serif;
             font-size: 2.3rem;
             font-weight: 600;
-            letter-spacing: 2px;
             color: #9b5a45;
-            margin-bottom: 0.5rem;
         }
 
         .invitation-sub {
             font-size: 1rem;
-            font-weight: 300;
             color: #ad7762;
             border-top: 1px dashed #eccaba;
             display: inline-block;
@@ -253,12 +213,12 @@
         }
 
         .content {
-            padding: 2rem 2.2rem 2rem;
+            padding: 2rem;
         }
 
         .couple-names {
             text-align: center;
-            margin: 1.5rem 0 1rem;
+            margin: 1.5rem 0;
         }
 
         .names-main {
@@ -269,24 +229,20 @@
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            display: inline-block;
         }
 
         .and-icon {
-            font-family: 'Playfair Display', serif;
             font-size: 2rem;
             margin: 0 12px;
             color: #b77b62;
-            vertical-align: middle;
         }
 
         .date-block {
             background: #fff5f0;
             border-radius: 54px;
-            padding: 1.6rem 1rem;
-            margin: 2rem 0;
+            padding: 1.6rem;
             text-align: center;
-            box-shadow: inset 0 0 0 1px #ffe1d4, 0 10px 20px rgba(0,0,0,0.02);
+            margin: 2rem 0;
         }
 
         .date-big {
@@ -294,30 +250,14 @@
             font-size: 2.6rem;
             font-weight: 700;
             color: #b56144;
-            letter-spacing: 4px;
-        }
-
-        .date-details {
-            font-size: 1.1rem;
-            color: #aa735e;
-            margin-top: 0.6rem;
-            font-weight: 400;
         }
 
         .timer-wrapper {
             background: #fef3ed;
             border-radius: 42px;
-            padding: 1.5rem 0.5rem;
+            padding: 1.5rem;
             margin: 2rem 0;
             text-align: center;
-        }
-
-        .timer-title {
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #bc826a;
-            margin-bottom: 1rem;
         }
 
         .timer-grid {
@@ -330,42 +270,30 @@
         .timer-cell {
             background: white;
             border-radius: 30px;
-            padding: 0.8rem 0.3rem;
+            padding: 0.8rem;
             min-width: 85px;
-            box-shadow: 0 5px 10px rgba(128, 78, 60, 0.1);
         }
 
         .timer-number {
             font-size: 2.6rem;
             font-weight: 700;
-            font-family: 'Montserrat', monospace;
             color: #a1573d;
-            line-height: 1;
         }
 
         .timer-label {
             font-size: 0.75rem;
             text-transform: uppercase;
             color: #c2947e;
-            letter-spacing: 1px;
-        }
-
-        .info-section {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            margin: 2rem 0;
         }
 
         .info-item {
-            background: #ffffff;
+            background: white;
             border-radius: 60px;
             padding: 1rem 1.8rem;
             display: flex;
             align-items: center;
             gap: 1.2rem;
-            flex-wrap: wrap;
-            box-shadow: 0 4px 12px rgba(158, 88, 65, 0.05);
+            margin: 1rem 0;
             border: 1px solid #ffded1;
         }
 
@@ -373,61 +301,89 @@
             font-size: 2rem;
             color: #cc8e72;
             width: 48px;
-            text-align: center;
         }
 
-        .info-text {
-            flex: 1;
-            font-weight: 500;
-            font-size: 1.05rem;
-            color: #4d3128;
-        }
-
-        .info-text strong {
-            color: #a75839;
-            font-weight: 600;
-        }
-
-        .rsvp-area {
+        /* ФОРМА ПОДТВЕРЖДЕНИЯ */
+        .rsvp-form {
             background: linear-gradient(115deg, #fef1ea, #fff7f2);
-            border-radius: 58px;
+            border-radius: 48px;
             padding: 1.8rem;
-            text-align: center;
-            margin: 2rem 0 1rem;
+            margin: 2rem 0;
         }
 
-        .sms-btn {
+        .form-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #9b5740;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 18px;
+            border: 1px solid #ffded1;
+            border-radius: 40px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            background: white;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #e7b49e;
+            box-shadow: 0 0 0 3px rgba(231, 180, 158, 0.2);
+        }
+
+        .submit-btn {
             background: #b56748;
             border: none;
             padding: 14px 32px;
             font-size: 1.1rem;
             font-weight: 600;
-            font-family: 'Montserrat', sans-serif;
             color: white;
             border-radius: 50px;
             cursor: pointer;
+            width: 100%;
             transition: all 0.25s;
-            box-shadow: 0 6px 14px rgba(159, 85, 57, 0.35);
-            margin-top: 0.5rem;
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .sms-btn:hover {
+        .submit-btn:hover {
             background: #9b4f36;
-            transform: scale(0.97);
+            transform: scale(0.98);
         }
 
-        .phone-number {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #a75839;
-            background: white;
-            display: inline-block;
-            padding: 6px 18px;
-            border-radius: 50px;
-            margin: 10px 0;
+        .submit-btn:disabled {
+            background: #d4a58e;
+            cursor: not-allowed;
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            padding: 10px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .form-message.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .form-message.error {
+            background: #ffebee;
+            color: #c62828;
         }
 
         footer {
@@ -436,15 +392,13 @@
             padding: 1rem;
             font-size: 0.7rem;
             color: #b6886e;
-            letter-spacing: 1px;
         }
 
         @media (max-width: 550px) {
             .names-main { font-size: 2.5rem; }
             .date-big { font-size: 1.8rem; }
-            .timer-cell { min-width: 70px; }
             .timer-number { font-size: 1.9rem; }
-            .content { padding: 1.5rem; }
+            .timer-cell { min-width: 70px; }
             .invitation-title { font-size: 1.7rem; }
             .envelope { width: 280px; height: 200px; }
         }
@@ -452,24 +406,20 @@
 </head>
 <body>
 
-<!-- КОНВЕРТ-ОБЛОЖКА -->
+<!-- КОНВЕРТ -->
 <div class="envelope-container" id="envelopeContainer">
     <div class="envelope">
         <div class="envelope-flap"></div>
         <div class="envelope-content">
-            <div class="envelope-heart">
-                <i class="fas fa-heart"></i>
-            </div>
+            <div class="envelope-heart"><i class="fas fa-heart"></i></div>
             <div class="envelope-title">Вам пришло письмо</div>
             <div class="envelope-sub">Свадебное приглашение</div>
-            <div class="envelope-tap">
-                <i class="fas fa-hand-pointer"></i> Нажмите, чтобы открыть
-            </div>
+            <div class="envelope-tap"><i class="fas fa-hand-pointer"></i> Нажмите, чтобы открыть</div>
         </div>
     </div>
 </div>
 
-<!-- ОСНОВНОЕ ПРИГЛАШЕНИЕ (изначально скрыто) -->
+<!-- ОСНОВНОЕ ПРИГЛАШЕНИЕ -->
 <div class="invitation-wrapper" id="invitationWrapper">
     <div class="invitation-card">
         <div class="hero">
@@ -500,33 +450,63 @@
                 </div>
             </div>
 
-            <div class="info-section">
-                <div class="info-item">
-                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <div class="info-text"><strong>Замок «Лесная Сказка»</strong><br>Московская область, пос. Ромашково, ул. Цветочная 12</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
-                    <div class="info-text"><strong>Программа:</strong> 16:30 – Сбор гостей | 17:00 – Церемония | 18:00 – Фуршет | 19:00 – Банкет и танцы</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-icon"><i class="fas fa-dress-code"></i></div>
-                    <div class="info-text"><strong>Дресс-код:</strong> Вечерний, приветствуются цветочные оттенки и элегантные наряды</div>
-                </div>
+            <div class="info-item">
+                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="info-text"><strong>Замок «Лесная Сказка»</strong><br>Московская область, пос. Ромашково, ул. Цветочная 12</div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
+                <div class="info-text"><strong>Программа:</strong> 16:30 – Сбор | 17:00 – Церемония | 18:00 – Фуршет | 19:00 – Банкет</div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon"><i class="fas fa-dress-code"></i></div>
+                <div class="info-text"><strong>Дресс-код:</strong> Вечерний, приветствуются цветочные оттенки</div>
             </div>
 
-            <div class="rsvp-area">
-                <div style="font-size: 1.2rem; font-weight: 500; margin-bottom: 0.5rem;">Будем рады видеть вас!</div>
-                <div style="font-size: 0.9rem; margin-bottom: 0.5rem;">Пожалуйста, подтвердите присутствие до 01.07.2026</div>
-                <div class="phone-number">📱 8-999-757-7769</div>
-                <button class="sms-btn" id="smsButton">
-                    <i class="fas fa-paper-plane"></i> Отправить SMS
-                </button>
-                <div id="smsStatus" style="margin-top: 12px; font-size: 0.85rem; color: #a76348; min-height: 40px;"></div>
+            <!-- ФОРМА ПОДТВЕРЖДЕНИЯ -->
+            <div class="rsvp-form">
+                <div style="text-align: center; margin-bottom: 1.2rem;">
+                    <i class="fas fa-pen-alt" style="font-size: 2rem; color: #b56748;"></i>
+                    <h3 style="margin-top: 0.5rem; color: #9b5740;">Подтвердите присутствие</h3>
+                </div>
+                
+                <form id="rsvpForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Ваше имя *</label>
+                        <input type="text" id="guestName" placeholder="Например: Александр" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-users"></i> Количество гостей (включая вас) *</label>
+                        <select id="guestCount" required>
+                            <option value="">Выберите...</option>
+                            <option value="1">1 человек</option>
+                            <option value="2">2 человека</option>
+                            <option value="3">3 человека</option>
+                            <option value="4">4 человека</option>
+                            <option value="5">5+ человек</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Телефон (необязательно)</label>
+                        <input type="tel" id="guestPhone" placeholder="Для связи, если будут изменения">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-comment"></i> Пожелания или комментарий</label>
+                        <input type="text" id="guestComment" placeholder="Аллергии, пожелания по рассадке...">
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <i class="fas fa-check-circle"></i> Подтвердить
+                    </button>
+                </form>
+                <div id="formMessage" class="form-message"></div>
             </div>
         </div>
         <footer>
-            С любовью, Ива и Драга ♥ Ждем вас разделить с нами этот день
+            С любовью, Ива и Драга ♥ Ждём вас разделить с нами этот день
         </footer>
     </div>
 </div>
@@ -535,11 +515,9 @@
     // === ОТКРЫТИЕ КОНВЕРТА ===
     const envelopeContainer = document.getElementById('envelopeContainer');
     const invitationWrapper = document.getElementById('invitationWrapper');
-
+    
     envelopeContainer.addEventListener('click', function() {
-        // Добавляем класс для исчезновения конверта
         envelopeContainer.classList.add('fade-out');
-        // Показываем приглашение
         invitationWrapper.classList.add('show');
     });
 
@@ -575,28 +553,87 @@
     updateTimer();
     setInterval(updateTimer, 1000);
 
-    // === КНОПКА SMS ===
-    const smsButton = document.getElementById('smsButton');
-    const phoneNumber = '89997577769';
-    const statusDiv = document.getElementById('smsStatus');
+    // === ОТПРАВКА В GOOGLE TABLES ===
+    // ⚠️ ВСТАВЬТЕ ВАШУ ССЫЛКУ ИЗ APPS SCRIPT ВМЕСТО ЭТОЙ ↓↓↓
+    const GOOGLE_SCRIPT_URL = 'ВАША_ССЫЛКА_ИЗ_APPS_SCRIPT_СЮДА';
+    
+    const form = document.getElementById('rsvpForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formMessage = document.getElementById('formMessage');
 
-    smsButton.addEventListener('click', function() {
-        const messageText = encodeURIComponent(
-            "Здравствуйте! Я подтверждаю своё присутствие на свадьбе Ивы и Драги.\n\n" +
-            "Моё имя: [напишите ваше имя]\n" +
-            "Количество гостей: [укажите число]\n\n" +
-            "С нетерпением жду праздника!"
-        );
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
         
-        const smsLink = `sms:${phoneNumber}?body=${messageText}`;
-        window.location.href = smsLink;
+        // Собираем данные
+        const name = document.getElementById('guestName').value.trim();
+        const guests = document.getElementById('guestCount').value;
+        const phone = document.getElementById('guestPhone').value.trim();
+        const comment = document.getElementById('guestComment').value.trim();
         
-        statusDiv.innerHTML = '<div style="background:#4caf50; color:white; padding:8px 16px; border-radius:40px; display:inline-block;">📱 Открываем SMS...</div>';
+        if (!name) {
+            showMessage('Пожалуйста, введите ваше имя', 'error');
+            return;
+        }
+        
+        if (!guests) {
+            showMessage('Пожалуйста, выберите количество гостей', 'error');
+            return;
+        }
+        
+        // Блокируем кнопку, пока идёт отправка
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Отправка...';
+        
+        try {
+            // Если ссылка на Google Script ещё не заменена, показываем инструкцию
+            if (GOOGLE_SCRIPT_URL === 'ВАША_ССЫЛКА_ИЗ_APPS_SCRIPT_СЮДА') {
+                showMessage('⚠️ Настройка: владелец приглашения должен заменить ссылку на Google Script в коде (строка GOOGLE_SCRIPT_URL)', 'error');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Подтвердить';
+                return;
+            }
+            
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', // нужно для работы с Google Script
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    guests: guests,
+                    phone: phone,
+                    comment: comment
+                })
+            });
+            
+            // При mode: 'no-cors' нельзя прочитать ответ, но отправка работает
+            showMessage('✅ Спасибо, ' + name + '! Ваше подтверждение отправлено. Ждём вас на свадьбе! 🥂', 'success');
+            form.reset();
+            
+        } catch (error) {
+            console.error('Ошибка:', error);
+            showMessage('❌ Произошла ошибка. Пожалуйста, попробуйте ещё раз или свяжитесь с нами по телефону', 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Подтвердить';
+        }
+    });
+    
+    function showMessage(text, type) {
+        formMessage.textContent = text;
+        formMessage.className = 'form-message ' + type;
         
         setTimeout(() => {
-            statusDiv.innerHTML = '';
-        }, 4000);
-    });
+            formMessage.textContent = '';
+            formMessage.className = 'form-message';
+        }, 5000);
+    }
+    
+    // Подсказка, если ссылка не заменена
+    if (GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbyTLdzIJmM0_0ZGicMj1fWBxjk_Jprlbzs0WYoLRPErlYzUyNBlBXUYWxbQH6p4X6g/exec') {
+        console.warn('⚠️ Внимание! Замените GOOGLE_SCRIPT_URL на ссылку из Google Apps Script');
+    }
 </script>
 </body>
 </html>
