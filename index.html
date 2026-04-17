@@ -555,7 +555,7 @@
 
     // === ОТПРАВКА В GOOGLE TABLES ===
     // ⚠️ ВСТАВЬТЕ ВАШУ ССЫЛКУ ИЗ APPS SCRIPT ВМЕСТО ЭТОЙ ↓↓↓
-    const GOOGLE_SCRIPT_URL = 'ВАША_ССЫЛКА_ИЗ_APPS_SCRIPT_СЮДА';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyTLdzIJmM0_0ZGicMj1fWBxjk_Jprlbzs0WYoLRPErlYzUyNBlBXUYWxbQH6p4X6g/exec';
     
     const form = document.getElementById('rsvpForm');
     const submitBtn = document.getElementById('submitBtn');
@@ -586,7 +586,7 @@
         
         try {
             // Если ссылка на Google Script ещё не заменена, показываем инструкцию
-            if (GOOGLE_SCRIPT_URL === 'ВАША_ССЫЛКА_ИЗ_APPS_SCRIPT_СЮДА') {
+            if (GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbyTLdzIJmM0_0ZGicMj1fWBxjk_Jprlbzs0WYoLRPErlYzUyNBlBXUYWxbQH6p4X6g/exec') {
                 showMessage('⚠️ Настройка: владелец приглашения должен заменить ссылку на Google Script в коде (строка GOOGLE_SCRIPT_URL)', 'error');
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Подтвердить';
