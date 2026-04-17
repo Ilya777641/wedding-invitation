@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Свадебное приглашение | Ива & Драга</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Шрифты и иконки -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,210 +15,400 @@
         }
 
         body {
-            background: linear-gradient(135deg, #fbe9e3 0%, #f5dfd7 100%);
+            background: linear-gradient(145deg, #f9e9e0 0%, #fce9e6 100%);
             font-family: 'Montserrat', sans-serif;
-            padding: 20px;
+            color: #3e2c2a;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
-        .card {
-            max-width: 700px;
-            margin: 0 auto;
-            background: #fffef9;
-            border-radius: 60px 60px 70px 70px;
-            box-shadow: 0 30px 50px rgba(90, 50, 40, 0.2);
+        /* === СТИЛИ ДЛЯ КОНВЕРТА (ОБЛОЖКИ) === */
+        .envelope-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #f9e9e0 0%, #fce9e6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .envelope-container.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .envelope {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            background: #fffef7;
+            border-radius: 12px;
+            box-shadow: 0 25px 45px rgba(89, 53, 46, 0.25), 0 0 0 1px rgba(255, 235, 220, 0.8);
+            transition: transform 0.3s ease;
+            animation: floatEnvelope 2s ease-in-out infinite;
+        }
+
+        @keyframes floatEnvelope {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .envelope:hover {
+            transform: scale(1.02);
+        }
+
+        /* Клапан конверта */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fffef7;
+            border-radius: 12px;
             overflow: hidden;
-            animation: fadeUp 0.8s ease-out;
         }
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+        .envelope-flap::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            border-top: 110px solid #ffe0d4;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-radius: 12px 12px 0 0;
         }
 
-        .header {
-            background: #fff1ea;
+        .envelope-flap::after {
+            content: "✉";
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 48px;
+            color: #e7b49e;
+            opacity: 0.7;
+        }
+
+        .envelope-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
             text-align: center;
-            padding: 30px 20px 25px;
-            border-bottom: 2px solid #ffddcf;
         }
 
-        .flower {
-            font-size: 40px;
-            animation: spinSlow 4s infinite ease;
+        .envelope-heart {
+            font-size: 32px;
+            color: #e7b49e;
+            margin-bottom: 15px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        .envelope-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: #9b5a45;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .envelope-sub {
+            font-size: 13px;
+            color: #ad7762;
+            margin-bottom: 20px;
+        }
+
+        .envelope-tap {
+            font-size: 12px;
+            color: #c89a82;
+            background: rgba(255, 235, 225, 0.9);
+            padding: 6px 16px;
+            border-radius: 30px;
             display: inline-block;
         }
 
-        @keyframes spinSlow {
+        .envelope-tap i {
+            margin-right: 6px;
+        }
+
+        /* === СТИЛИ ДЛЯ ОСНОВНОГО ПРИГЛАШЕНИЯ (СКРЫТО ИЗНАЧАЛЬНО) === */
+        .invitation-wrapper {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .invitation-wrapper.show {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+        .invitation-card {
+            background: #fffef7;
+            border-radius: 58px 58px 68px 68px;
+            box-shadow: 0 35px 65px rgba(89, 53, 46, 0.2), 0 0 0 1px rgba(255, 245, 235, 0.8);
+            overflow: hidden;
+            animation: floatGlow 0.8s ease-out;
+        }
+
+        @keyframes floatGlow {
+            0% {
+                opacity: 0;
+                transform: translateY(45px) scale(0.96);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #ffe9df, #ffe0d4);
+            padding: 2.5rem 2rem 1.8rem;
+            text-align: center;
+            position: relative;
+            border-bottom: 2px solid #ffcfbc;
+        }
+
+        .hero::before {
+            content: "❀";
+            font-size: 2rem;
+            color: #d9a78b;
+            position: absolute;
+            top: 15px;
+            left: 30px;
+            opacity: 0.5;
+            font-family: serif;
+        }
+
+        .hero::after {
+            content: "❀";
+            font-size: 2rem;
+            color: #d9a78b;
+            position: absolute;
+            top: 15px;
+            right: 30px;
+            opacity: 0.5;
+            font-family: serif;
+        }
+
+        .flower-icon {
+            font-size: 2rem;
+            color: #e7b49e;
+            margin-bottom: 1rem;
+            animation: sway 3s infinite ease-in-out;
+            display: inline-block;
+        }
+
+        @keyframes sway {
             0% { transform: rotate(0deg); }
-            50% { transform: rotate(8deg); }
+            50% { transform: rotate(6deg); }
             100% { transform: rotate(0deg); }
         }
 
-        h1 {
+        .invitation-title {
             font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            color: #aa684e;
+            font-size: 2.3rem;
+            font-weight: 600;
             letter-spacing: 2px;
-            margin: 10px 0 5px;
+            color: #9b5a45;
+            margin-bottom: 0.5rem;
         }
 
-        .sub {
-            color: #c58b70;
-            font-size: 13px;
-            border-top: 1px dashed #f0cfc0;
+        .invitation-sub {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #ad7762;
+            border-top: 1px dashed #eccaba;
             display: inline-block;
-            padding-top: 8px;
+            padding-top: 0.6rem;
         }
 
         .content {
-            padding: 30px 28px;
+            padding: 2rem 2.2rem 2rem;
         }
 
-        .names {
+        .couple-names {
             text-align: center;
-            font-size: 44px;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .names-main {
             font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
             font-weight: 700;
-            background: linear-gradient(120deg, #b46a4b, #8f4f36);
+            background: linear-gradient(125deg, #be7c62, #9b5740);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            margin: 15px 0;
-        }
-
-        .heart {
-            font-size: 34px;
-            background: none;
-            -webkit-background-clip: unset;
-            color: #e2a084;
             display: inline-block;
-            margin: 0 8px;
         }
 
-        .date-box {
-            background: #fff7f2;
-            border-radius: 50px;
-            padding: 18px;
-            text-align: center;
-            margin: 25px 0;
-            box-shadow: inset 0 0 0 1px #ffe3d6, 0 8px 15px rgba(0,0,0,0.02);
-        }
-
-        .date {
+        .and-icon {
             font-family: 'Playfair Display', serif;
-            font-size: 32px;
+            font-size: 2rem;
+            margin: 0 12px;
+            color: #b77b62;
+            vertical-align: middle;
+        }
+
+        .date-block {
+            background: #fff5f0;
+            border-radius: 54px;
+            padding: 1.6rem 1rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: inset 0 0 0 1px #ffe1d4, 0 10px 20px rgba(0,0,0,0.02);
+        }
+
+        .date-big {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
             font-weight: 700;
-            color: #bc6a4a;
+            color: #b56144;
+            letter-spacing: 4px;
         }
 
-        .time {
-            font-size: 15px;
-            color: #b87a60;
-            margin-top: 6px;
+        .date-details {
+            font-size: 1.1rem;
+            color: #aa735e;
+            margin-top: 0.6rem;
+            font-weight: 400;
         }
 
-        .timer {
-            background: #fef1ea;
-            border-radius: 45px;
-            padding: 18px 10px;
-            margin: 25px 0;
+        .timer-wrapper {
+            background: #fef3ed;
+            border-radius: 42px;
+            padding: 1.5rem 0.5rem;
+            margin: 2rem 0;
             text-align: center;
         }
 
-        .timer h4 {
-            font-size: 13px;
+        .timer-title {
+            font-size: 1rem;
+            text-transform: uppercase;
             letter-spacing: 3px;
-            color: #c08064;
-            margin-bottom: 12px;
+            color: #bc826a;
+            margin-bottom: 1rem;
         }
 
-        .timer-flex {
+        .timer-grid {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 1.2rem;
             flex-wrap: wrap;
         }
 
-        .timer-item {
+        .timer-cell {
             background: white;
             border-radius: 30px;
-            padding: 10px 15px;
-            min-width: 80px;
-            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+            padding: 0.8rem 0.3rem;
+            min-width: 85px;
+            box-shadow: 0 5px 10px rgba(128, 78, 60, 0.1);
         }
 
-        .timer-num {
-            font-size: 32px;
+        .timer-number {
+            font-size: 2.6rem;
             font-weight: 700;
-            color: #a75638;
+            font-family: 'Montserrat', monospace;
+            color: #a1573d;
+            line-height: 1;
         }
 
         .timer-label {
-            font-size: 11px;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            color: #c69278;
+            color: #c2947e;
+            letter-spacing: 1px;
         }
 
-        .info-row {
+        .info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        .info-item {
+            background: #ffffff;
+            border-radius: 60px;
+            padding: 1rem 1.8rem;
             display: flex;
             align-items: center;
-            gap: 18px;
-            background: white;
-            border-radius: 50px;
-            padding: 12px 20px;
-            margin: 15px 0;
-            border: 1px solid #ffe0d2;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 12px rgba(158, 88, 65, 0.05);
+            border: 1px solid #ffded1;
         }
 
         .info-icon {
-            font-size: 28px;
+            font-size: 2rem;
             color: #cc8e72;
-            min-width: 45px;
+            width: 48px;
             text-align: center;
         }
 
         .info-text {
             flex: 1;
-            font-size: 15px;
+            font-weight: 500;
+            font-size: 1.05rem;
             color: #4d3128;
-            line-height: 1.4;
         }
 
         .info-text strong {
             color: #a75839;
+            font-weight: 600;
         }
 
         .rsvp-area {
             background: linear-gradient(115deg, #fef1ea, #fff7f2);
-            border-radius: 55px;
-            padding: 25px 20px;
+            border-radius: 58px;
+            padding: 1.8rem;
             text-align: center;
-            margin: 30px 0 20px;
-        }
-
-        .rsvp-area h3 {
-            color: #9b5740;
-            margin-bottom: 8px;
-            font-family: 'Playfair Display', serif;
+            margin: 2rem 0 1rem;
         }
 
         .sms-btn {
             background: #b56748;
             border: none;
-            padding: 16px 35px;
-            font-size: 18px;
+            padding: 14px 32px;
+            font-size: 1.1rem;
             font-weight: 600;
             font-family: 'Montserrat', sans-serif;
             color: white;
-            border-radius: 60px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(159, 85, 57, 0.4);
-            margin: 15px 0 10px;
+            transition: all 0.25s;
+            box-shadow: 0 6px 14px rgba(159, 85, 57, 0.35);
+            margin-top: 0.5rem;
             display: inline-flex;
             align-items: center;
             gap: 12px;
@@ -224,129 +416,134 @@
 
         .sms-btn:hover {
             background: #9b4f36;
-            transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(159, 85, 57, 0.5);
-        }
-
-        .sms-btn:active {
-            transform: scale(0.98);
+            transform: scale(0.97);
         }
 
         .phone-number {
-            font-size: 20px;
-            font-weight: 700;
+            font-size: 1rem;
+            font-weight: 600;
             color: #a75839;
             background: white;
             display: inline-block;
-            padding: 8px 20px;
+            padding: 6px 18px;
             border-radius: 50px;
             margin: 10px 0;
-            letter-spacing: 1px;
-        }
-
-        .note {
-            font-size: 12px;
-            color: #b8836a;
-            margin-top: 15px;
-        }
-
-        .toast-msg {
-            background: #4caf50;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 50px;
-            font-size: 14px;
-            margin-top: 15px;
-            display: inline-block;
-            animation: fadeInOut 3s ease;
-        }
-
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: translateY(10px); }
-            15% { opacity: 1; transform: translateY(0); }
-            85% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-10px); }
         }
 
         footer {
             background: #fae9e1;
             text-align: center;
-            padding: 18px;
-            font-size: 12px;
+            padding: 1rem;
+            font-size: 0.7rem;
             color: #b6886e;
+            letter-spacing: 1px;
         }
 
         @media (max-width: 550px) {
-            .names { font-size: 32px; }
-            .date { font-size: 24px; }
-            .timer-num { font-size: 24px; }
-            .timer-item { min-width: 65px; padding: 8px 10px; }
-            .content { padding: 20px; }
-            .sms-btn { padding: 12px 25px; font-size: 16px; }
+            .names-main { font-size: 2.5rem; }
+            .date-big { font-size: 1.8rem; }
+            .timer-cell { min-width: 70px; }
+            .timer-number { font-size: 1.9rem; }
+            .content { padding: 1.5rem; }
+            .invitation-title { font-size: 1.7rem; }
+            .envelope { width: 280px; height: 200px; }
         }
     </style>
 </head>
 <body>
-<div class="card">
-    <div class="header">
-        <div class="flower">🌸</div>
-        <h1>СВАДЕБНОЕ ПРИГЛАШЕНИЕ</h1>
-        <div class="sub">Тепло наших сердец для вас</div>
-    </div>
 
-    <div class="content">
-        <div class="names">
-            Ива <span class="heart">❤</span> Драга
-        </div>
-
-        <div class="date-box">
-            <div class="date">31 ИЮЛЯ 2026</div>
-            <div class="time">17:00 • Торжественная церемония и банкет</div>
-        </div>
-
-        <div class="timer">
-            <h4>⏰ ДО НАШЕГО ДНЯ</h4>
-            <div class="timer-flex">
-                <div class="timer-item"><div class="timer-num" id="days">00</div><div class="timer-label">Дней</div></div>
-                <div class="timer-item"><div class="timer-num" id="hours">00</div><div class="timer-label">Часов</div></div>
-                <div class="timer-item"><div class="timer-num" id="minutes">00</div><div class="timer-label">Минут</div></div>
-                <div class="timer-item"><div class="timer-num" id="seconds">00</div><div class="timer-label">Секунд</div></div>
+<!-- КОНВЕРТ-ОБЛОЖКА -->
+<div class="envelope-container" id="envelopeContainer">
+    <div class="envelope">
+        <div class="envelope-flap"></div>
+        <div class="envelope-content">
+            <div class="envelope-heart">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="envelope-title">Вам пришло письмо</div>
+            <div class="envelope-sub">Свадебное приглашение</div>
+            <div class="envelope-tap">
+                <i class="fas fa-hand-pointer"></i> Нажмите, чтобы открыть
             </div>
         </div>
-
-        <div class="info-row">
-            <div class="info-icon">📍</div>
-            <div class="info-text"><strong>Замок «Лесная Сказка»</strong><br>Московская область, пос. Ромашково, ул. Цветочная 12</div>
-        </div>
-
-        <div class="info-row">
-            <div class="info-icon">⏰</div>
-            <div class="info-text"><strong>Программа:</strong> 16:30 – Сбор гостей | 17:00 – Церемония | 18:00 – Фуршет | 19:00 – Банкет и танцы</div>
-        </div>
-
-        <div class="info-row">
-            <div class="info-icon">👗</div>
-            <div class="info-text"><strong>Дресс-код:</strong> Вечерний, приветствуются цветочные оттенки и элегантные наряды</div>
-        </div>
-
-        <div class="rsvp-area">
-            <h3>✨ Подтвердите своё присутствие ✨</h3>
-            <p style="margin-bottom: 10px;">Отправьте SMS с вашим именем и количеством гостей</p>
-            <div class="phone-number">📱 8-999-757-7769</div>
-            <button class="sms-btn" id="smsButton">
-                📲 Отправить SMS
-            </button>
-            <div class="note">Нажмите на кнопку — откроется SMS с готовым текстом.<br>Просто отправьте!</div>
-            <div id="smsStatus" style="margin-top: 12px;"></div>
-        </div>
     </div>
+</div>
 
-    <footer>
-        С любовью, Ива и Драга ♥ Ждём вас разделить с нами этот день
-    </footer>
+<!-- ОСНОВНОЕ ПРИГЛАШЕНИЕ (изначально скрыто) -->
+<div class="invitation-wrapper" id="invitationWrapper">
+    <div class="invitation-card">
+        <div class="hero">
+            <div class="flower-icon"><i class="fas fa-seedling"></i></div>
+            <div class="invitation-title">СВАДЕБНОЕ ПРИГЛАШЕНИЕ</div>
+            <div class="invitation-sub">Тепло наших сердец для вас</div>
+        </div>
+
+        <div class="content">
+            <div class="couple-names">
+                <span class="names-main">Ива</span>
+                <span class="and-icon"><i class="fas fa-heart"></i></span>
+                <span class="names-main">Драга</span>
+            </div>
+
+            <div class="date-block">
+                <div class="date-big">31 ИЮЛЯ 2026</div>
+                <div class="date-details">17:00 • Торжественная церемония и банкет</div>
+            </div>
+
+            <div class="timer-wrapper">
+                <div class="timer-title"><i class="far fa-clock"></i> ДО НАШЕГО ДНЯ</div>
+                <div class="timer-grid">
+                    <div class="timer-cell"><div class="timer-number" id="days">00</div><div class="timer-label">Дней</div></div>
+                    <div class="timer-cell"><div class="timer-number" id="hours">00</div><div class="timer-label">Часов</div></div>
+                    <div class="timer-cell"><div class="timer-number" id="minutes">00</div><div class="timer-label">Минут</div></div>
+                    <div class="timer-cell"><div class="timer-number" id="seconds">00</div><div class="timer-label">Секунд</div></div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="info-text"><strong>Замок «Лесная Сказка»</strong><br>Московская область, пос. Ромашково, ул. Цветочная 12</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="info-text"><strong>Программа:</strong> 16:30 – Сбор гостей | 17:00 – Церемония | 18:00 – Фуршет | 19:00 – Банкет и танцы</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-dress-code"></i></div>
+                    <div class="info-text"><strong>Дресс-код:</strong> Вечерний, приветствуются цветочные оттенки и элегантные наряды</div>
+                </div>
+            </div>
+
+            <div class="rsvp-area">
+                <div style="font-size: 1.2rem; font-weight: 500; margin-bottom: 0.5rem;">Будем рады видеть вас!</div>
+                <div style="font-size: 0.9rem; margin-bottom: 0.5rem;">Пожалуйста, подтвердите присутствие до 01.07.2026</div>
+                <div class="phone-number">📱 8-999-757-7769</div>
+                <button class="sms-btn" id="smsButton">
+                    <i class="fas fa-paper-plane"></i> Отправить SMS
+                </button>
+                <div id="smsStatus" style="margin-top: 12px; font-size: 0.85rem; color: #a76348; min-height: 40px;"></div>
+            </div>
+        </div>
+        <footer>
+            С любовью, Ива и Драга ♥ Ждем вас разделить с нами этот день
+        </footer>
+    </div>
 </div>
 
 <script>
+    // === ОТКРЫТИЕ КОНВЕРТА ===
+    const envelopeContainer = document.getElementById('envelopeContainer');
+    const invitationWrapper = document.getElementById('invitationWrapper');
+
+    envelopeContainer.addEventListener('click', function() {
+        // Добавляем класс для исчезновения конверта
+        envelopeContainer.classList.add('fade-out');
+        // Показываем приглашение
+        invitationWrapper.classList.add('show');
+    });
+
+    // === ТАЙМЕР ===
     function getWeddingDate() {
         return new Date(2026, 6, 31, 17, 0, 0);
     }
@@ -378,6 +575,7 @@
     updateTimer();
     setInterval(updateTimer, 1000);
 
+    // === КНОПКА SMS ===
     const smsButton = document.getElementById('smsButton');
     const phoneNumber = '89997577769';
     const statusDiv = document.getElementById('smsStatus');
@@ -393,27 +591,12 @@
         const smsLink = `sms:${phoneNumber}?body=${messageText}`;
         window.location.href = smsLink;
         
-        statusDiv.innerHTML = '<div class="toast-msg">📱 Открываем SMS... Если не сработало, отправьте вручную на номер 8-999-757-7769</div>';
+        statusDiv.innerHTML = '<div style="background:#4caf50; color:white; padding:8px 16px; border-radius:40px; display:inline-block;">📱 Открываем SMS...</div>';
         
         setTimeout(() => {
-            if (statusDiv.innerHTML) {
-                statusDiv.innerHTML = '';
-            }
+            statusDiv.innerHTML = '';
         }, 4000);
     });
-
-    const phoneDiv = document.querySelector('.phone-number');
-    if (phoneDiv) {
-        phoneDiv.style.cursor = 'pointer';
-        phoneDiv.addEventListener('click', function() {
-            navigator.clipboard.writeText('89997577769').then(() => {
-                statusDiv.innerHTML = '<div class="toast-msg" style="background:#b56748;">✅ Номер скопирован: 8-999-757-7769</div>';
-                setTimeout(() => {
-                    if (statusDiv.innerHTML) statusDiv.innerHTML = '';
-                }, 2000);
-            });
-        });
-    }
 </script>
 </body>
 </html>
