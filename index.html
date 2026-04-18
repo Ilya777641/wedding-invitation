@@ -24,7 +24,6 @@
             padding: 20px;
         }
 
-        /* === КОНВЕРТ === */
         .envelope-container {
             position: fixed;
             top: 0;
@@ -150,7 +149,6 @@
             margin-right: 6px;
         }
 
-        /* === ОСНОВНОЕ ПРИГЛАШЕНИЕ === */
         .invitation-wrapper {
             opacity: 0;
             transform: scale(0.95);
@@ -237,7 +235,6 @@
             padding: 2rem;
         }
 
-        /* ПЕРСОНАЛЬНОЕ ОБРАЩЕНИЕ */
         .greeting {
             text-align: center;
             margin-bottom: 1.8rem;
@@ -457,7 +454,6 @@
 </head>
 <body>
 
-<!-- КОНВЕРТ-ОБЛОЖКА -->
 <div class="envelope-container" id="envelopeContainer">
     <div class="envelope">
         <div class="envelope-flap"></div>
@@ -470,7 +466,6 @@
     </div>
 </div>
 
-<!-- ОСНОВНОЕ ПРИГЛАШЕНИЕ -->
 <div class="invitation-wrapper" id="invitationWrapper">
     <div class="invitation-card">
         <div class="hero">
@@ -480,7 +475,6 @@
         </div>
 
         <div class="content">
-            <!-- ПЕРСОНАЛЬНОЕ ОБРАЩЕНИЕ -->
             <div class="greeting" id="greetingBlock">
                 <div class="greeting-text" id="guestGreeting">Дорогие друзья!</div>
                 <div class="greeting-sub">Имеем честь пригласить вас</div>
@@ -540,6 +534,31 @@
 </div>
 
 <script>
+    // === ФУНКЦИЯ ОПРЕДЕЛЕНИЯ РОДА (Дорогой / Дорогая / Дорогие) ===
+    function getCorrectGreeting(name) {
+        if (!name) return 'Дорогие друзья!';
+        
+        // Проверяем, есть ли "и" — для пар
+        if (name.includes(' и ')) {
+            return `Дорогие ${name}!`;
+        }
+        
+        // Убираем пробелы в начале и конце
+        name = name.trim();
+        
+        // Получаем последнюю букву (в нижнем регистре)
+        const lastChar = name.slice(-1).toLowerCase();
+        
+        // Женские окончания
+        const femaleEndings = ['а', 'я', 'ия'];
+        
+        if (femaleEndings.includes(lastChar)) {
+            return `Дорогая ${name}!`;
+        } else {
+            return `Дорогой ${name}!`;
+        }
+    }
+
     // === ПОЛУЧАЕМ ИМЯ ГОСТЯ ИЗ ССЫЛКИ ===
     function getGuestNameFromURL() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -552,20 +571,11 @@
         return null;
     }
 
-    function formatGreeting(guestName) {
-        if (!guestName) {
-            return 'Дорогие друзья!';
-        }
-        if (guestName.includes(' и ')) {
-            return `Дорогие ${guestName}!`;
-        }
-        return `Дорогой ${guestName}!`;
-    }
-
     const guestName = getGuestNameFromURL();
     const greetingDiv = document.getElementById('guestGreeting');
+    
     if (guestName) {
-        greetingDiv.textContent = formatGreeting(guestName);
+        greetingDiv.textContent = getCorrectGreeting(guestName);
     } else {
         greetingDiv.textContent = 'Дорогие друзья!';
     }
@@ -611,10 +621,9 @@
     updateTimer();
     setInterval(updateTimer, 1000);
 
-    // === КОПИРОВАНИЕ НОМЕРОВ ТЕЛЕФОНОВ ===
+    // === КОПИРОВАНИЕ НОМЕРОВ ===
     const phoneNumbers = document.querySelectorAll('.phone-number');
     
-    // Создаём уведомление
     const notice = document.createElement('div');
     notice.style.position = 'fixed';
     notice.style.bottom = '30px';
