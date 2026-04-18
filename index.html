@@ -231,7 +231,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label><i class="fas fa-users"></i> Количество гостей *</label>
+                        <label><i class="fas fa-users"></i> Количество гостей (включая вас) *</label>
                         <select id="guestCount" required>
                             <option value="">Выберите...</option>
                             <option value="1">1 человек</option>
@@ -244,12 +244,12 @@
                     
                     <div class="form-group">
                         <label><i class="fas fa-phone"></i> Телефон (необязательно)</label>
-                        <input type="tel" id="guestPhone" placeholder="Для связи">
+                        <input type="tel" id="guestPhone" placeholder="Для связи, если будут изменения">
                     </div>
                     
                     <div class="form-group">
-                        <label><i class="fas fa-comment"></i> Комментарий</label>
-                        <input type="text" id="guestComment" placeholder="Пожелания, аллергии...">
+                        <label><i class="fas fa-comment"></i> Пожелания или комментарий</label>
+                        <input type="text" id="guestComment" placeholder="Аллергии, пожелания по рассадке...">
                     </div>
                     
                     <button type="submit" class="submit-btn" id="submitBtn">
@@ -260,92 +260,115 @@
             </div>
         </div>
         <footer>
-            С любовью, Ива и Драга ♥ Ждём вас
+            С любовью, Ива и Драга ♥ Ждём вас разделить с нами этот день
         </footer>
     </div>
 </div>
 
 <script>
-    // Открытие конверта
-    document.getElementById('envelopeContainer').addEventListener('click', function() {
-        this.classList.add('fade-out');
-        document.getElementById('invitationWrapper').classList.add('show');
+    // === ОТКРЫТИЕ КОНВЕРТА ===
+    const envelopeContainer = document.getElementById('envelopeContainer');
+    const invitationWrapper = document.getElementById('invitationWrapper');
+    
+    envelopeContainer.addEventListener('click', function() {
+        envelopeContainer.classList.add('fade-out');
+        invitationWrapper.classList.add('show');
     });
 
-    // Таймер
+    // === ТАЙМЕР ===
+    function getWeddingDate() {
+        return new Date(2026, 6, 31, 17, 0, 0);
+    }
+
     function updateTimer() {
-        const target = new Date(2026, 6, 31, 17, 0, 0);
-        const diff = target - new Date();
-        if (diff <= 0) {
-            ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).innerText = '00');
+        const now = new Date().getTime();
+        const target = getWeddingDate().getTime();
+        const distance = target - now;
+
+        if (distance < 0) {
+            document.getElementById('days').innerText = "00";
+            document.getElementById('hours').innerText = "00";
+            document.getElementById('minutes').innerText = "00";
+            document.getElementById('seconds').innerText = "00";
             return;
         }
-        document.getElementById('days').innerText = Math.floor(diff / 86400000);
-        document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000);
-        document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000);
-        document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000);
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (86400000)) / (3600000));
+        const minutes = Math.floor((distance % 3600000) / 60000);
+        const seconds = Math.floor((distance % 60000) / 1000);
+
+        document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+        document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+        document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
     }
+
     updateTimer();
     setInterval(updateTimer, 1000);
 
-    // === ОТПРАВКА ФОРМЫ ===
-    // ВАША ССЫЛКА НА APPS SCRIPT
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyg3OAyebTCuWCVhXhZXkn-SjxASiuopKRbnOU_HQJ7B8MxEaXOS_w6m5F95m-n6uDf/exec';
+    // === НОВАЯ ССЫЛКА НА APPS SCRIPT (УЖЕ ВСТАВЛЕНА) ===
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxEt9vFlEn0mpANdg2nlgg1Bh_S6LJIdcacdgCoCvhAlLz1zxgMEdBQmN0Sez98YgCu/exec';
     
     const form = document.getElementById('rsvpForm');
     const submitBtn = document.getElementById('submitBtn');
-    const messageDiv = document.getElementById('formMessage');
+    const formMessage = document.getElementById('formMessage');
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         const name = document.getElementById('guestName').value.trim();
         const guests = document.getElementById('guestCount').value;
+        const phone = document.getElementById('guestPhone').value.trim();
+        const comment = document.getElementById('guestComment').value.trim();
         
         if (!name || !guests) {
-            messageDiv.innerHTML = '❌ Заполните имя и количество гостей';
-            messageDiv.className = 'form-message error';
+            showMessage('Пожалуйста, заполните имя и количество гостей', 'error');
             return;
         }
         
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Отправка...';
         
-        const formData = {
-            name: name,
-            guests: guests,
-            phone: document.getElementById('guestPhone').value.trim(),
-            comment: document.getElementById('guestComment').value.trim()
-        };
-        
         try {
-            const response = await fetch(SCRIPT_URL, {
+            // Отправляем данные в Google Sheets
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                mode: 'no-cors', // Этот режим позволяет обойти CORS, но мы не получим ответ
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    guests: guests,
+                    phone: phone,
+                    comment: comment
+                })
             });
             
-            // При mode: 'no-cors' мы не можем прочитать ответ, но отправка происходит
-            // Поэтому показываем успех, если не было явной ошибки
-            messageDiv.innerHTML = `✅ Спасибо, ${name}! Ваше подтверждение отправлено. Ждём вас на свадьбе! 🥂`;
-            messageDiv.className = 'form-message success';
+            // Так как мы используем no-cors, мы не можем прочитать response,
+            // но сам запрос уходит. Считаем, что успешно.
+            showMessage('✅ Спасибо, ' + name + '! Ваше подтверждение отправлено. Ждём вас на свадьбе! 🥂', 'success');
             form.reset();
             
         } catch (error) {
             console.error('Ошибка:', error);
-            messageDiv.innerHTML = '❌ Ошибка отправки. Пожалуйста, попробуйте ещё раз или свяжитесь с нами по телефону 8-999-757-7769';
-            messageDiv.className = 'form-message error';
+            showMessage('❌ Произошла ошибка. Пожалуйста, попробуйте ещё раз или свяжитесь с нами по телефону 8-999-757-7769', 'error');
         } finally {
             submitBtn.disabled = false;
             submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Подтвердить';
         }
+    });
+    
+    function showMessage(text, type) {
+        formMessage.textContent = text;
+        formMessage.className = 'form-message ' + type;
         
         setTimeout(() => {
-            messageDiv.innerHTML = '';
-            messageDiv.className = 'form-message';
+            formMessage.textContent = '';
+            formMessage.className = 'form-message';
         }, 5000);
-    });
+    }
 </script>
 </body>
 </html>
