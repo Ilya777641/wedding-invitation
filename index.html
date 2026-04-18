@@ -402,7 +402,6 @@
 </head>
 <body>
 
-<!-- КОНВЕРТ-ОБЛОЖКА -->
 <div class="envelope-container" id="envelopeContainer">
     <div class="envelope">
         <div class="envelope-flap"></div>
@@ -415,7 +414,6 @@
     </div>
 </div>
 
-<!-- ОСНОВНОЕ ПРИГЛАШЕНИЕ -->
 <div class="invitation-wrapper" id="invitationWrapper">
     <div class="invitation-card">
         <div class="hero">
@@ -459,7 +457,6 @@
                 <div class="info-text"><strong>Дресс-код:</strong> Вечерний, приветствуются цветочные оттенки</div>
             </div>
 
-            <!-- ФОРМА ПОДТВЕРЖДЕНИЯ -->
             <div class="rsvp-form">
                 <div style="text-align: center; margin-bottom: 1.2rem;">
                     <i class="fas fa-pen-alt" style="font-size: 2rem; color: #b56748;"></i>
@@ -508,7 +505,6 @@
 </div>
 
 <script>
-    // === ОТКРЫТИЕ КОНВЕРТА ===
     const envelopeContainer = document.getElementById('envelopeContainer');
     const invitationWrapper = document.getElementById('invitationWrapper');
     
@@ -517,7 +513,6 @@
         invitationWrapper.classList.add('show');
     });
 
-    // === ТАЙМЕР ===
     function getWeddingDate() {
         return new Date(2026, 6, 31, 17, 0, 0);
     }
@@ -549,9 +544,8 @@
     updateTimer();
     setInterval(updateTimer, 1000);
 
-    // === ОТПРАВКА В ВАШУ GOOGLE ТАБЛИЦУ ===
-    // ВАША ССЫЛКА УЖЕ ВСТАВЛЕНА!
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUhRAOqFf51qAaVP9ReVdSt39kDqecSrB1TuBKQSqpH5naRuQqB92JSgcvId9sORQZ/exec';
+    // ВАША НОВАЯ ССЫЛКА УЖЕ ВСТАВЛЕНА!
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyg3OAyebTCuWCVhXhZXkn-SjxASiuopKRbnOU_HQJ7B8MxEaXOS_w6m5F95m-n6uDf/exec';
     
     const form = document.getElementById('rsvpForm');
     const submitBtn = document.getElementById('submitBtn');
@@ -581,7 +575,6 @@
         try {
             const response = await fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -593,8 +586,14 @@
                 })
             });
             
-            showMessage('✅ Спасибо, ' + name + '! Ваше подтверждение отправлено. Ждём вас на свадьбе! 🥂', 'success');
-            form.reset();
+            const result = await response.json();
+            
+            if (result.result === 'success') {
+                showMessage('✅ Спасибо, ' + name + '! Ваше подтверждение отправлено. Ждём вас на свадьбе! 🥂', 'success');
+                form.reset();
+            } else {
+                showMessage('❌ Ошибка: ' + (result.error || 'Не удалось отправить данные'), 'error');
+            }
             
         } catch (error) {
             console.error('Ошибка:', error);
