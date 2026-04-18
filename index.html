@@ -29,7 +29,7 @@
             overflow-x: hidden;
         }
 
-        /* === КОНВЕРТ === */
+        /* === КОНВЕРТ С ЗОЛОТИСТЫМ СВЕЧЕНИЕМ === */
         .envelope-container {
             position: fixed;
             top: 0;
@@ -51,6 +51,7 @@
             pointer-events: none;
         }
 
+        /* Анимация раскрытия конверта */
         .envelope {
             position: relative;
             width: 480px;
@@ -58,9 +59,39 @@
             background: linear-gradient(145deg, #fffef7 0%, #faf5ed 100%);
             border-radius: 12px;
             box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(212, 184, 150, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            animation: floatEnvelope 3s ease-in-out infinite;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: floatEnvelope 3s ease-in-out infinite, goldenGlow 2s ease-in-out infinite;
             cursor: pointer;
+            transform-origin: center;
+        }
+
+        /* Мягкое золотистое свечение */
+        @keyframes goldenGlow {
+            0%, 100% {
+                box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(212, 184, 150, 0.4), 0 0 20px rgba(196, 162, 122, 0.3), 0 0 40px rgba(196, 162, 122, 0.15);
+            }
+            50% {
+                box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(212, 184, 150, 0.6), 0 0 35px rgba(196, 162, 122, 0.6), 0 0 60px rgba(196, 162, 122, 0.3);
+            }
+        }
+
+        /* Анимация раскрытия (при клике) */
+        .envelope.open-envelope {
+            animation: openEnvelope 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        @keyframes openEnvelope {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            30% {
+                transform: scale(1.05) rotate(2deg);
+            }
+            100% {
+                transform: scale(1.3) rotate(5deg);
+                opacity: 0;
+            }
         }
 
         @keyframes floatEnvelope {
@@ -70,7 +101,6 @@
 
         .envelope:hover {
             transform: scale(1.02) translateY(-5px);
-            box-shadow: 0 40px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(212, 184, 150, 0.6);
         }
 
         .envelope-flap {
@@ -97,6 +127,7 @@
             border-right: 240px solid transparent;
             border-radius: 12px 12px 0 0;
             box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
         }
 
         .envelope-flap::after {
@@ -110,6 +141,7 @@
             pointer-events: none;
         }
 
+        /* Декоративная линия */
         .envelope-line {
             position: absolute;
             bottom: 60px;
@@ -120,6 +152,55 @@
             z-index: 3;
         }
 
+        /* СУРГУЧНАЯ ПЕЧАТЬ ПО ЦЕНТРУ */
+        .seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle at 30% 30%, #c41e1e, #8b0000);
+            border-radius: 50%;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), inset 0 2px 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(196, 162, 122, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: bold;
+            font-size: 28px;
+            color: #f5e6d3;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Инициалы на печати */
+        .seal::after {
+            content: "И Д";
+            position: absolute;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: #f0dbb2;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+        }
+
+        /* Волнистый край печати */
+        .seal::before {
+            content: "";
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255, 215, 120, 0.6);
+            pointer-events: none;
+        }
+
+        /* Содержимое конверта */
         .envelope-content {
             position: relative;
             z-index: 5;
@@ -284,7 +365,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 2rem;
             font-weight: 500;
-            color: #000000;
+            color: #c4a27a;
             line-height: 1.3;
         }
 
@@ -506,6 +587,8 @@
             .envelope-title { font-size: 24px; }
             .envelope-heart { font-size: 42px; }
             .envelope-tap { font-size: 11px; padding: 8px 18px; }
+            .seal { width: 50px; height: 50px; }
+            .seal::after { font-size: 18px; }
             .greeting-text { font-size: 1.5rem; }
             .names-main { font-size: 2.3rem; }
             .date-big { font-size: 1.6rem; }
@@ -521,11 +604,12 @@
 </head>
 <body>
 
-<!-- КОНВЕРТ -->
+<!-- КОНВЕРТ С ПЕЧАТЬЮ, СВЕЧЕНИЕМ И АНИМАЦИЕЙ РАСКРЫТИЯ -->
 <div class="envelope-container" id="envelopeContainer">
-    <div class="envelope">
+    <div class="envelope" id="envelope">
         <div class="envelope-flap"></div>
         <div class="envelope-line"></div>
+        <div class="seal"></div>
         <div class="envelope-content">
             <div class="envelope-heart"><i class="fas fa-heart"></i></div>
             <div class="envelope-title">Вам пришло письмо</div>
@@ -608,41 +692,46 @@
 </div>
 
 <script>
+    // === АНИМАЦИЯ РАСКРЫТИЯ КОНВЕРТА ===
+    const envelopeContainer = document.getElementById('envelopeContainer');
+    const envelope = document.getElementById('envelope');
+    const invitationWrapper = document.getElementById('invitationWrapper');
+
+    envelopeContainer.addEventListener('click', function() {
+        // Добавляем класс анимации раскрытия
+        envelope.classList.add('open-envelope');
+        
+        // После анимации раскрытия скрываем контейнер и показываем приглашение
+        setTimeout(() => {
+            envelopeContainer.classList.add('fade-out');
+            invitationWrapper.classList.add('show');
+            startPetals(); // Запускаем лепестки
+        }, 800);
+    });
+
     // === ПАДАЮЩИЕ ЛЕПЕСТКИ ===
     function createPetal() {
         const petal = document.createElement('div');
         petal.classList.add('petal');
         
-        // Символы лепестков
         const petals = ['🌸', '🌼', '🌺', '🌸', '🌷', '🌸'];
         petal.innerHTML = petals[Math.floor(Math.random() * petals.length)];
         
-        // Случайные размеры
         const size = Math.random() * 20 + 16;
         petal.style.fontSize = size + 'px';
-        
-        // Случайная позиция по горизонтали
         petal.style.left = Math.random() * 100 + '%';
-        
-        // Случайная скорость падения (от 5 до 12 секунд)
         const duration = Math.random() * 7 + 5;
         petal.style.animationDuration = duration + 's';
-        
-        // Случайная задержка старта
         petal.style.animationDelay = Math.random() * 5 + 's';
-        
-        // Случайная прозрачность
         petal.style.opacity = Math.random() * 0.5 + 0.3;
         
         document.body.appendChild(petal);
         
-        // Удаляем лепесток после окончания анимации
         setTimeout(() => {
             petal.remove();
         }, duration * 1000);
     }
 
-    // Создаём лепестки только после открытия конверта
     let petalsInterval = null;
     
     function startPetals() {
@@ -659,7 +748,7 @@
         }
     }
 
-    // === ОСТАЛЬНОЙ КОД ===
+    // === ПЕРСОНАЛИЗАЦИЯ ===
     function getCorrectGreeting(name) {
         if (!name) return 'Дорогие друзья!';
         if (name.includes(' и ')) return `Дорогие ${name}!`;
@@ -692,16 +781,7 @@
         greetingDiv.textContent = 'Дорогие друзья!';
     }
 
-    const envelopeContainer = document.getElementById('envelopeContainer');
-    const invitationWrapper = document.getElementById('invitationWrapper');
-    
-    envelopeContainer.addEventListener('click', function() {
-        envelopeContainer.classList.add('fade-out');
-        invitationWrapper.classList.add('show');
-        // Запускаем лепестки после открытия конверта
-        startPetals();
-    });
-
+    // === ТАЙМЕР ===
     function getWeddingDate() {
         return new Date(2026, 6, 31, 16, 0, 0);
     }
@@ -733,6 +813,7 @@
     updateTimer();
     setInterval(updateTimer, 1000);
 
+    // === КОПИРОВАНИЕ НОМЕРОВ ===
     const phoneNumbers = document.querySelectorAll('.phone-number');
     const notice = document.createElement('div');
     notice.style.position = 'fixed';
