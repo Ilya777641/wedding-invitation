@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Свадебное приглашение | Илья & Диана</title>
-    <!-- Основные шрифты -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- НОВЫЙ ШРИФТ ДЛЯ ДАТЫ: OUTIFT -->
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
@@ -19,9 +18,9 @@
         }
 
         body {
-            background: linear-gradient(145deg, #f9e9e0 0%, #fce9e6 100%);
+            background: linear-gradient(145deg, #2b2522 0%, #1e1a18 100%);
             font-family: 'Montserrat', sans-serif;
-            color: #3e2c2a;
+            color: #e8ddd3;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -29,14 +28,14 @@
             padding: 20px;
         }
 
-        /* === КОНВЕРТ === */
+        /* === НОВЫЙ КОНВЕРТ (ТЁМНЫЙ, ЭЛЕГАНТНЫЙ) === */
         .envelope-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(145deg, #f9e9e0 0%, #fce9e6 100%);
+            background: linear-gradient(145deg, #2b2522 0%, #1e1a18 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -53,22 +52,22 @@
 
         .envelope {
             position: relative;
-            width: 340px;
-            height: 230px;
-            background: #fffef7;
-            border-radius: 16px;
-            box-shadow: 0 30px 50px rgba(89, 53, 46, 0.3);
-            transition: transform 0.3s ease;
-            animation: floatEnvelope 2.5s ease-in-out infinite;
+            width: 380px;
+            height: 260px;
+            background: #1e1a18;
+            border-radius: 20px;
+            box-shadow: 0 40px 60px rgba(0, 0, 0, 0.5), 0 0 0 2px #c4a27a, 0 0 0 6px #2b2522;
+            transition: transform 0.4s ease;
+            animation: floatEnvelope 3s ease-in-out infinite;
         }
 
         @keyframes floatEnvelope {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(1deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
         }
 
         .envelope:hover {
-            transform: scale(1.02);
+            transform: scale(1.03);
         }
 
         .envelope-flap {
@@ -77,8 +76,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #fffef7;
-            border-radius: 16px;
+            background: #1e1a18;
+            border-radius: 20px;
             overflow: hidden;
         }
 
@@ -89,10 +88,10 @@
             left: 0;
             width: 100%;
             height: 0;
-            border-top: 115px solid #ffe0d4;
-            border-left: 170px solid transparent;
-            border-right: 170px solid transparent;
-            border-radius: 16px 16px 0 0;
+            border-top: 130px solid #c4a27a;
+            border-left: 190px solid transparent;
+            border-right: 190px solid transparent;
+            border-radius: 20px 20px 0 0;
         }
 
         .envelope-flap::after {
@@ -112,49 +111,50 @@
         }
 
         .envelope-heart {
-            font-size: 36px;
-            color: #e7b49e;
-            margin-bottom: 12px;
-            animation: pulse 1.5s ease-in-out infinite;
+            font-size: 48px;
+            color: #c4a27a;
+            margin-bottom: 15px;
+            animation: pulse 1.8s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(196, 162, 122, 0.3);
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.2); opacity: 1; }
+            0%, 100% { transform: scale(1); opacity: 0.8; text-shadow: 0 0 5px rgba(196, 162, 122, 0.3); }
+            50% { transform: scale(1.15); opacity: 1; text-shadow: 0 0 20px rgba(196, 162, 122, 0.6); }
         }
 
         .envelope-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            color: #9b5a45;
-            margin-bottom: 5px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            color: #e8ddd3;
+            margin-bottom: 8px;
+            letter-spacing: 3px;
         }
 
         .envelope-sub {
-            font-size: 13px;
-            color: #ad7762;
-            margin-bottom: 15px;
+            font-size: 14px;
+            color: #c4a27a;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
         }
 
         .envelope-tap {
-            font-size: 12px;
-            color: #c89a82;
-            background: rgba(255, 235, 225, 0.9);
-            padding: 8px 20px;
-            border-radius: 40px;
+            font-size: 13px;
+            color: #a0a0a0;
+            background: rgba(196, 162, 122, 0.12);
+            padding: 10px 24px;
+            border-radius: 50px;
+            border: 1px solid rgba(196, 162, 122, 0.3);
+            backdrop-filter: blur(4px);
         }
 
-        .envelope-tap i {
-            margin-right: 6px;
-        }
-
-        /* === ОСНОВНОЕ ПРИГЛАШЕНИЕ === */
+        /* === ОСНОВНОЕ ПРИГЛАШЕНИЕ (НОВЫЙ СТИЛЬ) === */
         .invitation-wrapper {
             opacity: 0;
             transform: scale(0.95);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
-            max-width: 750px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -165,300 +165,322 @@
         }
 
         .invitation-card {
-            background: #fffef7;
-            border-radius: 58px 58px 68px 68px;
-            box-shadow: 0 35px 65px rgba(89, 53, 46, 0.2);
+            background: linear-gradient(145deg, #2b2522 0%, #24201d 100%);
+            border-radius: 64px 64px 72px 72px;
+            box-shadow: 0 45px 75px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(196, 162, 122, 0.2);
             overflow: hidden;
             position: relative;
         }
 
+        /* Декоративная рамка */
         .invitation-card::before {
+            content: "";
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid rgba(196, 162, 122, 0.25);
+            border-radius: 48px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Верхняя золотая линия */
+        .invitation-card::after {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #e7b49e, #d9a78b, #e7b49e);
+            height: 4px;
+            background: linear-gradient(90deg, #c4a27a, #e8ddd3, #c4a27a);
         }
 
         .hero {
-            background: linear-gradient(135deg, #ffe9df, #ffe0d4);
+            background: linear-gradient(135deg, rgba(196, 162, 122, 0.08), rgba(196, 162, 122, 0.03));
             padding: 2rem 2rem 1.5rem;
             text-align: center;
             position: relative;
-            border-bottom: 2px solid #ffcfbc;
+            border-bottom: 1px solid rgba(196, 162, 122, 0.2);
         }
 
         .hero::before, .hero::after {
-            content: "❀";
-            font-size: 2rem;
-            color: #d9a78b;
+            content: "✦";
+            font-size: 1.8rem;
+            color: #c4a27a;
             position: absolute;
-            top: 15px;
-            opacity: 0.5;
+            top: 20px;
+            opacity: 0.4;
         }
-        .hero::before { left: 20px; }
-        .hero::after { right: 20px; }
+        .hero::before { left: 25px; }
+        .hero::after { right: 25px; }
 
         .flower-icon {
-            font-size: 2rem;
-            color: #e7b49e;
+            font-size: 2.5rem;
+            color: #c4a27a;
             margin-bottom: 0.8rem;
-            animation: sway 3s infinite ease;
+            animation: sway 4s infinite ease;
             display: inline-block;
+            filter: drop-shadow(0 0 5px rgba(196, 162, 122, 0.3));
         }
 
         @keyframes sway {
             0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(6deg); }
+            50% { transform: rotate(8deg); }
         }
 
         .invitation-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 600;
-            color: #9b5a45;
-            letter-spacing: 2px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 500;
+            color: #e8ddd3;
+            letter-spacing: 4px;
         }
 
         .invitation-sub {
-            font-size: 0.9rem;
-            color: #ad7762;
-            border-top: 1px dashed #eccaba;
+            font-size: 0.85rem;
+            color: #c4a27a;
+            border-top: 1px dashed rgba(196, 162, 122, 0.3);
             display: inline-block;
-            padding-top: 0.5rem;
-            margin-top: 0.5rem;
+            padding-top: 0.6rem;
+            margin-top: 0.6rem;
         }
 
         .content {
-            padding: 2rem;
+            padding: 2.2rem;
         }
 
+        /* ПЕРСОНАЛЬНОЕ ОБРАЩЕНИЕ */
         .greeting {
             text-align: center;
             margin-bottom: 1.8rem;
             padding-bottom: 1rem;
-            border-bottom: 2px dotted #f0cfc0;
+            border-bottom: 2px dotted rgba(196, 162, 122, 0.25);
         }
 
         .greeting-text {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 2rem;
-            font-weight: 600;
-            color: #b56748;
+            font-weight: 500;
+            color: #c4a27a;
             line-height: 1.3;
         }
 
         .greeting-sub {
-            font-size: 1rem;
-            color: #c48a6e;
+            font-size: 0.9rem;
+            color: #a0a0a0;
             margin-top: 8px;
         }
 
+        /* ИМЕНА */
         .couple-names {
             text-align: center;
             margin: 1rem 0 1.2rem;
         }
 
         .names-main {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 700;
-            background: linear-gradient(125deg, #be7c62, #9b5740);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: #e8ddd3;
             display: inline-block;
+            letter-spacing: 3px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         .and-icon {
-            font-size: 1.8rem;
-            margin: 0 10px;
-            color: #b77b62;
+            font-size: 2rem;
+            margin: 0 15px;
+            color: #c4a27a;
             vertical-align: middle;
         }
 
+        /* ДАТА (шрифт Outfit) */
         .date-block {
-            background: #fff5f0;
-            border-radius: 50px;
-            padding: 1.2rem;
+            background: rgba(196, 162, 122, 0.06);
+            border-radius: 60px;
+            padding: 1.3rem;
             text-align: center;
-            margin: 1.5rem 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            margin: 1.8rem 0;
+            border: 1px solid rgba(196, 162, 122, 0.15);
+            backdrop-filter: blur(4px);
         }
 
-        /* НОВЫЙ ШРИФТ ДЛЯ ДАТЫ — OUTFIT */
         .date-big {
             font-family: 'Outfit', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: #b56144;
-            letter-spacing: 2px;
+            font-size: 2.4rem;
+            font-weight: 500;
+            color: #c4a27a;
+            letter-spacing: 3px;
         }
 
         .date-details {
             font-family: 'Outfit', sans-serif;
             font-size: 1rem;
-            color: #aa735e;
-            margin-top: 5px;
-            font-weight: 400;
+            color: #b0a088;
+            margin-top: 6px;
         }
 
+        /* ТАЙМЕР */
         .timer-wrapper {
-            background: #fef3ed;
-            border-radius: 42px;
+            background: rgba(196, 162, 122, 0.05);
+            border-radius: 60px;
             padding: 1.2rem;
-            margin: 1.5rem 0;
+            margin: 1.8rem 0;
             text-align: center;
+            border: 1px solid rgba(196, 162, 122, 0.1);
         }
 
         .timer-title {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #bc826a;
-            margin-bottom: 0.8rem;
+            letter-spacing: 4px;
+            color: #c4a27a;
+            margin-bottom: 1rem;
         }
 
         .timer-grid {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
         }
 
         .timer-cell {
-            background: white;
-            border-radius: 25px;
-            padding: 0.6rem;
-            min-width: 75px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
-            transition: transform 0.2s;
-        }
-
-        .timer-cell:hover {
-            transform: translateY(-3px);
+            text-align: center;
+            min-width: 70px;
         }
 
         .timer-number {
-            font-size: 2.2rem;
-            font-weight: 700;
-            font-family: 'Montserrat', monospace;
-            color: #a1573d;
+            font-size: 2.5rem;
+            font-weight: 500;
+            font-family: 'Outfit', monospace;
+            color: #e8ddd3;
             line-height: 1;
         }
 
         .timer-label {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
-            color: #c2947e;
+            color: #888;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        /* ИНФО-БЛОКИ С ДЕТАЛЯМИ */
+        .info-section {
+            margin: 1.5rem 0;
         }
 
         .info-item {
-            background: white;
-            border-radius: 50px;
-            padding: 0.9rem 1.5rem;
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin: 1rem 0;
-            border: 1px solid #ffded1;
-            transition: all 0.2s;
+            padding: 1rem 1.2rem;
+            margin: 0.8rem 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 50px;
+            border: 1px solid rgba(196, 162, 122, 0.12);
+            transition: all 0.3s ease;
         }
 
         .info-item:hover {
-            border-color: #e7b49e;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+            background: rgba(196, 162, 122, 0.05);
+            border-color: rgba(196, 162, 122, 0.3);
+            transform: translateX(5px);
         }
 
         .info-icon {
-            font-size: 1.8rem;
-            color: #cc8e72;
+            font-size: 1.6rem;
+            color: #c4a27a;
             width: 45px;
             text-align: center;
         }
 
         .info-text {
             flex: 1;
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: #4d3128;
+            font-size: 0.9rem;
+            color: #d0c8c0;
+            line-height: 1.4;
         }
 
         .info-text strong {
-            color: #a75839;
+            color: #c4a27a;
+            font-weight: 500;
         }
 
+        /* ТЕЛЕФОНЫ */
         .phone-section {
-            background: linear-gradient(115deg, #fef1ea, #fff7f2);
-            border-radius: 50px;
-            padding: 1.2rem;
             text-align: center;
-            margin: 1.8rem 0 0.5rem;
+            margin: 2rem 0 0.5rem;
+            padding: 1rem;
+            border-top: 1px dashed rgba(196, 162, 122, 0.2);
         }
 
         .phone-row {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.2rem;
             flex-wrap: wrap;
-            margin: 10px 0;
+            margin: 12px 0;
         }
 
         .phone-number {
             font-size: 1rem;
-            font-weight: 600;
-            color: #a75839;
-            background: white;
+            font-weight: 500;
+            color: #c4a27a;
+            background: rgba(196, 162, 122, 0.08);
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 18px;
+            gap: 10px;
+            padding: 8px 22px;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.2s;
-            border: 1px solid #ffded1;
+            border: 1px solid rgba(196, 162, 122, 0.2);
         }
 
         .phone-number:hover {
-            background: #fff1ea;
+            background: rgba(196, 162, 122, 0.15);
             transform: scale(1.02);
-            border-color: #e7b49e;
+            border-color: rgba(196, 162, 122, 0.5);
         }
 
         .copy-notice {
             font-size: 0.7rem;
-            color: #b8836a;
-            margin-top: 8px;
+            color: #777;
+            margin-top: 10px;
         }
 
         footer {
-            background: #fae9e1;
+            background: rgba(0, 0, 0, 0.2);
             text-align: center;
-            padding: 0.8rem;
-            font-size: 0.65rem;
-            color: #b6886e;
+            padding: 1rem;
+            font-size: 0.7rem;
+            color: #888;
+            letter-spacing: 1px;
         }
 
         @media (max-width: 550px) {
             .greeting-text { font-size: 1.5rem; }
-            .names-main { font-size: 2.2rem; }
+            .names-main { font-size: 2.3rem; }
             .date-big { font-size: 1.6rem; }
-            .timer-number { font-size: 1.6rem; }
-            .timer-cell { min-width: 65px; }
+            .timer-number { font-size: 1.8rem; }
+            .timer-cell { min-width: 55px; }
             .invitation-title { font-size: 1.5rem; }
             .content { padding: 1.5rem; }
-            .envelope { width: 280px; height: 200px; }
-            .envelope-flap::before { border-left: 140px solid transparent; border-right: 140px solid transparent; border-top: 100px solid #ffe0d4; }
-            .phone-row { gap: 0.5rem; }
-            .phone-number { font-size: 0.85rem; padding: 6px 12px; }
+            .envelope { width: 300px; height: 220px; }
+            .envelope-flap::before { border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 110px solid #c4a27a; }
+            .phone-row { gap: 0.8rem; }
+            .phone-number { font-size: 0.85rem; padding: 6px 14px; }
+            .invitation-card::before { top: 12px; left: 12px; right: 12px; bottom: 12px; }
         }
     </style>
 </head>
 <body>
 
-<!-- КОНВЕРТ-ОБЛОЖКА -->
+<!-- КОНВЕРТ-ОБЛОЖКА (НОВЫЙ СТИЛЬ) -->
 <div class="envelope-container" id="envelopeContainer">
     <div class="envelope">
         <div class="envelope-flap"></div>
@@ -475,7 +497,7 @@
 <div class="invitation-wrapper" id="invitationWrapper">
     <div class="invitation-card">
         <div class="hero">
-            <div class="flower-icon"><i class="fas fa-seedling"></i></div>
+            <div class="flower-icon"><i class="fas fa-feather-alt"></i></div>
             <div class="invitation-title">СВАДЕБНОЕ ПРИГЛАШЕНИЕ</div>
             <div class="invitation-sub">Тепло наших сердец для вас</div>
         </div>
@@ -507,17 +529,23 @@
                 </div>
             </div>
 
-            <div class="info-item">
-                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                <div class="info-text"><strong>Ресторан «Версаль»</strong><br>Элеваторная ул., 13, посёлок Мелькомбинат</div>
-            </div>
-            <div class="info-item">
-                <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
-                <div class="info-text"><strong>Программа:</strong> 15:30 – Сбор гостей | 16:00 – Церемония | 17:00 – Фуршет | 18:00 – Банкет и танцы</div>
+            <div class="info-section">
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="info-text"><strong>Ресторан «Версаль»</strong><br>Элеваторная ул., 13, посёлок Мелькомбинат</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="info-text"><strong>Программа:</strong> 15:30 – Сбор гостей | 16:00 – Церемония | 17:00 – Фуршет | 18:00 – Банкет и танцы</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-glass-cheers"></i></div>
+                    <div class="info-text"><strong>Фуршет и банкет:</strong> Изысканное меню от шеф-повара, живая музыка, караоке</div>
+                </div>
             </div>
 
             <div class="phone-section">
-                <div style="font-size: 0.85rem; margin-bottom: 8px; color: #9b5740;">По всем вопросам:</div>
+                <div style="font-size: 0.8rem; margin-bottom: 10px; color: #c4a27a; letter-spacing: 1px;">По всем вопросам:</div>
                 <div class="phone-row">
                     <div class="phone-number" data-phone="89997577769">
                         <i class="fas fa-phone-alt"></i> 8-999-757-7769
@@ -530,7 +558,7 @@
             </div>
         </div>
         <footer>
-            С любовью, Илья и Диана ♥ Ждём вас разделить с нами этот день
+            <i class="fas fa-heart" style="color: #c4a27a; font-size: 0.7rem;"></i> С любовью, Илья и Диана <i class="fas fa-heart" style="color: #c4a27a; font-size: 0.7rem;"></i>
         </footer>
     </div>
 </div>
@@ -621,11 +649,12 @@
     notice.style.bottom = '30px';
     notice.style.left = '50%';
     notice.style.transform = 'translateX(-50%)';
-    notice.style.backgroundColor = '#4caf50';
-    notice.style.color = 'white';
+    notice.style.backgroundColor = '#c4a27a';
+    notice.style.color = '#1e1a18';
     notice.style.padding = '10px 20px';
     notice.style.borderRadius = '50px';
     notice.style.fontSize = '14px';
+    notice.style.fontWeight = '500';
     notice.style.zIndex = '1001';
     notice.style.opacity = '0';
     notice.style.transition = 'opacity 0.3s';
@@ -646,10 +675,12 @@
             }).catch(() => {
                 notice.textContent = '❌ Не удалось скопировать';
                 notice.style.backgroundColor = '#c62828';
+                notice.style.color = 'white';
                 notice.style.opacity = '1';
                 setTimeout(() => {
                     notice.style.opacity = '0';
-                    notice.style.backgroundColor = '#4caf50';
+                    notice.style.backgroundColor = '#c4a27a';
+                    notice.style.color = '#1e1a18';
                 }, 2000);
             });
         });
