@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Илья & Диана | Свадебное приглашение</title>
-    <!-- Google Fonts & Simple CSS Reset -->
+    <!-- Шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- AOS Library для анимаций при скролле -->
+    <!-- AOS анимации -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         * {
@@ -23,7 +23,32 @@
             overflow-x: hidden;
         }
 
-        /* Контейнер-обложка (конверт) */
+        /* Музыкальная кнопка */
+        .music-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid #eeded2;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.2s;
+            color: #c4a27a;
+            font-size: 22px;
+        }
+        .music-btn:hover {
+            transform: scale(1.05);
+            background: #fef5f0;
+        }
+
+        /* Конверт-обложка */
         .envelope-container {
             position: fixed;
             top: 0;
@@ -68,7 +93,7 @@
             font-size: 14px;
         }
 
-        /* Основной контент (изначально скрыт) */
+        /* Основной контент */
         .main-content {
             opacity: 0;
             transition: opacity 0.9s ease;
@@ -77,7 +102,7 @@
             opacity: 1;
         }
 
-        /* Hero секция (первый экран) */
+        /* Hero секция */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -109,7 +134,7 @@
             color: #5a4a3e;
         }
 
-        /* Секция с таймером */
+        /* Таймер (круговой, как в примере) */
         .timer-section {
             background: #fff5f0;
             padding: 60px 20px;
@@ -119,28 +144,34 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 28px;
             color: #5a4a3e;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
+        }
+        .timer-sub {
+            font-size: 14px;
+            color: #a09080;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
         }
         .timer-grid {
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 20px;
             flex-wrap: wrap;
         }
         .timer-card {
             background: white;
             border-radius: 100px;
-            width: 90px;
-            height: 90px;
+            width: 95px;
+            height: 95px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
             border: 1px solid #f0e0d4;
         }
         .timer-number {
-            font-size: 32px;
+            font-size: 34px;
             font-weight: 600;
             font-family: 'Montserrat', monospace;
             color: #c4a27a;
@@ -151,6 +182,7 @@
             text-transform: uppercase;
             color: #a09080;
             letter-spacing: 1px;
+            margin-top: 5px;
         }
 
         /* Текст приглашения */
@@ -179,7 +211,7 @@
             color: #c4a27a;
         }
 
-        /* Расписание (тайминг) */
+        /* Расписание */
         .schedule-section {
             background: #fefaf8;
             padding: 70px 25px;
@@ -240,12 +272,14 @@
         .dresscode-badge {
             display: inline-block;
             background: #fff;
-            padding: 8px 30px;
+            padding: 8px 35px;
             border-radius: 50px;
             font-weight: 500;
             color: #c4a27a;
             border: 1px solid #eeded2;
             margin-top: 20px;
+            font-size: 18px;
+            letter-spacing: 1px;
         }
 
         /* Контакты */
@@ -259,6 +293,11 @@
             font-weight: 500;
             color: #3a2c24;
             margin: 10px 0;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .contacts-section .phone:hover {
+            color: #c4a27a;
         }
         .small-note {
             font-size: 12px;
@@ -266,7 +305,6 @@
             margin-top: 15px;
         }
 
-        /* Нижний колонтитул */
         footer {
             background: #f5ede8;
             padding: 25px;
@@ -276,11 +314,10 @@
             border-top: 1px solid #eeded2;
         }
 
-        /* Адаптивность */
         @media (max-width: 550px) {
             .hero .names { font-size: 38px; letter-spacing: 3px; }
-            .timer-card { width: 70px; height: 70px; }
-            .timer-number { font-size: 24px; }
+            .timer-card { width: 75px; height: 75px; }
+            .timer-number { font-size: 26px; }
             .timeline-item { gap: 12px; }
             .time { min-width: 70px; font-size: 14px; }
         }
@@ -288,7 +325,12 @@
 </head>
 <body>
 
-<!-- КОНВЕРТ-ОБЛОЖКА -->
+<!-- КНОПКА ВКЛЮЧЕНИЯ МУЗЫКИ -->
+<div class="music-btn" id="musicToggle">
+    <i class="fas fa-music"></i>
+</div>
+
+<!-- КОНВЕРТ -->
 <div class="envelope-container" id="envelopeContainer">
     <div class="envelope">
         <i class="fas fa-envelope-open-text"></i>
@@ -297,10 +339,9 @@
     </div>
 </div>
 
-<!-- ОСНОВНОЙ КОНТЕНТ (ПРИГЛАШЕНИЕ) -->
+<!-- ОСНОВНОЙ КОНТЕНТ -->
 <div class="main-content" id="mainContent">
     
-    <!-- Герой-блок с именами и датой -->
     <div class="hero">
         <div class="names" data-aos="fade-up" data-aos-duration="1000">
             ИЛЬЯ & ДИАНА
@@ -314,9 +355,9 @@
         </div>
     </div>
 
-    <!-- Таймер обратного отсчёта -->
     <div class="timer-section">
         <div class="timer-title" data-aos="fade-up">До нашей свадьбы осталось</div>
+        <div class="timer-sub" data-aos="fade-up" data-aos-delay="50">мы уже почти готовы</div>
         <div class="timer-grid" data-aos="fade-up" data-aos-delay="100">
             <div class="timer-card"><span class="timer-number" id="days">00</span><span class="timer-label">Дней</span></div>
             <div class="timer-card"><span class="timer-number" id="hours">00</span><span class="timer-label">Часов</span></div>
@@ -325,19 +366,17 @@
         </div>
     </div>
 
-    <!-- Тёплые слова -->
     <div class="message-section">
-        <h3 data-aos="fade-up">Дорогие наши гости!</h3>
+        <h3 data-aos="fade-up">Дорогие родные и близкие!</h3>
         <p data-aos="fade-up" data-aos-delay="100">
-            Мы не представляем этот праздник без вас — наших близких и дорогих сердцу людей. 
-            Пусть этот день станет началом нашей новой семейной истории, которую мы с радостью разделим с вами.
+            Мы не представляем этот праздник без вас. Пусть этот день станет началом 
+            нашей новой семейной истории, которую мы с радостью разделим с вами.
         </p>
         <div class="signature" data-aos="fade-up" data-aos-delay="200">
             Илья & Диана
         </div>
     </div>
 
-    <!-- Расписание дня -->
     <div class="schedule-section">
         <div class="section-title" data-aos="fade-up">Тайминг дня</div>
         <div class="timeline" data-aos="fade-up" data-aos-delay="100">
@@ -350,23 +389,20 @@
         </div>
     </div>
 
-    <!-- Место проведения -->
     <div class="location-section">
         <div class="section-title" data-aos="fade-up">Место проведения</div>
         <div class="location-name" data-aos="fade-up" data-aos-delay="100">Ресторан «Версаль»</div>
         <div class="address" data-aos="fade-up" data-aos-delay="150">Элеваторная ул., 13, посёлок Мелькомбинат, Московская обл.</div>
     </div>
 
-    <!-- Дресс-код -->
     <div class="dresscode-section">
         <div class="section-title" data-aos="fade-up">Дресс-код</div>
-        <div class="dresscode-badge" data-aos="zoom-in" data-aos-delay="100">Вечерний / Cocktail</div>
+        <div class="dresscode-badge" data-aos="zoom-in" data-aos-delay="100">Cocktail / Evening</div>
         <p style="margin-top: 25px; max-width: 500px; margin-left: auto; margin-right: auto; color: #5a4a3e;" data-aos="fade-up" data-aos-delay="150">
             Будем рады, если вы поддержите стиль торжества в своих нарядах. Приветствуются цветочные оттенки и элегантные аксессуары.
         </p>
     </div>
 
-    <!-- Контакты -->
     <div class="contacts-section">
         <div class="section-title" data-aos="fade-up">Организаторы</div>
         <div class="phone" data-aos="fade-up" data-aos-delay="50">👨‍💼 Илья: <strong>8-999-757-7769</strong></div>
@@ -379,26 +415,53 @@
     </footer>
 </div>
 
-<!-- Скрипты -->
+<!-- Аудио (фоновая музыка) -->
+<audio id="bgMusic" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/02/02/audio_bb11ff1f22.mp3?filename=romantic-piano-115729.mp3" type="audio/mpeg">
+    <!-- Резервная ссылка на красивую инструментальную музыку с Pixabay (свадебная/романтичная) -->
+</audio>
+
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    // Инициализация AOS (анимации при скролле)
-    AOS.init({
-        duration: 800,
-        once: true,
-        offset: 50
-    });
+    AOS.init({ duration: 800, once: true, offset: 50 });
 
-    // Открытие конверта
+    // Элементы
     const envelope = document.getElementById('envelopeContainer');
     const main = document.getElementById('mainContent');
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicToggle');
+    let isMusicPlaying = false;
 
+    // Автовоспроизведение заблокировано браузером, включаем после клика на конверт
     envelope.addEventListener('click', () => {
         envelope.classList.add('fade-out');
         main.classList.add('show');
-        // Запускаем таймер и копирование только после открытия
         startTimer();
         enablePhoneCopy();
+        
+        // Пытаемся включить музыку (браузер разрешит, так как это действие пользователя)
+        music.play().then(() => {
+            isMusicPlaying = true;
+            musicBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+        }).catch(() => {
+            isMusicPlaying = false;
+            musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+        });
+    });
+
+    // Кнопка управления музыкой
+    musicBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (isMusicPlaying) {
+            music.pause();
+            isMusicPlaying = false;
+            musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+        } else {
+            music.play().then(() => {
+                isMusicPlaying = true;
+                musicBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            }).catch(() => {});
+        }
     });
 
     // Таймер
@@ -432,18 +495,18 @@
         timerInterval = setInterval(updateTimerDisplay, 1000);
     }
 
-    // Копирование номеров по клику
+    // Копирование номеров
     function enablePhoneCopy() {
         const phones = document.querySelectorAll('.phone');
         phones.forEach(phone => {
             phone.style.cursor = 'pointer';
             phone.addEventListener('click', () => {
-                const rawNumber = phone.innerText.match(/\d[\d\s-]+/g)[0].replace(/[\s-]/g, '');
+                const rawNumber = phone.innerText.match(/[\d\s-]+/g)[0].replace(/[\s-]/g, '');
                 navigator.clipboard.writeText(rawNumber).then(() => {
                     const toast = document.createElement('div');
                     toast.innerText = '✅ Номер скопирован';
                     toast.style.position = 'fixed';
-                    toast.style.bottom = '30px';
+                    toast.style.bottom = '80px';
                     toast.style.left = '50%';
                     toast.style.transform = 'translateX(-50%)';
                     toast.style.backgroundColor = '#c4a27a';
