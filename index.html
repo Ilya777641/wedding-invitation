@@ -102,7 +102,7 @@
             transform: scale(0.95);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
-            max-width: 750px;
+            max-width: 800px;
             margin: 0 auto;
         }
         .invitation-wrapper.show { opacity: 1; transform: scale(1); pointer-events: auto; }
@@ -139,30 +139,50 @@
         .timer-label { font-size: 0.75rem; text-transform: uppercase; color: #c2947e; }
         .info-item { background: white; border-radius: 60px; padding: 1rem 1.8rem; display: flex; align-items: center; gap: 1.2rem; margin: 1rem 0; border: 1px solid #ffded1; }
         .info-icon { font-size: 2rem; color: #cc8e72; width: 48px; }
-        .rsvp-form { background: linear-gradient(115deg, #fef1ea, #fff7f2); border-radius: 48px; padding: 1.8rem; margin: 2rem 0; }
-        .form-group { margin-bottom: 1.2rem; text-align: left; }
-        .form-group label { display: block; font-weight: 600; color: #9b5740; margin-bottom: 0.5rem; font-size: 0.9rem; }
-        .form-group input, .form-group select { width: 100%; padding: 12px 18px; border: 1px solid #ffded1; border-radius: 40px; font-family: 'Montserrat', sans-serif; font-size: 1rem; background: white; }
-        .form-group input:focus, .form-group select:focus { outline: none; border-color: #e7b49e; box-shadow: 0 0 0 3px rgba(231, 180, 158, 0.2); }
-        .submit-btn { background: #b56748; border: none; padding: 14px 32px; font-size: 1.1rem; font-weight: 600; color: white; border-radius: 50px; cursor: pointer; width: 100%; transition: all 0.25s; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .submit-btn:hover { background: #9b4f36; transform: scale(0.98); }
-        .submit-btn:disabled { background: #d4a58e; cursor: not-allowed; }
-        .form-message { margin-top: 1rem; padding: 10px; border-radius: 40px; font-size: 0.85rem; text-align: center; }
-        .form-message.success { background: #e8f5e9; color: #2e7d32; }
-        .form-message.error { background: #ffebee; color: #c62828; }
+        .rsvp-form {
+            background: linear-gradient(115deg, #fef1ea, #fff7f2);
+            border-radius: 48px;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .form-container {
+            width: 100%;
+            border-radius: 32px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+        .form-container iframe {
+            width: 100%;
+            height: 650px;
+            border: none;
+            background: white;
+            border-radius: 32px;
+        }
+        .phone-note {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: #a76348;
+            padding: 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 50px;
+            display: inline-block;
+        }
         footer { background: #fae9e1; text-align: center; padding: 1rem; font-size: 0.7rem; color: #b6886e; }
-        @media (max-width: 550px) {
+        @media (max-width: 650px) {
             .names-main { font-size: 2.5rem; }
             .date-big { font-size: 1.8rem; }
             .timer-number { font-size: 1.9rem; }
             .timer-cell { min-width: 70px; }
             .invitation-title { font-size: 1.7rem; }
             .envelope { width: 280px; height: 200px; }
+            .form-container iframe { height: 550px; }
         }
     </style>
 </head>
 <body>
 
+<!-- КОНВЕРТ-ОБЛОЖКА -->
 <div class="envelope-container" id="envelopeContainer">
     <div class="envelope">
         <div class="envelope-flap"></div>
@@ -175,6 +195,7 @@
     </div>
 </div>
 
+<!-- ОСНОВНОЕ ПРИГЛАШЕНИЕ -->
 <div class="invitation-wrapper" id="invitationWrapper">
     <div class="invitation-card">
         <div class="hero">
@@ -218,45 +239,19 @@
                 <div class="info-text"><strong>Дресс-код:</strong> Вечерний, приветствуются цветочные оттенки</div>
             </div>
 
+            <!-- ВСТРОЕННАЯ GOOGLE ФОРМА -->
             <div class="rsvp-form">
-                <div style="text-align: center; margin-bottom: 1.2rem;">
-                    <i class="fas fa-pen-alt" style="font-size: 2rem; color: #b56748;"></i>
-                    <h3 style="margin-top: 0.5rem; color: #9b5740;">Подтвердите присутствие</h3>
+                <i class="fas fa-pen-alt" style="font-size: 2rem; color: #b56748;"></i>
+                <h3 style="margin: 0.5rem 0; color: #9b5740;">Подтвердите присутствие</h3>
+                <p style="margin-bottom: 0.5rem;">Заполните форму ниже — данные сразу попадут в таблицу</p>
+                
+                <div class="form-container">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf6JBakqXtYMqvepb87iHGYTUEiCzYHbFHSME4J45-lKOqZFA/viewform?embedded=true" width="100%" height="650" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
                 </div>
                 
-                <form id="rsvpForm">
-                    <div class="form-group">
-                        <label><i class="fas fa-user"></i> Ваше имя *</label>
-                        <input type="text" id="guestName" placeholder="Например: Александр" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-users"></i> Количество гостей (включая вас) *</label>
-                        <select id="guestCount" required>
-                            <option value="">Выберите...</option>
-                            <option value="1">1 человек</option>
-                            <option value="2">2 человека</option>
-                            <option value="3">3 человека</option>
-                            <option value="4">4 человека</option>
-                            <option value="5">5+ человек</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-phone"></i> Телефон (необязательно)</label>
-                        <input type="tel" id="guestPhone" placeholder="Для связи, если будут изменения">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-comment"></i> Пожелания или комментарий</label>
-                        <input type="text" id="guestComment" placeholder="Аллергии, пожелания по рассадке...">
-                    </div>
-                    
-                    <button type="submit" class="submit-btn" id="submitBtn">
-                        <i class="fas fa-check-circle"></i> Подтвердить
-                    </button>
-                </form>
-                <div id="formMessage" class="form-message"></div>
+                <div class="phone-note">
+                    <i class="fas fa-phone-alt"></i> Или подтвердите по телефону/СМС: <strong>8-999-757-7769</strong>
+                </div>
             </div>
         </div>
         <footer>
@@ -266,109 +261,27 @@
 </div>
 
 <script>
-    // === ОТКРЫТИЕ КОНВЕРТА ===
-    const envelopeContainer = document.getElementById('envelopeContainer');
-    const invitationWrapper = document.getElementById('invitationWrapper');
-    
-    envelopeContainer.addEventListener('click', function() {
-        envelopeContainer.classList.add('fade-out');
-        invitationWrapper.classList.add('show');
+    // Открытие конверта
+    document.getElementById('envelopeContainer').addEventListener('click', function() {
+        this.classList.add('fade-out');
+        document.getElementById('invitationWrapper').classList.add('show');
     });
 
-    // === ТАЙМЕР ===
-    function getWeddingDate() {
-        return new Date(2026, 6, 31, 17, 0, 0);
-    }
-
+    // Таймер обратного отсчёта
     function updateTimer() {
-        const now = new Date().getTime();
-        const target = getWeddingDate().getTime();
-        const distance = target - now;
-
-        if (distance < 0) {
-            document.getElementById('days').innerText = "00";
-            document.getElementById('hours').innerText = "00";
-            document.getElementById('minutes').innerText = "00";
-            document.getElementById('seconds').innerText = "00";
+        const target = new Date(2026, 6, 31, 17, 0, 0);
+        const diff = target - new Date();
+        if (diff <= 0) {
+            ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).innerText = '00');
             return;
         }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (86400000)) / (3600000));
-        const minutes = Math.floor((distance % 3600000) / 60000);
-        const seconds = Math.floor((distance % 60000) / 1000);
-
-        document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-        document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-        document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-        document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+        document.getElementById('days').innerText = Math.floor(diff / 86400000);
+        document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000);
+        document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000);
+        document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000);
     }
-
     updateTimer();
     setInterval(updateTimer, 1000);
-
-    // === НОВАЯ ССЫЛКА НА APPS SCRIPT (УЖЕ ВСТАВЛЕНА) ===
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxEt9vFlEn0mpANdg2nlgg1Bh_S6LJIdcacdgCoCvhAlLz1zxgMEdBQmN0Sez98YgCu/exec';
-    
-    const form = document.getElementById('rsvpForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const formMessage = document.getElementById('formMessage');
-
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const name = document.getElementById('guestName').value.trim();
-        const guests = document.getElementById('guestCount').value;
-        const phone = document.getElementById('guestPhone').value.trim();
-        const comment = document.getElementById('guestComment').value.trim();
-        
-        if (!name || !guests) {
-            showMessage('Пожалуйста, заполните имя и количество гостей', 'error');
-            return;
-        }
-        
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Отправка...';
-        
-        try {
-            // Отправляем данные в Google Sheets
-            const response = await fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors', // Этот режим позволяет обойти CORS, но мы не получим ответ
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: name,
-                    guests: guests,
-                    phone: phone,
-                    comment: comment
-                })
-            });
-            
-            // Так как мы используем no-cors, мы не можем прочитать response,
-            // но сам запрос уходит. Считаем, что успешно.
-            showMessage('✅ Спасибо, ' + name + '! Ваше подтверждение отправлено. Ждём вас на свадьбе! 🥂', 'success');
-            form.reset();
-            
-        } catch (error) {
-            console.error('Ошибка:', error);
-            showMessage('❌ Произошла ошибка. Пожалуйста, попробуйте ещё раз или свяжитесь с нами по телефону 8-999-757-7769', 'error');
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Подтвердить';
-        }
-    });
-    
-    function showMessage(text, type) {
-        formMessage.textContent = text;
-        formMessage.className = 'form-message ' + type;
-        
-        setTimeout(() => {
-            formMessage.textContent = '';
-            formMessage.className = 'form-message';
-        }, 5000);
-    }
 </script>
 </body>
 </html>
