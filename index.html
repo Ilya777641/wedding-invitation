@@ -18,9 +18,9 @@
         }
 
         body {
-            background: linear-gradient(145deg, #2b2522 0%, #1e1a18 100%);
+            background: linear-gradient(145deg, #f5ede8 0%, #efe5df 100%);
             font-family: 'Montserrat', sans-serif;
-            color: #e8ddd3;
+            color: #3a2e2a;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -28,14 +28,14 @@
             padding: 20px;
         }
 
-        /* === НОВЫЙ КОНВЕРТ (ТЁМНЫЙ, ЭЛЕГАНТНЫЙ) === */
+        /* === КОНВЕРТ (СВЕТЛЫЙ, ЭЛЕГАНТНЫЙ) === */
         .envelope-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(145deg, #2b2522 0%, #1e1a18 100%);
+            background: linear-gradient(145deg, #f5ede8 0%, #efe5df 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -54,20 +54,20 @@
             position: relative;
             width: 380px;
             height: 260px;
-            background: #1e1a18;
+            background: #fffef7;
             border-radius: 20px;
-            box-shadow: 0 40px 60px rgba(0, 0, 0, 0.5), 0 0 0 2px #c4a27a, 0 0 0 6px #2b2522;
+            box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1), 0 0 0 2px #d4b896, 0 0 0 6px #f5ede8;
             transition: transform 0.4s ease;
             animation: floatEnvelope 3s ease-in-out infinite;
         }
 
         @keyframes floatEnvelope {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(1deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
         }
 
         .envelope:hover {
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
 
         .envelope-flap {
@@ -76,7 +76,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #1e1a18;
+            background: #fffef7;
             border-radius: 20px;
             overflow: hidden;
         }
@@ -88,7 +88,7 @@
             left: 0;
             width: 100%;
             height: 0;
-            border-top: 130px solid #c4a27a;
+            border-top: 130px solid #f0e0d4;
             border-left: 190px solid transparent;
             border-right: 190px solid transparent;
             border-radius: 20px 20px 0 0;
@@ -115,18 +115,18 @@
             color: #c4a27a;
             margin-bottom: 15px;
             animation: pulse 1.8s ease-in-out infinite;
-            text-shadow: 0 0 10px rgba(196, 162, 122, 0.3);
+            text-shadow: 0 0 10px rgba(196, 162, 122, 0.2);
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; text-shadow: 0 0 5px rgba(196, 162, 122, 0.3); }
-            50% { transform: scale(1.15); opacity: 1; text-shadow: 0 0 20px rgba(196, 162, 122, 0.6); }
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
         }
 
         .envelope-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: 28px;
-            color: #e8ddd3;
+            color: #5a4a3e;
             margin-bottom: 8px;
             letter-spacing: 3px;
         }
@@ -140,15 +140,14 @@
 
         .envelope-tap {
             font-size: 13px;
-            color: #a0a0a0;
-            background: rgba(196, 162, 122, 0.12);
+            color: #8a7a6e;
+            background: rgba(196, 162, 122, 0.1);
             padding: 10px 24px;
             border-radius: 50px;
             border: 1px solid rgba(196, 162, 122, 0.3);
-            backdrop-filter: blur(4px);
         }
 
-        /* === ОСНОВНОЕ ПРИГЛАШЕНИЕ (НОВЫЙ СТИЛЬ) === */
+        /* === ОСНОВНОЕ ПРИГЛАШЕНИЕ (СВЕТЛЫЙ СТИЛЬ) === */
         .invitation-wrapper {
             opacity: 0;
             transform: scale(0.95);
@@ -165,9 +164,9 @@
         }
 
         .invitation-card {
-            background: linear-gradient(145deg, #2b2522 0%, #24201d 100%);
+            background: #fffef7;
             border-radius: 64px 64px 72px 72px;
-            box-shadow: 0 45px 75px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(196, 162, 122, 0.2);
+            box-shadow: 0 35px 65px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(196, 162, 122, 0.2);
             overflow: hidden;
             position: relative;
         }
@@ -186,7 +185,7 @@
             z-index: 1;
         }
 
-        /* Верхняя золотая линия */
+        /* Верхняя линия */
         .invitation-card::after {
             content: "";
             position: absolute;
@@ -198,11 +197,11 @@
         }
 
         .hero {
-            background: linear-gradient(135deg, rgba(196, 162, 122, 0.08), rgba(196, 162, 122, 0.03));
+            background: linear-gradient(135deg, rgba(196, 162, 122, 0.05), rgba(196, 162, 122, 0.02));
             padding: 2rem 2rem 1.5rem;
             text-align: center;
             position: relative;
-            border-bottom: 1px solid rgba(196, 162, 122, 0.2);
+            border-bottom: 1px solid rgba(196, 162, 122, 0.15);
         }
 
         .hero::before, .hero::after {
@@ -222,7 +221,6 @@
             margin-bottom: 0.8rem;
             animation: sway 4s infinite ease;
             display: inline-block;
-            filter: drop-shadow(0 0 5px rgba(196, 162, 122, 0.3));
         }
 
         @keyframes sway {
@@ -234,7 +232,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.2rem;
             font-weight: 500;
-            color: #e8ddd3;
+            color: #5a4a3e;
             letter-spacing: 4px;
         }
 
@@ -251,12 +249,11 @@
             padding: 2.2rem;
         }
 
-        /* ПЕРСОНАЛЬНОЕ ОБРАЩЕНИЕ */
         .greeting {
             text-align: center;
             margin-bottom: 1.8rem;
             padding-bottom: 1rem;
-            border-bottom: 2px dotted rgba(196, 162, 122, 0.25);
+            border-bottom: 2px dotted rgba(196, 162, 122, 0.3);
         }
 
         .greeting-text {
@@ -269,11 +266,10 @@
 
         .greeting-sub {
             font-size: 0.9rem;
-            color: #a0a0a0;
+            color: #8a7a6e;
             margin-top: 8px;
         }
 
-        /* ИМЕНА */
         .couple-names {
             text-align: center;
             margin: 1rem 0 1.2rem;
@@ -283,10 +279,9 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 3.5rem;
             font-weight: 600;
-            color: #e8ddd3;
+            color: #5a4a3e;
             display: inline-block;
             letter-spacing: 3px;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         .and-icon {
@@ -296,15 +291,13 @@
             vertical-align: middle;
         }
 
-        /* ДАТА (шрифт Outfit) */
         .date-block {
-            background: rgba(196, 162, 122, 0.06);
+            background: rgba(196, 162, 122, 0.05);
             border-radius: 60px;
             padding: 1.3rem;
             text-align: center;
             margin: 1.8rem 0;
             border: 1px solid rgba(196, 162, 122, 0.15);
-            backdrop-filter: blur(4px);
         }
 
         .date-big {
@@ -318,13 +311,12 @@
         .date-details {
             font-family: 'Outfit', sans-serif;
             font-size: 1rem;
-            color: #b0a088;
+            color: #8a7a6e;
             margin-top: 6px;
         }
 
-        /* ТАЙМЕР */
         .timer-wrapper {
-            background: rgba(196, 162, 122, 0.05);
+            background: rgba(196, 162, 122, 0.04);
             border-radius: 60px;
             padding: 1.2rem;
             margin: 1.8rem 0;
@@ -356,19 +348,18 @@
             font-size: 2.5rem;
             font-weight: 500;
             font-family: 'Outfit', monospace;
-            color: #e8ddd3;
+            color: #5a4a3e;
             line-height: 1;
         }
 
         .timer-label {
             font-size: 0.65rem;
             text-transform: uppercase;
-            color: #888;
+            color: #a09080;
             letter-spacing: 2px;
             margin-top: 5px;
         }
 
-        /* ИНФО-БЛОКИ С ДЕТАЛЯМИ */
         .info-section {
             margin: 1.5rem 0;
         }
@@ -379,14 +370,14 @@
             gap: 1rem;
             padding: 1rem 1.2rem;
             margin: 0.8rem 0;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(196, 162, 122, 0.03);
             border-radius: 50px;
             border: 1px solid rgba(196, 162, 122, 0.12);
             transition: all 0.3s ease;
         }
 
         .info-item:hover {
-            background: rgba(196, 162, 122, 0.05);
+            background: rgba(196, 162, 122, 0.07);
             border-color: rgba(196, 162, 122, 0.3);
             transform: translateX(5px);
         }
@@ -401,7 +392,7 @@
         .info-text {
             flex: 1;
             font-size: 0.9rem;
-            color: #d0c8c0;
+            color: #5a4a3e;
             line-height: 1.4;
         }
 
@@ -410,12 +401,10 @@
             font-weight: 500;
         }
 
-        /* ТЕЛЕФОНЫ */
         .phone-section {
             text-align: center;
-            margin: 2rem 0 0.5rem;
+            margin: 2rem 0 1rem;
             padding: 1rem;
-            border-top: 1px dashed rgba(196, 162, 122, 0.2);
         }
 
         .phone-row {
@@ -449,17 +438,20 @@
 
         .copy-notice {
             font-size: 0.7rem;
-            color: #777;
+            color: #a09080;
             margin-top: 10px;
         }
 
         footer {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(196, 162, 122, 0.05);
             text-align: center;
             padding: 1rem;
-            font-size: 0.7rem;
-            color: #888;
+            font-size: 0.75rem;
+            color: #8a7a6e;
             letter-spacing: 1px;
+            margin-top: 10px;
+            position: relative;
+            z-index: 2;
         }
 
         @media (max-width: 550px) {
@@ -471,16 +463,17 @@
             .invitation-title { font-size: 1.5rem; }
             .content { padding: 1.5rem; }
             .envelope { width: 300px; height: 220px; }
-            .envelope-flap::before { border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 110px solid #c4a27a; }
+            .envelope-flap::before { border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 110px solid #f0e0d4; }
             .phone-row { gap: 0.8rem; }
             .phone-number { font-size: 0.85rem; padding: 6px 14px; }
             .invitation-card::before { top: 12px; left: 12px; right: 12px; bottom: 12px; }
+            footer { margin-top: 5px; padding: 0.8rem; }
         }
     </style>
 </head>
 <body>
 
-<!-- КОНВЕРТ-ОБЛОЖКА (НОВЫЙ СТИЛЬ) -->
+<!-- КОНВЕРТ-ОБЛОЖКА -->
 <div class="envelope-container" id="envelopeContainer">
     <div class="envelope">
         <div class="envelope-flap"></div>
@@ -538,10 +531,6 @@
                     <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
                     <div class="info-text"><strong>Программа:</strong> 15:30 – Сбор гостей | 16:00 – Церемония | 17:00 – Фуршет | 18:00 – Банкет и танцы</div>
                 </div>
-                <div class="info-item">
-                    <div class="info-icon"><i class="fas fa-glass-cheers"></i></div>
-                    <div class="info-text"><strong>Фуршет и банкет:</strong> Изысканное меню от шеф-повара, живая музыка, караоке</div>
-                </div>
             </div>
 
             <div class="phone-section">
@@ -558,7 +547,7 @@
             </div>
         </div>
         <footer>
-            <i class="fas fa-heart" style="color: #c4a27a; font-size: 0.7rem;"></i> С любовью, Илья и Диана <i class="fas fa-heart" style="color: #c4a27a; font-size: 0.7rem;"></i>
+            С любовью, Илья и Диана ♥ Ждём вас разделить с нами этот день
         </footer>
     </div>
 </div>
@@ -650,7 +639,7 @@
     notice.style.left = '50%';
     notice.style.transform = 'translateX(-50%)';
     notice.style.backgroundColor = '#c4a27a';
-    notice.style.color = '#1e1a18';
+    notice.style.color = '#fffef7';
     notice.style.padding = '10px 20px';
     notice.style.borderRadius = '50px';
     notice.style.fontSize = '14px';
@@ -680,7 +669,7 @@
                 setTimeout(() => {
                     notice.style.opacity = '0';
                     notice.style.backgroundColor = '#c4a27a';
-                    notice.style.color = '#1e1a18';
+                    notice.style.color = '#fffef7';
                 }, 2000);
             });
         });
