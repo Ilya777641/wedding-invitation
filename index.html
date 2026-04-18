@@ -26,9 +26,10 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            overflow-x: hidden;
         }
 
-        /* === НОВЫЙ РЕАЛИСТИЧНЫЙ КОНВЕРТ === */
+        /* === КОНВЕРТ === */
         .envelope-container {
             position: fixed;
             top: 0;
@@ -50,16 +51,13 @@
             pointer-events: none;
         }
 
-        /* Конверт — увеличенный и объёмный */
         .envelope {
             position: relative;
             width: 480px;
             height: 320px;
             background: linear-gradient(145deg, #fffef7 0%, #faf5ed 100%);
             border-radius: 12px;
-            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25),
-                        0 0 0 1px rgba(212, 184, 150, 0.4),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(212, 184, 150, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.8);
             transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             animation: floatEnvelope 3s ease-in-out infinite;
             cursor: pointer;
@@ -75,7 +73,6 @@
             box-shadow: 0 40px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(212, 184, 150, 0.6);
         }
 
-        /* Верхний клапан (треугольник) */
         .envelope-flap {
             position: absolute;
             top: 0;
@@ -100,10 +97,8 @@
             border-right: 240px solid transparent;
             border-radius: 12px 12px 0 0;
             box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.03);
-            transition: all 0.3s ease;
         }
 
-        /* Тень под клапаном */
         .envelope-flap::after {
             content: "";
             position: absolute;
@@ -115,7 +110,6 @@
             pointer-events: none;
         }
 
-        /* Декоративная линия (как будто конверт склеен) */
         .envelope-line {
             position: absolute;
             bottom: 60px;
@@ -126,7 +120,6 @@
             z-index: 3;
         }
 
-        /* Содержимое конверта */
         .envelope-content {
             position: relative;
             z-index: 5;
@@ -149,8 +142,8 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.9; text-shadow: 0 0 5px rgba(196, 162, 122, 0.3); }
-            50% { transform: scale(1.12); opacity: 1; text-shadow: 0 0 20px rgba(196, 162, 122, 0.5); }
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.12); opacity: 1; }
         }
 
         .envelope-title {
@@ -160,7 +153,6 @@
             color: #5a4a3e;
             margin-bottom: 8px;
             letter-spacing: 4px;
-            text-shadow: 0 1px 0 rgba(255,255,255,0.5);
         }
 
         .envelope-sub {
@@ -168,7 +160,6 @@
             color: #c4a27a;
             margin-bottom: 25px;
             letter-spacing: 2px;
-            font-weight: 400;
         }
 
         .envelope-tap {
@@ -178,17 +169,6 @@
             padding: 12px 28px;
             border-radius: 50px;
             border: 1px solid rgba(196, 162, 122, 0.4);
-            backdrop-filter: blur(2px);
-            transition: all 0.2s;
-        }
-
-        .envelope-tap i {
-            margin-right: 8px;
-        }
-
-        .envelope-tap:hover {
-            background: rgba(196, 162, 122, 0.2);
-            transform: scale(1.02);
         }
 
         /* === ОСНОВНОЕ ПРИГЛАШЕНИЕ === */
@@ -199,6 +179,8 @@
             pointer-events: none;
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 10;
         }
 
         .invitation-wrapper.show {
@@ -302,7 +284,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 2rem;
             font-weight: 500;
-            color: #c4a27a;
+            color: #000000;
             line-height: 1.3;
         }
 
@@ -496,6 +478,28 @@
             z-index: 2;
         }
 
+        /* === АНИМАЦИЯ ПАДАЮЩИХ ЛЕПЕСТКОВ === */
+        .petal {
+            position: fixed;
+            top: -20px;
+            pointer-events: none;
+            z-index: 999;
+            font-size: 1.2rem;
+            opacity: 0.7;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-20px) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         @media (max-width: 550px) {
             .envelope { width: 320px; height: 230px; }
             .envelope-flap::before { border-top: 125px solid #f7efe7; border-left: 160px solid transparent; border-right: 160px solid transparent; }
@@ -517,7 +521,7 @@
 </head>
 <body>
 
-<!-- РЕАЛИСТИЧНЫЙ КОНВЕРТ -->
+<!-- КОНВЕРТ -->
 <div class="envelope-container" id="envelopeContainer">
     <div class="envelope">
         <div class="envelope-flap"></div>
@@ -543,7 +547,7 @@
         <div class="content">
             <div class="greeting" id="greetingBlock">
                 <div class="greeting-text" id="guestGreeting">Дорогие друзья!</div>
-                <div class="greeting-sub">Приглашаем Вас на наш праздник</div>
+                <div class="greeting-sub">Имеем честь пригласить вас</div>
             </div>
 
             <div class="couple-names">
@@ -554,7 +558,7 @@
 
             <div class="date-block">
                 <div class="date-big">31 ИЮЛЯ 2026</div>
-                <div class="date-details">16:00 • Торжественная церемония</div>
+                <div class="date-details">16:00 • Торжественная церемония и банкет</div>
             </div>
 
             <div class="timer-wrapper">
@@ -604,6 +608,58 @@
 </div>
 
 <script>
+    // === ПАДАЮЩИЕ ЛЕПЕСТКИ ===
+    function createPetal() {
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        
+        // Символы лепестков
+        const petals = ['🌸', '🌼', '🌺', '🌸', '🌷', '🌸'];
+        petal.innerHTML = petals[Math.floor(Math.random() * petals.length)];
+        
+        // Случайные размеры
+        const size = Math.random() * 20 + 16;
+        petal.style.fontSize = size + 'px';
+        
+        // Случайная позиция по горизонтали
+        petal.style.left = Math.random() * 100 + '%';
+        
+        // Случайная скорость падения (от 5 до 12 секунд)
+        const duration = Math.random() * 7 + 5;
+        petal.style.animationDuration = duration + 's';
+        
+        // Случайная задержка старта
+        petal.style.animationDelay = Math.random() * 5 + 's';
+        
+        // Случайная прозрачность
+        petal.style.opacity = Math.random() * 0.5 + 0.3;
+        
+        document.body.appendChild(petal);
+        
+        // Удаляем лепесток после окончания анимации
+        setTimeout(() => {
+            petal.remove();
+        }, duration * 1000);
+    }
+
+    // Создаём лепестки только после открытия конверта
+    let petalsInterval = null;
+    
+    function startPetals() {
+        if (petalsInterval) return;
+        petalsInterval = setInterval(() => {
+            createPetal();
+        }, 800);
+    }
+
+    function stopPetals() {
+        if (petalsInterval) {
+            clearInterval(petalsInterval);
+            petalsInterval = null;
+        }
+    }
+
+    // === ОСТАЛЬНОЙ КОД ===
     function getCorrectGreeting(name) {
         if (!name) return 'Дорогие друзья!';
         if (name.includes(' и ')) return `Дорогие ${name}!`;
@@ -638,9 +694,12 @@
 
     const envelopeContainer = document.getElementById('envelopeContainer');
     const invitationWrapper = document.getElementById('invitationWrapper');
+    
     envelopeContainer.addEventListener('click', function() {
         envelopeContainer.classList.add('fade-out');
         invitationWrapper.classList.add('show');
+        // Запускаем лепестки после открытия конверта
+        startPetals();
     });
 
     function getWeddingDate() {
