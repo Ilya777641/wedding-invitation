@@ -2,14 +2,13 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Свадебное приглашение | Илья & Диана</title>
-    <!-- Шрифты -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Илья & Диана | Свадебное приглашение</title>
+    <!-- Google Fonts & Simple CSS Reset -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- AOS Library для анимаций при скролле -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -18,843 +17,450 @@
         }
 
         body {
-            background: linear-gradient(145deg, #f5ede8 0%, #efe5df 100%);
+            background: #fffaf7;
             font-family: 'Montserrat', sans-serif;
-            color: #3a2e2a;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            color: #2c241f;
             overflow-x: hidden;
         }
 
-        /* === КОНВЕРТ С ЗОЛОТИСТЫМ СВЕЧЕНИЕМ === */
+        /* Контейнер-обложка (конверт) */
         .envelope-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(145deg, #f5ede8 0%, #efe5df 100%);
+            background: #fffaf7;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+            z-index: 2000;
             cursor: pointer;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
-
         .envelope-container.fade-out {
             opacity: 0;
             visibility: hidden;
-            pointer-events: none;
         }
-
-        /* Анимация раскрытия конверта */
         .envelope {
-            position: relative;
-            width: 480px;
-            height: 320px;
-            background: linear-gradient(145deg, #fffef7 0%, #faf5ed 100%);
-            border-radius: 12px;
-            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(212, 184, 150, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            animation: floatEnvelope 3s ease-in-out infinite, goldenGlow 2s ease-in-out infinite;
-            cursor: pointer;
-            transform-origin: center;
+            text-align: center;
+            animation: float 2.5s infinite ease;
         }
-
-        /* Мягкое золотистое свечение */
-        @keyframes goldenGlow {
-            0%, 100% {
-                box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(212, 184, 150, 0.4), 0 0 20px rgba(196, 162, 122, 0.3), 0 0 40px rgba(196, 162, 122, 0.15);
-            }
-            50% {
-                box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(212, 184, 150, 0.6), 0 0 35px rgba(196, 162, 122, 0.6), 0 0 60px rgba(196, 162, 122, 0.3);
-            }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0); }
         }
-
-        /* Анимация раскрытия (при клике) */
-        .envelope.open-envelope {
-            animation: openEnvelope 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        .envelope i {
+            font-size: 70px;
+            color: #c4a27a;
+            margin-bottom: 20px;
         }
-
-        @keyframes openEnvelope {
-            0% {
-                transform: scale(1) rotate(0deg);
-                opacity: 1;
-            }
-            30% {
-                transform: scale(1.05) rotate(2deg);
-            }
-            100% {
-                transform: scale(1.3) rotate(5deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes floatEnvelope {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(0.5deg); }
-        }
-
-        .envelope:hover {
-            transform: scale(1.02) translateY(-5px);
-        }
-
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: transparent;
-            border-radius: 12px;
-            overflow: hidden;
-            z-index: 2;
-        }
-
-        .envelope-flap::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 0;
-            border-top: 170px solid #f7efe7;
-            border-left: 240px solid transparent;
-            border-right: 240px solid transparent;
-            border-radius: 12px 12px 0 0;
-            box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.03);
-            transition: all 0.3s ease;
-        }
-
-        .envelope-flap::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 20px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.05), transparent);
-            pointer-events: none;
-        }
-
-        /* Декоративная линия */
-        .envelope-line {
-            position: absolute;
-            bottom: 60px;
-            left: 20px;
-            right: 20px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212, 184, 150, 0.4), transparent);
-            z-index: 3;
-        }
-
-        /* СУРГУЧНАЯ ПЕЧАТЬ ПО ЦЕНТРУ */
-        .seal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70px;
-            height: 70px;
-            background: radial-gradient(circle at 30% 30%, #c41e1e, #8b0000);
-            border-radius: 50%;
-            z-index: 10;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), inset 0 2px 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(196, 162, 122, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .envelope h2 {
             font-family: 'Cormorant Garamond', serif;
-            font-weight: bold;
             font-size: 28px;
-            color: #f5e6d3;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            color: #5a4a3e;
             letter-spacing: 2px;
-            transition: all 0.3s ease;
+        }
+        .envelope p {
+            color: #8a7a6e;
+            margin-top: 10px;
+            font-size: 14px;
         }
 
-        /* Инициалы на печати */
-        .seal::after {
-            content: "И Д";
-            position: absolute;
+        /* Основной контент (изначально скрыт) */
+        .main-content {
+            opacity: 0;
+            transition: opacity 0.9s ease;
+        }
+        .main-content.show {
+            opacity: 1;
+        }
+
+        /* Hero секция (первый экран) */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(145deg, #fffaf7 0%, #fef3ed 100%);
+        }
+        .hero .names {
             font-family: 'Cormorant Garamond', serif;
-            font-weight: 700;
-            font-size: 24px;
-            color: #f0dbb2;
-            text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+            font-size: 52px;
+            font-weight: 600;
+            color: #3a2c24;
+            letter-spacing: 6px;
+            margin-bottom: 20px;
+        }
+        .hero .date {
+            font-size: 18px;
+            color: #c4a27a;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+        .hero .invite-text {
+            max-width: 280px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #5a4a3e;
         }
 
-        /* Волнистый край печати */
-        .seal::before {
-            content: "";
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            border-radius: 50%;
-            border: 1px dashed rgba(255, 215, 120, 0.6);
-            pointer-events: none;
+        /* Секция с таймером */
+        .timer-section {
+            background: #fff5f0;
+            padding: 60px 20px;
+            text-align: center;
         }
-
-        /* Содержимое конверта */
-        .envelope-content {
-            position: relative;
-            z-index: 5;
-            height: 100%;
+        .timer-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            color: #5a4a3e;
+            margin-bottom: 30px;
+        }
+        .timer-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        .timer-card {
+            background: white;
+            border-radius: 100px;
+            width: 90px;
+            height: 90px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 25px;
-            background: transparent;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            border: 1px solid #f0e0d4;
         }
-
-        .envelope-heart {
-            font-size: 58px;
-            color: #c4a27a;
-            margin-bottom: 15px;
-            animation: pulse 2s ease-in-out infinite;
-            filter: drop-shadow(0 5px 15px rgba(196, 162, 122, 0.3));
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.12); opacity: 1; }
-        }
-
-        .envelope-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 34px;
-            font-weight: 600;
-            color: #5a4a3e;
-            margin-bottom: 8px;
-            letter-spacing: 4px;
-        }
-
-        .envelope-sub {
-            font-size: 16px;
-            color: #c4a27a;
-            margin-bottom: 25px;
-            letter-spacing: 2px;
-        }
-
-        .envelope-tap {
-            font-size: 14px;
-            color: #8a7a6e;
-            background: rgba(196, 162, 122, 0.12);
-            padding: 12px 28px;
-            border-radius: 50px;
-            border: 1px solid rgba(196, 162, 122, 0.4);
-        }
-
-        /* === ОСНОВНОЕ ПРИГЛАШЕНИЕ === */
-        .invitation-wrapper {
-            opacity: 0;
-            transform: scale(0.95);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 10;
-        }
-
-        .invitation-wrapper.show {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-        }
-
-        .invitation-card {
-            background: #fffef7;
-            border-radius: 64px 64px 72px 72px;
-            box-shadow: 0 35px 65px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(196, 162, 122, 0.2);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .invitation-card::before {
-            content: "";
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            border: 1px solid rgba(196, 162, 122, 0.25);
-            border-radius: 48px;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .invitation-card::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #c4a27a, #e8ddd3, #c4a27a);
-        }
-
-        .hero {
-            background: linear-gradient(135deg, rgba(196, 162, 122, 0.05), rgba(196, 162, 122, 0.02));
-            padding: 2rem 2rem 1.5rem;
-            text-align: center;
-            position: relative;
-            border-bottom: 1px solid rgba(196, 162, 122, 0.15);
-        }
-
-        .hero::before, .hero::after {
-            content: "✦";
-            font-size: 1.8rem;
-            color: #c4a27a;
-            position: absolute;
-            top: 20px;
-            opacity: 0.4;
-        }
-        .hero::before { left: 25px; }
-        .hero::after { right: 25px; }
-
-        .flower-icon {
-            font-size: 2.5rem;
-            color: #c4a27a;
-            margin-bottom: 0.8rem;
-            animation: sway 4s infinite ease;
-            display: inline-block;
-        }
-
-        @keyframes sway {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(8deg); }
-        }
-
-        .invitation-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.2rem;
-            font-weight: 500;
-            color: #5a4a3e;
-            letter-spacing: 4px;
-        }
-
-        .invitation-sub {
-            font-size: 0.85rem;
-            color: #c4a27a;
-            border-top: 1px dashed rgba(196, 162, 122, 0.3);
-            display: inline-block;
-            padding-top: 0.6rem;
-            margin-top: 0.6rem;
-        }
-
-        .content {
-            padding: 2.2rem;
-        }
-
-        .greeting {
-            text-align: center;
-            margin-bottom: 1.8rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px dotted rgba(196, 162, 122, 0.3);
-        }
-
-        .greeting-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 500;
-            color: #c4a27a;
-            line-height: 1.3;
-        }
-
-        .greeting-sub {
-            font-size: 0.9rem;
-            color: #8a7a6e;
-            margin-top: 8px;
-        }
-
-        .couple-names {
-            text-align: center;
-            margin: 1rem 0 1.2rem;
-        }
-
-        .names-main {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
-            font-weight: 600;
-            color: #5a4a3e;
-            display: inline-block;
-            letter-spacing: 3px;
-        }
-
-        .and-icon {
-            font-size: 2rem;
-            margin: 0 15px;
-            color: #c4a27a;
-            vertical-align: middle;
-        }
-
-        .date-block {
-            background: rgba(196, 162, 122, 0.05);
-            border-radius: 60px;
-            padding: 1.3rem;
-            text-align: center;
-            margin: 1.8rem 0;
-            border: 1px solid rgba(196, 162, 122, 0.15);
-        }
-
-        .date-big {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.4rem;
-            font-weight: 500;
-            color: #c4a27a;
-            letter-spacing: 3px;
-        }
-
-        .date-details {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1rem;
-            color: #8a7a6e;
-            margin-top: 6px;
-        }
-
-        .timer-wrapper {
-            background: rgba(196, 162, 122, 0.04);
-            border-radius: 60px;
-            padding: 1.2rem;
-            margin: 1.8rem 0;
-            text-align: center;
-            border: 1px solid rgba(196, 162, 122, 0.1);
-        }
-
-        .timer-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: #c4a27a;
-            margin-bottom: 1rem;
-        }
-
-        .timer-grid {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .timer-cell {
-            text-align: center;
-            min-width: 70px;
-        }
-
         .timer-number {
-            font-size: 2.5rem;
-            font-weight: 500;
-            font-family: 'Outfit', monospace;
-            color: #5a4a3e;
+            font-size: 32px;
+            font-weight: 600;
+            font-family: 'Montserrat', monospace;
+            color: #c4a27a;
             line-height: 1;
         }
-
         .timer-label {
-            font-size: 0.65rem;
+            font-size: 11px;
             text-transform: uppercase;
             color: #a09080;
-            letter-spacing: 2px;
-            margin-top: 5px;
-        }
-
-        .info-section {
-            margin: 1.5rem 0;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 1.2rem;
-            margin: 0.8rem 0;
-            background: rgba(196, 162, 122, 0.03);
-            border-radius: 50px;
-            border: 1px solid rgba(196, 162, 122, 0.12);
-            transition: all 0.3s ease;
-        }
-
-        .info-item:hover {
-            background: rgba(196, 162, 122, 0.07);
-            border-color: rgba(196, 162, 122, 0.3);
-            transform: translateX(5px);
-        }
-
-        .info-icon {
-            font-size: 1.6rem;
-            color: #c4a27a;
-            width: 45px;
-            text-align: center;
-        }
-
-        .info-text {
-            flex: 1;
-            font-size: 0.9rem;
-            color: #5a4a3e;
-            line-height: 1.4;
-        }
-
-        .info-text strong {
-            color: #c4a27a;
-            font-weight: 500;
-        }
-
-        .phone-section {
-            text-align: center;
-            margin: 1rem 0 0.2rem;
-            padding: 0.5rem;
-        }
-
-        .phone-row {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            margin: 12px 0;
-        }
-
-        .phone-number {
-            font-size: 1rem;
-            font-weight: 500;
-            color: #c4a27a;
-            background: rgba(196, 162, 122, 0.08);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 22px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid rgba(196, 162, 122, 0.2);
-        }
-
-        .phone-number:hover {
-            background: rgba(196, 162, 122, 0.15);
-            transform: scale(1.02);
-            border-color: rgba(196, 162, 122, 0.5);
-        }
-
-        .copy-notice {
-            font-size: 0.7rem;
-            color: #a09080;
-            margin-top: 10px;
-        }
-
-        footer {
-            background: rgba(196, 162, 122, 0.05);
-            text-align: center;
-            padding: 0.6rem 1rem;
-            font-size: 0.75rem;
-            color: #8a7a6e;
             letter-spacing: 1px;
-            margin-top: 0px;
-            position: relative;
-            z-index: 2;
         }
 
-        /* === АНИМАЦИЯ ПАДАЮЩИХ ЛЕПЕСТКОВ === */
-        .petal {
-            position: fixed;
-            top: -20px;
-            pointer-events: none;
-            z-index: 999;
-            font-size: 1.2rem;
-            opacity: 0.7;
-            animation: fall linear forwards;
+        /* Текст приглашения */
+        .message-section {
+            padding: 80px 25px;
+            text-align: center;
+            background: white;
+        }
+        .message-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            color: #3a2c24;
+            margin-bottom: 25px;
+        }
+        .message-section p {
+            max-width: 500px;
+            margin: 0 auto 20px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #5a4a3e;
+        }
+        .message-section .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            margin-top: 30px;
+            color: #c4a27a;
         }
 
-        @keyframes fall {
-            0% {
-                transform: translateY(-20px) rotate(0deg);
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
+        /* Расписание (тайминг) */
+        .schedule-section {
+            background: #fefaf8;
+            padding: 70px 25px;
+        }
+        .section-title {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            color: #3a2c24;
+            margin-bottom: 40px;
+        }
+        .timeline {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .timeline-item {
+            display: flex;
+            align-items: baseline;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #eeded2;
+        }
+        .time {
+            font-weight: 600;
+            color: #c4a27a;
+            min-width: 90px;
+            font-size: 16px;
+        }
+        .event {
+            color: #5a4a3e;
+            font-size: 15px;
         }
 
+        /* Локация */
+        .location-section {
+            padding: 70px 25px;
+            text-align: center;
+            background: white;
+        }
+        .location-name {
+            font-size: 24px;
+            font-family: 'Cormorant Garamond', serif;
+            color: #3a2c24;
+            margin-bottom: 10px;
+        }
+        .address {
+            color: #8a7a6e;
+            margin-bottom: 15px;
+        }
+
+        /* Дресс-код */
+        .dresscode-section {
+            background: #fefaf8;
+            padding: 70px 25px;
+            text-align: center;
+        }
+        .dresscode-badge {
+            display: inline-block;
+            background: #fff;
+            padding: 8px 30px;
+            border-radius: 50px;
+            font-weight: 500;
+            color: #c4a27a;
+            border: 1px solid #eeded2;
+            margin-top: 20px;
+        }
+
+        /* Контакты */
+        .contacts-section {
+            padding: 60px 25px;
+            text-align: center;
+            background: white;
+        }
+        .contacts-section .phone {
+            font-size: 18px;
+            font-weight: 500;
+            color: #3a2c24;
+            margin: 10px 0;
+        }
+        .small-note {
+            font-size: 12px;
+            color: #a09080;
+            margin-top: 15px;
+        }
+
+        /* Нижний колонтитул */
+        footer {
+            background: #f5ede8;
+            padding: 25px;
+            text-align: center;
+            font-size: 12px;
+            color: #8a7a6e;
+            border-top: 1px solid #eeded2;
+        }
+
+        /* Адаптивность */
         @media (max-width: 550px) {
-            .envelope { width: 320px; height: 230px; }
-            .envelope-flap::before { border-top: 125px solid #f7efe7; border-left: 160px solid transparent; border-right: 160px solid transparent; }
-            .envelope-title { font-size: 24px; }
-            .envelope-heart { font-size: 42px; }
-            .envelope-tap { font-size: 11px; padding: 8px 18px; }
-            .seal { width: 50px; height: 50px; }
-            .seal::after { font-size: 18px; }
-            .greeting-text { font-size: 1.5rem; }
-            .names-main { font-size: 2.3rem; }
-            .date-big { font-size: 1.6rem; }
-            .timer-number { font-size: 1.8rem; }
-            .timer-cell { min-width: 55px; }
-            .invitation-title { font-size: 1.5rem; }
-            .content { padding: 1.5rem; }
-            .phone-row { gap: 0.8rem; }
-            .phone-number { font-size: 0.85rem; padding: 6px 14px; }
-            .invitation-card::before { top: 12px; left: 12px; right: 12px; bottom: 12px; }
+            .hero .names { font-size: 38px; letter-spacing: 3px; }
+            .timer-card { width: 70px; height: 70px; }
+            .timer-number { font-size: 24px; }
+            .timeline-item { gap: 12px; }
+            .time { min-width: 70px; font-size: 14px; }
         }
     </style>
 </head>
 <body>
 
-<!-- КОНВЕРТ С ПЕЧАТЬЮ, СВЕЧЕНИЕМ И АНИМАЦИЕЙ РАСКРЫТИЯ -->
+<!-- КОНВЕРТ-ОБЛОЖКА -->
 <div class="envelope-container" id="envelopeContainer">
-    <div class="envelope" id="envelope">
-        <div class="envelope-flap"></div>
-        <div class="envelope-line"></div>
-        <div class="seal"></div>
-        <div class="envelope-content">
-            <div class="envelope-heart"><i class="fas fa-heart"></i></div>
-            <div class="envelope-title">Вам пришло письмо</div>
-            <div class="envelope-sub">Свадебное приглашение</div>
-            <div class="envelope-tap"><i class="fas fa-hand-pointer"></i> Нажмите, чтобы открыть</div>
-        </div>
+    <div class="envelope">
+        <i class="fas fa-envelope-open-text"></i>
+        <h2>Вам письмо</h2>
+        <p>Нажмите, чтобы открыть</p>
     </div>
 </div>
 
-<!-- ОСНОВНОЕ ПРИГЛАШЕНИЕ -->
-<div class="invitation-wrapper" id="invitationWrapper">
-    <div class="invitation-card">
-        <div class="hero">
-            <div class="flower-icon"><i class="fas fa-feather-alt"></i></div>
-            <div class="invitation-title">СВАДЕБНОЕ ПРИГЛАШЕНИЕ</div>
-            <div class="invitation-sub">Тепло наших сердец для вас</div>
+<!-- ОСНОВНОЙ КОНТЕНТ (ПРИГЛАШЕНИЕ) -->
+<div class="main-content" id="mainContent">
+    
+    <!-- Герой-блок с именами и датой -->
+    <div class="hero">
+        <div class="names" data-aos="fade-up" data-aos-duration="1000">
+            ИЛЬЯ & ДИАНА
         </div>
-
-        <div class="content">
-            <div class="greeting" id="greetingBlock">
-                <div class="greeting-text" id="guestGreeting">Дорогие друзья!</div>
-                <div class="greeting-sub">Имеем честь пригласить вас</div>
-            </div>
-
-            <div class="couple-names">
-                <span class="names-main">Илья</span>
-                <span class="and-icon"><i class="fas fa-heart"></i></span>
-                <span class="names-main">Диана</span>
-            </div>
-
-            <div class="date-block">
-                <div class="date-big">31 ИЮЛЯ 2026</div>
-                <div class="date-details">16:00 • Торжественная церемония и банкет</div>
-            </div>
-
-            <div class="timer-wrapper">
-                <div class="timer-title"><i class="far fa-clock"></i> ДО НАШЕГО ДНЯ</div>
-                <div class="timer-grid">
-                    <div class="timer-cell"><div class="timer-number" id="days">00</div><div class="timer-label">Дней</div></div>
-                    <div class="timer-cell"><div class="timer-number" id="hours">00</div><div class="timer-label">Часов</div></div>
-                    <div class="timer-cell"><div class="timer-number" id="minutes">00</div><div class="timer-label">Минут</div></div>
-                    <div class="timer-cell"><div class="timer-number" id="seconds">00</div><div class="timer-label">Секунд</div></div>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-item">
-                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <div class="info-text"><strong>Ресторан «Версаль»</strong><br>Элеваторная ул., 13, посёлок Мелькомбинат</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
-                    <div class="info-text"><strong>Программа:</strong> 15:30 – Сбор гостей | 16:00 – Церемония | 17:00 – Фуршет | 18:00 – Банкет и танцы</div>
-                </div>
-            </div>
-
-            <div class="phone-section">
-                <div style="font-size: 0.8rem; margin-bottom: 10px; color: #c4a27a; letter-spacing: 1px;">По всем вопросам:</div>
-                <div class="phone-row">
-                    <div style="text-align: center;">
-                        <div class="phone-number" data-phone="89997577769">
-                            <i class="fas fa-phone-alt"></i> 8-999-757-7769
-                        </div>
-                        <div style="font-size: 0.7rem; color: #c4a27a; margin-top: 5px;">👨‍💼 Илья (жених)</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div class="phone-number" data-phone="89870483010">
-                            <i class="fas fa-phone-alt"></i> 8-987-048-3010
-                        </div>
-                        <div style="font-size: 0.7rem; color: #c4a27a; margin-top: 5px;">👰‍♀️ Диана (невеста)</div>
-                    </div>
-                </div>
-                <div class="copy-notice"><i class="fas fa-copy"></i> Нажмите на номер, чтобы скопировать</div>
-            </div>
+        <div class="date" data-aos="fade-up" data-aos-delay="150">
+            31 ИЮЛЯ 2026
         </div>
-        <footer>
-            С любовью, Илья и Диана ♥ Ждём вас разделить с нами этот день
-        </footer>
+        <div class="invite-text" data-aos="fade-up" data-aos-delay="300">
+            Приглашаем вас разделить с нами<br>
+            радость этого особенного дня
+        </div>
     </div>
+
+    <!-- Таймер обратного отсчёта -->
+    <div class="timer-section">
+        <div class="timer-title" data-aos="fade-up">До нашей свадьбы осталось</div>
+        <div class="timer-grid" data-aos="fade-up" data-aos-delay="100">
+            <div class="timer-card"><span class="timer-number" id="days">00</span><span class="timer-label">Дней</span></div>
+            <div class="timer-card"><span class="timer-number" id="hours">00</span><span class="timer-label">Часов</span></div>
+            <div class="timer-card"><span class="timer-number" id="minutes">00</span><span class="timer-label">Минут</span></div>
+            <div class="timer-card"><span class="timer-number" id="seconds">00</span><span class="timer-label">Секунд</span></div>
+        </div>
+    </div>
+
+    <!-- Тёплые слова -->
+    <div class="message-section">
+        <h3 data-aos="fade-up">Дорогие наши гости!</h3>
+        <p data-aos="fade-up" data-aos-delay="100">
+            Мы не представляем этот праздник без вас — наших близких и дорогих сердцу людей. 
+            Пусть этот день станет началом нашей новой семейной истории, которую мы с радостью разделим с вами.
+        </p>
+        <div class="signature" data-aos="fade-up" data-aos-delay="200">
+            Илья & Диана
+        </div>
+    </div>
+
+    <!-- Расписание дня -->
+    <div class="schedule-section">
+        <div class="section-title" data-aos="fade-up">Тайминг дня</div>
+        <div class="timeline" data-aos="fade-up" data-aos-delay="100">
+            <div class="timeline-item"><div class="time">15:30</div><div class="event">Сбор гостей, приветственный фуршет</div></div>
+            <div class="timeline-item"><div class="time">16:00</div><div class="event">Торжественная церемония</div></div>
+            <div class="timeline-item"><div class="time">17:00</div><div class="event">Фуршет и развлекательная программа</div></div>
+            <div class="timeline-item"><div class="time">18:00</div><div class="event">Банкет, поздравления, танцы</div></div>
+            <div class="timeline-item"><div class="time">21:00</div><div class="event">Праздничный торт</div></div>
+            <div class="timeline-item"><div class="time">23:00</div><div class="event">Окончание вечера</div></div>
+        </div>
+    </div>
+
+    <!-- Место проведения -->
+    <div class="location-section">
+        <div class="section-title" data-aos="fade-up">Место проведения</div>
+        <div class="location-name" data-aos="fade-up" data-aos-delay="100">Ресторан «Версаль»</div>
+        <div class="address" data-aos="fade-up" data-aos-delay="150">Элеваторная ул., 13, посёлок Мелькомбинат, Московская обл.</div>
+    </div>
+
+    <!-- Дресс-код -->
+    <div class="dresscode-section">
+        <div class="section-title" data-aos="fade-up">Дресс-код</div>
+        <div class="dresscode-badge" data-aos="zoom-in" data-aos-delay="100">Вечерний / Cocktail</div>
+        <p style="margin-top: 25px; max-width: 500px; margin-left: auto; margin-right: auto; color: #5a4a3e;" data-aos="fade-up" data-aos-delay="150">
+            Будем рады, если вы поддержите стиль торжества в своих нарядах. Приветствуются цветочные оттенки и элегантные аксессуары.
+        </p>
+    </div>
+
+    <!-- Контакты -->
+    <div class="contacts-section">
+        <div class="section-title" data-aos="fade-up">Организаторы</div>
+        <div class="phone" data-aos="fade-up" data-aos-delay="50">👨‍💼 Илья: <strong>8-999-757-7769</strong></div>
+        <div class="phone" data-aos="fade-up" data-aos-delay="100">👰‍♀️ Диана: <strong>8-987-048-3010</strong></div>
+        <div class="small-note" data-aos="fade-up" data-aos-delay="150">Нажмите на номер, чтобы скопировать</div>
+    </div>
+
+    <footer>
+        С нетерпением ждём встречи!<br>С любовью, Илья и Диана
+    </footer>
 </div>
 
+<!-- Скрипты -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    // === АНИМАЦИЯ РАСКРЫТИЯ КОНВЕРТА ===
-    const envelopeContainer = document.getElementById('envelopeContainer');
-    const envelope = document.getElementById('envelope');
-    const invitationWrapper = document.getElementById('invitationWrapper');
-
-    envelopeContainer.addEventListener('click', function() {
-        // Добавляем класс анимации раскрытия
-        envelope.classList.add('open-envelope');
-        
-        // После анимации раскрытия скрываем контейнер и показываем приглашение
-        setTimeout(() => {
-            envelopeContainer.classList.add('fade-out');
-            invitationWrapper.classList.add('show');
-            startPetals(); // Запускаем лепестки
-        }, 800);
+    // Инициализация AOS (анимации при скролле)
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 50
     });
 
-    // === ПАДАЮЩИЕ ЛЕПЕСТКИ ===
-    function createPetal() {
-        const petal = document.createElement('div');
-        petal.classList.add('petal');
-        
-        const petals = ['🌸', '🌼', '🌺', '🌸', '🌷', '🌸'];
-        petal.innerHTML = petals[Math.floor(Math.random() * petals.length)];
-        
-        const size = Math.random() * 20 + 16;
-        petal.style.fontSize = size + 'px';
-        petal.style.left = Math.random() * 100 + '%';
-        const duration = Math.random() * 7 + 5;
-        petal.style.animationDuration = duration + 's';
-        petal.style.animationDelay = Math.random() * 5 + 's';
-        petal.style.opacity = Math.random() * 0.5 + 0.3;
-        
-        document.body.appendChild(petal);
-        
-        setTimeout(() => {
-            petal.remove();
-        }, duration * 1000);
-    }
+    // Открытие конверта
+    const envelope = document.getElementById('envelopeContainer');
+    const main = document.getElementById('mainContent');
 
-    let petalsInterval = null;
-    
-    function startPetals() {
-        if (petalsInterval) return;
-        petalsInterval = setInterval(() => {
-            createPetal();
-        }, 800);
-    }
+    envelope.addEventListener('click', () => {
+        envelope.classList.add('fade-out');
+        main.classList.add('show');
+        // Запускаем таймер и копирование только после открытия
+        startTimer();
+        enablePhoneCopy();
+    });
 
-    function stopPetals() {
-        if (petalsInterval) {
-            clearInterval(petalsInterval);
-            petalsInterval = null;
+    // Таймер
+    let timerInterval = null;
+    function startTimer() {
+        if (timerInterval) return;
+        function getWeddingDate() {
+            return new Date(2026, 6, 31, 16, 0, 0);
         }
-    }
-
-    // === ПЕРСОНАЛИЗАЦИЯ ===
-    function getCorrectGreeting(name) {
-        if (!name) return 'Дорогие друзья!';
-        if (name.includes(' и ')) return `Дорогие ${name}!`;
-        name = name.trim();
-        const lastChar = name.slice(-1).toLowerCase();
-        const femaleEndings = ['а', 'я', 'ия'];
-        if (femaleEndings.includes(lastChar)) {
-            return `Дорогая ${name}!`;
-        } else {
-            return `Дорогой ${name}!`;
+        function updateTimerDisplay() {
+            const now = new Date().getTime();
+            const target = getWeddingDate().getTime();
+            const diff = target - now;
+            if (diff <= 0) {
+                document.getElementById('days').innerText = '00';
+                document.getElementById('hours').innerText = '00';
+                document.getElementById('minutes').innerText = '00';
+                document.getElementById('seconds').innerText = '00';
+                return;
+            }
+            const days = Math.floor(diff / (1000*60*60*24));
+            const hours = Math.floor((diff % (86400000)) / (3600000));
+            const minutes = Math.floor((diff % 3600000) / 60000);
+            const seconds = Math.floor((diff % 60000) / 1000);
+            document.getElementById('days').innerText = days < 10 ? '0'+days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0'+hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0'+minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0'+seconds : seconds;
         }
+        updateTimerDisplay();
+        timerInterval = setInterval(updateTimerDisplay, 1000);
     }
 
-    function getGuestNameFromURL() {
-        const urlParams = new URLSearchParams(window.location.search);
-        let guest = urlParams.get('guest');
-        if (guest) {
-            guest = decodeURIComponent(guest);
-            guest = guest.replace(/\+/g, ' ');
-            return guest;
-        }
-        return null;
-    }
-
-    const guestName = getGuestNameFromURL();
-    const greetingDiv = document.getElementById('guestGreeting');
-    if (guestName) {
-        greetingDiv.textContent = getCorrectGreeting(guestName);
-    } else {
-        greetingDiv.textContent = 'Дорогие друзья!';
-    }
-
-    // === ТАЙМЕР ===
-    function getWeddingDate() {
-        return new Date(2026, 6, 31, 16, 0, 0);
-    }
-
-    function updateTimer() {
-        const now = new Date().getTime();
-        const target = getWeddingDate().getTime();
-        const distance = target - now;
-
-        if (distance < 0) {
-            document.getElementById('days').innerText = "00";
-            document.getElementById('hours').innerText = "00";
-            document.getElementById('minutes').innerText = "00";
-            document.getElementById('seconds').innerText = "00";
-            return;
-        }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (86400000)) / (3600000));
-        const minutes = Math.floor((distance % 3600000) / 60000);
-        const seconds = Math.floor((distance % 60000) / 1000);
-
-        document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-        document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-        document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-        document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
-    }
-
-    updateTimer();
-    setInterval(updateTimer, 1000);
-
-    // === КОПИРОВАНИЕ НОМЕРОВ ===
-    const phoneNumbers = document.querySelectorAll('.phone-number');
-    const notice = document.createElement('div');
-    notice.style.position = 'fixed';
-    notice.style.bottom = '30px';
-    notice.style.left = '50%';
-    notice.style.transform = 'translateX(-50%)';
-    notice.style.backgroundColor = '#c4a27a';
-    notice.style.color = '#fffef7';
-    notice.style.padding = '10px 20px';
-    notice.style.borderRadius = '50px';
-    notice.style.fontSize = '14px';
-    notice.style.fontWeight = '500';
-    notice.style.zIndex = '1001';
-    notice.style.opacity = '0';
-    notice.style.transition = 'opacity 0.3s';
-    notice.style.pointerEvents = 'none';
-    document.body.appendChild(notice);
-    
-    phoneNumbers.forEach(phoneDiv => {
-        phoneDiv.addEventListener('click', function() {
-            const phoneNumber = this.getAttribute('data-phone');
-            const displayNumber = this.innerText.trim();
-            navigator.clipboard.writeText(phoneNumber).then(() => {
-                notice.textContent = '✅ Номер скопирован: ' + displayNumber;
-                notice.style.opacity = '1';
-                setTimeout(() => {
-                    notice.style.opacity = '0';
-                }, 2000);
-            }).catch(() => {
-                notice.textContent = '❌ Не удалось скопировать';
-                notice.style.backgroundColor = '#c62828';
-                notice.style.color = 'white';
-                notice.style.opacity = '1';
-                setTimeout(() => {
-                    notice.style.opacity = '0';
-                    notice.style.backgroundColor = '#c4a27a';
-                    notice.style.color = '#fffef7';
-                }, 2000);
+    // Копирование номеров по клику
+    function enablePhoneCopy() {
+        const phones = document.querySelectorAll('.phone');
+        phones.forEach(phone => {
+            phone.style.cursor = 'pointer';
+            phone.addEventListener('click', () => {
+                const rawNumber = phone.innerText.match(/\d[\d\s-]+/g)[0].replace(/[\s-]/g, '');
+                navigator.clipboard.writeText(rawNumber).then(() => {
+                    const toast = document.createElement('div');
+                    toast.innerText = '✅ Номер скопирован';
+                    toast.style.position = 'fixed';
+                    toast.style.bottom = '30px';
+                    toast.style.left = '50%';
+                    toast.style.transform = 'translateX(-50%)';
+                    toast.style.backgroundColor = '#c4a27a';
+                    toast.style.color = 'white';
+                    toast.style.padding = '8px 20px';
+                    toast.style.borderRadius = '40px';
+                    toast.style.fontSize = '14px';
+                    toast.style.zIndex = '3000';
+                    toast.style.opacity = '0';
+                    toast.style.transition = 'opacity 0.2s';
+                    document.body.appendChild(toast);
+                    setTimeout(() => toast.style.opacity = '1', 10);
+                    setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 1800);
+                });
             });
         });
-    });
+    }
 </script>
 </body>
 </html>
