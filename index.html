@@ -24,6 +24,7 @@
             padding: 20px;
         }
 
+        /* === КОНВЕРТ (БЕЗ МАЛЕНЬКОГО ЗНАЧКА КОНВЕРТА) === */
         .envelope-container {
             position: fixed;
             top: 0;
@@ -89,15 +90,9 @@
             border-radius: 16px 16px 0 0;
         }
 
+        /* Убираем маленький значок конверта ✉ */
         .envelope-flap::after {
-            content: "✉";
-            position: absolute;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 52px;
-            color: #e7b49e;
-            opacity: 0.8;
+            display: none;
         }
 
         .envelope-content {
@@ -149,6 +144,7 @@
             margin-right: 6px;
         }
 
+        /* === ОСНОВНОЕ ПРИГЛАШЕНИЕ === */
         .invitation-wrapper {
             opacity: 0;
             transform: scale(0.95);
@@ -180,6 +176,20 @@
             right: 0;
             height: 6px;
             background: linear-gradient(90deg, #e7b49e, #d9a78b, #e7b49e);
+        }
+
+        /* ФОТО В ШАПКЕ */
+        .photo-section {
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .wedding-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
 
         .hero {
@@ -438,6 +448,7 @@
         }
 
         @media (max-width: 550px) {
+            .photo-section { height: 200px; }
             .greeting-text { font-size: 1.5rem; }
             .names-main { font-size: 2.2rem; }
             .date-big { font-size: 1.6rem; }
@@ -454,6 +465,7 @@
 </head>
 <body>
 
+<!-- КОНВЕРТ-ОБЛОЖКА (БЕЗ МАЛЕНЬКОГО ЗНАЧКА КОНВЕРТА) -->
 <div class="envelope-container" id="envelopeContainer">
     <div class="envelope">
         <div class="envelope-flap"></div>
@@ -466,8 +478,15 @@
     </div>
 </div>
 
+<!-- ОСНОВНОЕ ПРИГЛАШЕНИЕ -->
 <div class="invitation-wrapper" id="invitationWrapper">
     <div class="invitation-card">
+        
+        <!-- ФОТО (СНАЧАЛА) -->
+        <div class="photo-section">
+            <img class="wedding-photo" src="wedding-photo.jpg" alt="Илья и Диана" onerror="this.style.display='none'">
+        </div>
+        
         <div class="hero">
             <div class="flower-icon"><i class="fas fa-seedling"></i></div>
             <div class="invitation-title">СВАДЕБНОЕ ПРИГЛАШЕНИЕ</div>
@@ -534,22 +553,13 @@
 </div>
 
 <script>
-    // === ФУНКЦИЯ ОПРЕДЕЛЕНИЯ РОДА (Дорогой / Дорогая / Дорогие) ===
+    // === ОПРЕДЕЛЕНИЕ РОДА (Дорогой / Дорогая / Дорогие) ===
     function getCorrectGreeting(name) {
         if (!name) return 'Дорогие друзья!';
+        if (name.includes(' и ')) return `Дорогие ${name}!`;
         
-        // Проверяем, есть ли "и" — для пар
-        if (name.includes(' и ')) {
-            return `Дорогие ${name}!`;
-        }
-        
-        // Убираем пробелы в начале и конце
         name = name.trim();
-        
-        // Получаем последнюю букву (в нижнем регистре)
         const lastChar = name.slice(-1).toLowerCase();
-        
-        // Женские окончания
         const femaleEndings = ['а', 'я', 'ия'];
         
         if (femaleEndings.includes(lastChar)) {
@@ -559,7 +569,6 @@
         }
     }
 
-    // === ПОЛУЧАЕМ ИМЯ ГОСТЯ ИЗ ССЫЛКИ ===
     function getGuestNameFromURL() {
         const urlParams = new URLSearchParams(window.location.search);
         let guest = urlParams.get('guest');
