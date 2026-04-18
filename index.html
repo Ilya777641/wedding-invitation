@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Свадебное приглашение | Илья & Диана</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -14,9 +14,9 @@
         }
 
         body {
-            background: #0a0a0a;
+            background: linear-gradient(145deg, #f9e9e0 0%, #fce9e6 100%);
             font-family: 'Montserrat', sans-serif;
-            color: #f5f0eb;
+            color: #3e2c2a;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -24,14 +24,14 @@
             padding: 20px;
         }
 
-        /* КОНВЕРТ-ОБЛОЖКА */
+        /* === КОНВЕРТ === */
         .envelope-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0a0a0a;
+            background: linear-gradient(145deg, #f9e9e0 0%, #fce9e6 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -50,9 +50,9 @@
             position: relative;
             width: 340px;
             height: 230px;
-            background: #1a1a1a;
+            background: #fffef7;
             border-radius: 16px;
-            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 50px rgba(89, 53, 46, 0.3);
             transition: transform 0.3s ease;
             animation: floatEnvelope 2.5s ease-in-out infinite;
         }
@@ -72,7 +72,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #1a1a1a;
+            background: #fffef7;
             border-radius: 16px;
             overflow: hidden;
         }
@@ -84,7 +84,7 @@
             left: 0;
             width: 100%;
             height: 0;
-            border-top: 115px solid #2a2a2a;
+            border-top: 115px solid #ffe0d4;
             border-left: 170px solid transparent;
             border-right: 170px solid transparent;
             border-radius: 16px 16px 0 0;
@@ -97,8 +97,8 @@
             left: 50%;
             transform: translateX(-50%);
             font-size: 52px;
-            color: #c4a27a;
-            opacity: 0.6;
+            color: #e7b49e;
+            opacity: 0.8;
         }
 
         .envelope-content {
@@ -115,7 +115,7 @@
 
         .envelope-heart {
             font-size: 36px;
-            color: #c4a27a;
+            color: #e7b49e;
             margin-bottom: 12px;
             animation: pulse 1.5s ease-in-out infinite;
         }
@@ -128,32 +128,35 @@
         .envelope-title {
             font-family: 'Playfair Display', serif;
             font-size: 24px;
-            color: #f5f0eb;
+            color: #9b5a45;
             margin-bottom: 5px;
-            letter-spacing: 2px;
         }
 
         .envelope-sub {
             font-size: 13px;
-            color: #c4a27a;
+            color: #ad7762;
             margin-bottom: 15px;
         }
 
         .envelope-tap {
             font-size: 12px;
-            color: #a0a0a0;
-            background: rgba(255, 255, 255, 0.08);
+            color: #c89a82;
+            background: rgba(255, 235, 225, 0.9);
             padding: 8px 20px;
             border-radius: 40px;
         }
 
-        /* ОСНОВНОЕ ПРИГЛАШЕНИЕ (ТЁМНЫЙ СТИЛЬ) */
+        .envelope-tap i {
+            margin-right: 6px;
+        }
+
+        /* === ОСНОВНОЕ ПРИГЛАШЕНИЕ === */
         .invitation-wrapper {
             opacity: 0;
             transform: scale(0.95);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
-            max-width: 650px;
+            max-width: 750px;
             margin: 0 auto;
         }
 
@@ -164,221 +167,291 @@
         }
 
         .invitation-card {
-            background: #0a0a0a;
-            border-radius: 40px;
-            box-shadow: 0 35px 65px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+            background: #fffef7;
+            border-radius: 58px 58px 68px 68px;
+            box-shadow: 0 35px 65px rgba(89, 53, 46, 0.2);
             overflow: hidden;
+            position: relative;
+        }
+
+        .invitation-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #e7b49e, #d9a78b, #e7b49e);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #ffe9df, #ffe0d4);
+            padding: 2rem 2rem 1.5rem;
             text-align: center;
-            padding: 50px 30px;
+            position: relative;
+            border-bottom: 2px solid #ffcfbc;
+        }
+
+        .hero::before, .hero::after {
+            content: "❀";
+            font-size: 2rem;
+            color: #d9a78b;
+            position: absolute;
+            top: 15px;
+            opacity: 0.5;
+        }
+        .hero::before { left: 20px; }
+        .hero::after { right: 20px; }
+
+        .flower-icon {
+            font-size: 2rem;
+            color: #e7b49e;
+            margin-bottom: 0.8rem;
+            animation: sway 3s infinite ease;
+            display: inline-block;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(6deg); }
+        }
+
+        .invitation-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #9b5a45;
+            letter-spacing: 2px;
+        }
+
+        .invitation-sub {
+            font-size: 0.9rem;
+            color: #ad7762;
+            border-top: 1px dashed #eccaba;
+            display: inline-block;
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .content {
+            padding: 2rem;
         }
 
         /* ПЕРСОНАЛЬНОЕ ОБРАЩЕНИЕ */
         .greeting {
-            margin-bottom: 20px;
+            text-align: center;
+            margin-bottom: 1.8rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px dotted #f0cfc0;
         }
 
         .greeting-text {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-weight: 400;
-            color: #c4a27a;
-            letter-spacing: 1px;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #b56748;
+            line-height: 1.3;
         }
 
-        /* ОСНОВНЫЕ ИМЕНА */
+        .greeting-sub {
+            font-size: 1rem;
+            color: #c48a6e;
+            margin-top: 8px;
+        }
+
         .couple-names {
-            margin: 20px 0 15px;
+            text-align: center;
+            margin: 1rem 0 1.2rem;
         }
 
         .names-main {
             font-family: 'Playfair Display', serif;
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: 700;
-            color: #f5f0eb;
-            letter-spacing: 4px;
+            background: linear-gradient(125deg, #be7c62, #9b5740);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
             display: inline-block;
         }
 
         .and-icon {
-            font-size: 2rem;
-            margin: 0 12px;
-            color: #c4a27a;
+            font-size: 1.8rem;
+            margin: 0 10px;
+            color: #b77b62;
             vertical-align: middle;
         }
 
-        /* ДАТА */
         .date-block {
-            margin: 30px 0 20px;
+            background: #fff5f0;
+            border-radius: 50px;
+            padding: 1.2rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
         }
 
         .date-big {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 400;
-            color: #f5f0eb;
-            letter-spacing: 6px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #b56144;
         }
 
         .date-details {
-            font-size: 0.9rem;
-            color: #888;
-            margin-top: 8px;
-            letter-spacing: 1px;
+            font-size: 1rem;
+            color: #aa735e;
+            margin-top: 5px;
         }
 
-        /* ТАЙМЕР */
         .timer-wrapper {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 60px;
-            padding: 20px 15px;
-            margin: 30px 0;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: #fef3ed;
+            border-radius: 42px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .timer-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #bc826a;
+            margin-bottom: 0.8rem;
         }
 
         .timer-grid {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             flex-wrap: wrap;
         }
 
         .timer-cell {
-            text-align: center;
+            background: white;
+            border-radius: 25px;
+            padding: 0.6rem;
+            min-width: 75px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+            transition: transform 0.2s;
+        }
+
+        .timer-cell:hover {
+            transform: translateY(-3px);
         }
 
         .timer-number {
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             font-weight: 700;
             font-family: 'Montserrat', monospace;
-            color: #f5f0eb;
+            color: #a1573d;
             line-height: 1;
         }
 
         .timer-label {
             font-size: 0.7rem;
             text-transform: uppercase;
-            color: #888;
-            letter-spacing: 2px;
-            margin-top: 5px;
-        }
-
-        /* ДОМЕН / ССЫЛКА */
-        .domain {
-            font-family: 'Montserrat', monospace;
-            font-size: 0.9rem;
-            color: #c4a27a;
-            letter-spacing: 1px;
-            margin: 15px 0 10px;
-            word-break: break-all;
-        }
-
-        /* КНОПКА "ДЛЯ МЕНЯ В КАЛЕНДАРЕ" */
-        .calendar-btn {
-            background: rgba(196, 162, 122, 0.15);
-            border: 1px solid rgba(196, 162, 122, 0.4);
-            padding: 12px 28px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            font-family: 'Montserrat', sans-serif;
-            color: #c4a27a;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 20px auto 15px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: transparent;
-        }
-
-        .calendar-btn:hover {
-            background: rgba(196, 162, 122, 0.25);
-            border-color: #c4a27a;
-            transform: scale(1.02);
-        }
-
-        /* ИНФОРМАЦИОННЫЕ БЛОКИ (МЕСТО, ПРОГРАММА, ДРЕСС-КОД) */
-        .info-section {
-            margin: 30px 0 20px;
-            text-align: left;
+            color: #c2947e;
         }
 
         .info-item {
+            background: white;
+            border-radius: 50px;
+            padding: 0.9rem 1.5rem;
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            gap: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #ffded1;
+            transition: all 0.2s;
+        }
+
+        .info-item:hover {
+            border-color: #e7b49e;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
         }
 
         .info-icon {
-            font-size: 1.4rem;
-            color: #c4a27a;
-            width: 35px;
+            font-size: 1.8rem;
+            color: #cc8e72;
+            width: 45px;
             text-align: center;
         }
 
         .info-text {
-            font-size: 0.9rem;
-            color: #ddd;
-            line-height: 1.4;
+            flex: 1;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: #4d3128;
         }
 
         .info-text strong {
-            color: #f5f0eb;
-            font-weight: 600;
+            color: #a75839;
         }
 
-        /* ТЕЛЕФОН */
         .phone-section {
-            margin: 25px 0 15px;
-            padding-top: 10px;
+            background: linear-gradient(115deg, #fef1ea, #fff7f2);
+            border-radius: 50px;
+            padding: 1.2rem;
             text-align: center;
+            margin: 1.8rem 0 0.5rem;
+        }
+
+        .phone-row {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 10px 0;
         }
 
         .phone-number {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #c4a27a;
-            background: rgba(255, 255, 255, 0.03);
-            display: inline-block;
-            padding: 8px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #a75839;
+            background: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
             border-radius: 50px;
-            letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.2s;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid #ffded1;
         }
 
         .phone-number:hover {
-            background: rgba(196, 162, 122, 0.1);
-            border-color: rgba(196, 162, 122, 0.3);
+            background: #fff1ea;
+            transform: scale(1.02);
+            border-color: #e7b49e;
         }
 
         .copy-notice {
             font-size: 0.7rem;
-            color: #666;
+            color: #b8836a;
             margin-top: 8px;
         }
 
-        /* ПОДПИСЬ ВНИЗУ */
-        .footer-note {
-            font-size: 0.7rem;
-            color: #555;
-            margin-top: 35px;
-            letter-spacing: 1px;
+        footer {
+            background: #fae9e1;
+            text-align: center;
+            padding: 0.8rem;
+            font-size: 0.65rem;
+            color: #b6886e;
         }
 
-        /* АДАПТИВ */
         @media (max-width: 550px) {
-            .invitation-card { padding: 35px 20px; }
-            .names-main { font-size: 2.8rem; letter-spacing: 2px; }
-            .date-big { font-size: 1.3rem; letter-spacing: 3px; }
-            .timer-number { font-size: 2rem; }
-            .timer-grid { gap: 0.8rem; }
-            .greeting-text { font-size: 1.1rem; }
+            .greeting-text { font-size: 1.5rem; }
+            .names-main { font-size: 2.2rem; }
+            .date-big { font-size: 1.6rem; }
+            .timer-number { font-size: 1.6rem; }
+            .timer-cell { min-width: 65px; }
+            .invitation-title { font-size: 1.5rem; }
+            .content { padding: 1.5rem; }
             .envelope { width: 280px; height: 200px; }
-            .envelope-flap::before { border-left: 140px solid transparent; border-right: 140px solid transparent; border-top: 100px solid #2a2a2a; }
+            .envelope-flap::before { border-left: 140px solid transparent; border-right: 140px solid transparent; border-top: 100px solid #ffe0d4; }
+            .phone-row { gap: 0.5rem; }
+            .phone-number { font-size: 0.85rem; padding: 6px 12px; }
         }
     </style>
 </head>
@@ -400,45 +473,40 @@
 <!-- ОСНОВНОЕ ПРИГЛАШЕНИЕ -->
 <div class="invitation-wrapper" id="invitationWrapper">
     <div class="invitation-card">
-        
-        <!-- ПЕРСОНАЛЬНОЕ ОБРАЩЕНИЕ (из ссылки) -->
-        <div class="greeting" id="greetingBlock">
-            <div class="greeting-text" id="guestGreeting">Дорогие друзья!</div>
+        <div class="hero">
+            <div class="flower-icon"><i class="fas fa-seedling"></i></div>
+            <div class="invitation-title">СВАДЕБНОЕ ПРИГЛАШЕНИЕ</div>
+            <div class="invitation-sub">Тепло наших сердец для вас</div>
         </div>
 
-        <!-- ИМЕНА -->
-        <div class="couple-names">
-            <span class="names-main">ИЛЬЯ</span>
-            <span class="and-icon"><i class="fas fa-heart"></i></span>
-            <span class="names-main">ДИАНА</span>
-        </div>
-
-        <!-- ДАТА -->
-        <div class="date-block">
-            <div class="date-big">31 ИЮЛЯ 2026</div>
-            <div class="date-details">16:00</div>
-        </div>
-
-        <!-- ТАЙМЕР -->
-        <div class="timer-wrapper">
-            <div class="timer-grid">
-                <div class="timer-cell"><div class="timer-number" id="weeks">00</div><div class="timer-label">НЕДЕЛЬ</div></div>
-                <div class="timer-cell"><div class="timer-number" id="days">00</div><div class="timer-label">ДНЕЙ</div></div>
-                <div class="timer-cell"><div class="timer-number" id="hours">00</div><div class="timer-label">ЧАСОВ</div></div>
-                <div class="timer-cell"><div class="timer-number" id="minutes">00</div><div class="timer-label">МИНУТ</div></div>
+        <div class="content">
+            <!-- ПЕРСОНАЛЬНОЕ ОБРАЩЕНИЕ -->
+            <div class="greeting" id="greetingBlock">
+                <div class="greeting-text" id="guestGreeting">Дорогие друзья!</div>
+                <div class="greeting-sub">Имеем честь пригласить вас</div>
             </div>
-        </div>
 
-        <!-- ДОМЕН / АДРЕС САЙТА -->
-        <div class="domain">ilya777641.github.io/wedding-invitation</div>
+            <div class="couple-names">
+                <span class="names-main">Илья</span>
+                <span class="and-icon"><i class="fas fa-heart"></i></span>
+                <span class="names-main">Диана</span>
+            </div>
 
-        <!-- КНОПКА В КАЛЕНДАРЬ -->
-        <button class="calendar-btn" id="calendarBtn">
-            <i class="far fa-calendar-plus"></i> Для меня в календаре
-        </button>
+            <div class="date-block">
+                <div class="date-big">31 ИЮЛЯ 2026</div>
+                <div class="date-details">16:00 • Торжественная церемония и банкет</div>
+            </div>
 
-        <!-- ИНФОРМАЦИЯ О МЕСТЕ, ПРОГРАММЕ, ДРЕСС-КОДЕ -->
-        <div class="info-section">
+            <div class="timer-wrapper">
+                <div class="timer-title"><i class="far fa-clock"></i> ДО НАШЕГО ДНЯ</div>
+                <div class="timer-grid">
+                    <div class="timer-cell"><div class="timer-number" id="days">00</div><div class="timer-label">Дней</div></div>
+                    <div class="timer-cell"><div class="timer-number" id="hours">00</div><div class="timer-label">Часов</div></div>
+                    <div class="timer-cell"><div class="timer-number" id="minutes">00</div><div class="timer-label">Минут</div></div>
+                    <div class="timer-cell"><div class="timer-number" id="seconds">00</div><div class="timer-label">Секунд</div></div>
+                </div>
+            </div>
+
             <div class="info-item">
                 <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
                 <div class="info-text"><strong>Ресторан «Версаль»</strong><br>Элеваторная ул., 13, посёлок Мелькомбинат</div>
@@ -451,19 +519,23 @@
                 <div class="info-icon"><i class="fas fa-dress-code"></i></div>
                 <div class="info-text"><strong>Дресс-код:</strong> Вечерний, приветствуются цветочные оттенки и элегантные наряды</div>
             </div>
-        </div>
 
-        <!-- ТЕЛЕФОН -->
-        <div class="phone-section">
-            <div class="phone-number" id="phoneNumber">
-                <i class="fas fa-phone-alt"></i> 8-999-757-7769
+            <div class="phone-section">
+                <div style="font-size: 0.85rem; margin-bottom: 8px; color: #9b5740;">По всем вопросам:</div>
+                <div class="phone-row">
+                    <div class="phone-number" data-phone="89997577769">
+                        <i class="fas fa-phone-alt"></i> 8-999-757-7769
+                    </div>
+                    <div class="phone-number" data-phone="89870483010">
+                        <i class="fas fa-phone-alt"></i> 8-987-048-3010
+                    </div>
+                </div>
+                <div class="copy-notice"><i class="fas fa-copy"></i> Нажмите на номер, чтобы скопировать</div>
             </div>
-            <div class="copy-notice"><i class="fas fa-copy"></i> Нажмите на номер, чтобы скопировать</div>
         </div>
-
-        <div class="footer-note">
-            С любовью, Илья и Диана ♥
-        </div>
+        <footer>
+            С любовью, Илья и Диана ♥ Ждём вас разделить с нами этот день
+        </footer>
     </div>
 </div>
 
@@ -507,9 +579,8 @@
         invitationWrapper.classList.add('show');
     });
 
-    // === ТАЙМЕР (НЕДЕЛИ, ДНИ, ЧАСЫ, МИНУТЫ) ===
+    // === ТАЙМЕР ===
     function getWeddingDate() {
-        // 31 июля 2026 года, 16:00:00
         return new Date(2026, 6, 31, 16, 0, 0);
     }
 
@@ -519,56 +590,38 @@
         const distance = target - now;
 
         if (distance < 0) {
-            document.getElementById('weeks').innerText = "00";
             document.getElementById('days').innerText = "00";
             document.getElementById('hours').innerText = "00";
             document.getElementById('minutes').innerText = "00";
+            document.getElementById('seconds').innerText = "00";
             return;
         }
 
-        const totalDays = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const weeks = Math.floor(totalDays / 7);
-        const days = totalDays % 7;
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (86400000)) / (3600000));
         const minutes = Math.floor((distance % 3600000) / 60000);
+        const seconds = Math.floor((distance % 60000) / 1000);
 
-        document.getElementById('weeks').innerText = weeks < 10 ? '0' + weeks : weeks;
         document.getElementById('days').innerText = days < 10 ? '0' + days : days;
         document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
         document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
     }
 
     updateTimer();
     setInterval(updateTimer, 1000);
 
-    // === КНОПКА "ДЛЯ МЕНЯ В КАЛЕНДАРЕ" ===
-    const calendarBtn = document.getElementById('calendarBtn');
+    // === КОПИРОВАНИЕ НОМЕРОВ ТЕЛЕФОНОВ ===
+    const phoneNumbers = document.querySelectorAll('.phone-number');
     
-    calendarBtn.addEventListener('click', function() {
-        // Создаём ссылку для добавления в Google Calendar / iCal
-        const startDate = '20260731T160000';
-        const endDate = '20260731T220000';
-        const title = encodeURIComponent('Свадьба Ильи и Дианы');
-        const details = encodeURIComponent('Свадебное торжество в ресторане «Версаль». Адрес: Элеваторная ул., 13, посёлок Мелькомбинат. Программа: 15:30 – Сбор гостей | 16:00 – Церемония | 17:00 – Фуршет | 18:00 – Банкет и танцы. Дресс-код: вечерний.');
-        const location = encodeURIComponent('Ресторан «Версаль», Элеваторная ул., 13, посёлок Мелькомбинат');
-        
-        const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`;
-        
-        window.open(calendarUrl, '_blank');
-    });
-
-    // === КОПИРОВАНИЕ НОМЕРА ТЕЛЕФОНА ===
-    const phoneDiv = document.getElementById('phoneNumber');
-    const phoneNumber = '8-999-757-7769';
-    const cleanPhone = '89997577769';
-    
+    // Создаём уведомление
     const notice = document.createElement('div');
     notice.style.position = 'fixed';
     notice.style.bottom = '30px';
     notice.style.left = '50%';
     notice.style.transform = 'translateX(-50%)';
-    notice.style.backgroundColor = '#c4a27a';
-    notice.style.color = '#0a0a0a';
+    notice.style.backgroundColor = '#4caf50';
+    notice.style.color = 'white';
     notice.style.padding = '10px 20px';
     notice.style.borderRadius = '50px';
     notice.style.fontSize = '14px';
@@ -576,26 +629,28 @@
     notice.style.opacity = '0';
     notice.style.transition = 'opacity 0.3s';
     notice.style.pointerEvents = 'none';
-    notice.style.fontWeight = '500';
     document.body.appendChild(notice);
     
-    phoneDiv.addEventListener('click', function() {
-        navigator.clipboard.writeText(cleanPhone).then(() => {
-            notice.textContent = '✅ Номер скопирован: ' + phoneNumber;
-            notice.style.opacity = '1';
-            setTimeout(() => {
-                notice.style.opacity = '0';
-            }, 2000);
-        }).catch(() => {
-            notice.textContent = '❌ Не удалось скопировать';
-            notice.style.backgroundColor = '#c62828';
-            notice.style.color = 'white';
-            notice.style.opacity = '1';
-            setTimeout(() => {
-                notice.style.opacity = '0';
-                notice.style.backgroundColor = '#c4a27a';
-                notice.style.color = '#0a0a0a';
-            }, 2000);
+    phoneNumbers.forEach(phoneDiv => {
+        phoneDiv.addEventListener('click', function() {
+            const phoneNumber = this.getAttribute('data-phone');
+            const displayNumber = this.innerText.trim();
+            
+            navigator.clipboard.writeText(phoneNumber).then(() => {
+                notice.textContent = '✅ Номер скопирован: ' + displayNumber;
+                notice.style.opacity = '1';
+                setTimeout(() => {
+                    notice.style.opacity = '0';
+                }, 2000);
+            }).catch(() => {
+                notice.textContent = '❌ Не удалось скопировать';
+                notice.style.backgroundColor = '#c62828';
+                notice.style.opacity = '1';
+                setTimeout(() => {
+                    notice.style.opacity = '0';
+                    notice.style.backgroundColor = '#4caf50';
+                }, 2000);
+            });
         });
     });
 </script>
