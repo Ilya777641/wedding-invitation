@@ -7,12 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: linear-gradient(145deg, #f9e9e0 0%, #fce9e6 100%);
             font-family: 'Montserrat', sans-serif;
@@ -23,7 +18,6 @@
             justify-content: center;
             padding: 20px;
         }
-
         .envelope-container {
             position: fixed;
             top: 0;
@@ -38,13 +32,7 @@
             cursor: pointer;
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .envelope-container.fade-out {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
+        .envelope-container.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
         .envelope {
             position: relative;
             width: 320px;
@@ -55,14 +43,8 @@
             transition: transform 0.3s ease;
             animation: floatEnvelope 2s ease-in-out infinite;
         }
-
-        @keyframes floatEnvelope {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
+        @keyframes floatEnvelope { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
         .envelope:hover { transform: scale(1.02); }
-
         .envelope-flap {
             position: absolute;
             top: 0;
@@ -73,7 +55,6 @@
             border-radius: 12px;
             overflow: hidden;
         }
-
         .envelope-flap::before {
             content: "";
             position: absolute;
@@ -86,7 +67,6 @@
             border-right: 160px solid transparent;
             border-radius: 12px 12px 0 0;
         }
-
         .envelope-flap::after {
             content: "✉";
             position: absolute;
@@ -97,7 +77,6 @@
             color: #e7b49e;
             opacity: 0.7;
         }
-
         .envelope-content {
             position: relative;
             z-index: 2;
@@ -108,39 +87,16 @@
             justify-content: center;
             text-align: center;
         }
-
         .envelope-heart {
             font-size: 32px;
             color: #e7b49e;
             margin-bottom: 15px;
             animation: pulse 1.5s ease-in-out infinite;
         }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.2); opacity: 1; }
-        }
-
-        .envelope-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            color: #9b5a45;
-        }
-
-        .envelope-sub {
-            font-size: 13px;
-            color: #ad7762;
-            margin: 8px 0 15px;
-        }
-
-        .envelope-tap {
-            font-size: 12px;
-            color: #c89a82;
-            background: rgba(255, 235, 225, 0.9);
-            padding: 6px 16px;
-            border-radius: 30px;
-        }
-
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.2); opacity: 1; } }
+        .envelope-title { font-family: 'Playfair Display', serif; font-size: 22px; color: #9b5a45; }
+        .envelope-sub { font-size: 13px; color: #ad7762; margin: 8px 0 15px; }
+        .envelope-tap { font-size: 12px; color: #c89a82; background: rgba(255, 235, 225, 0.9); padding: 6px 16px; border-radius: 30px; }
         .invitation-wrapper {
             opacity: 0;
             transform: scale(0.95);
@@ -149,20 +105,13 @@
             max-width: 750px;
             margin: 0 auto;
         }
-
-        .invitation-wrapper.show {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-        }
-
+        .invitation-wrapper.show { opacity: 1; transform: scale(1); pointer-events: auto; }
         .invitation-card {
             background: #fffef7;
             border-radius: 58px;
             box-shadow: 0 35px 65px rgba(89, 53, 46, 0.2);
             overflow: hidden;
         }
-
         .hero {
             background: linear-gradient(135deg, #ffe9df, #ffe0d4);
             padding: 2.5rem 2rem 1.8rem;
@@ -170,226 +119,38 @@
             position: relative;
             border-bottom: 2px solid #ffcfbc;
         }
-
-        .hero::before, .hero::after {
-            content: "❀";
-            font-size: 2rem;
-            color: #d9a78b;
-            position: absolute;
-            top: 15px;
-            opacity: 0.5;
-        }
+        .hero::before, .hero::after { content: "❀"; font-size: 2rem; color: #d9a78b; position: absolute; top: 15px; opacity: 0.5; }
         .hero::before { left: 30px; }
         .hero::after { right: 30px; }
-
-        .flower-icon {
-            font-size: 2rem;
-            color: #e7b49e;
-            margin-bottom: 1rem;
-            animation: sway 3s infinite ease;
-            display: inline-block;
-        }
-
-        @keyframes sway {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(6deg); }
-        }
-
-        .invitation-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.3rem;
-            font-weight: 600;
-            color: #9b5a45;
-        }
-
-        .invitation-sub {
-            font-size: 1rem;
-            color: #ad7762;
-            border-top: 1px dashed #eccaba;
-            display: inline-block;
-            padding-top: 0.6rem;
-        }
-
-        .content {
-            padding: 2rem;
-        }
-
-        .couple-names {
-            text-align: center;
-            margin: 1.5rem 0;
-        }
-
-        .names-main {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            background: linear-gradient(125deg, #be7c62, #9b5740);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        .and-icon {
-            font-size: 2rem;
-            margin: 0 12px;
-            color: #b77b62;
-        }
-
-        .date-block {
-            background: #fff5f0;
-            border-radius: 54px;
-            padding: 1.6rem;
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .date-big {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.6rem;
-            font-weight: 700;
-            color: #b56144;
-        }
-
-        .timer-wrapper {
-            background: #fef3ed;
-            border-radius: 42px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            text-align: center;
-        }
-
-        .timer-grid {
-            display: flex;
-            justify-content: center;
-            gap: 1.2rem;
-            flex-wrap: wrap;
-        }
-
-        .timer-cell {
-            background: white;
-            border-radius: 30px;
-            padding: 0.8rem;
-            min-width: 85px;
-        }
-
-        .timer-number {
-            font-size: 2.6rem;
-            font-weight: 700;
-            color: #a1573d;
-        }
-
-        .timer-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            color: #c2947e;
-        }
-
-        .info-item {
-            background: white;
-            border-radius: 60px;
-            padding: 1rem 1.8rem;
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            margin: 1rem 0;
-            border: 1px solid #ffded1;
-        }
-
-        .info-icon {
-            font-size: 2rem;
-            color: #cc8e72;
-            width: 48px;
-        }
-
-        .rsvp-form {
-            background: linear-gradient(115deg, #fef1ea, #fff7f2);
-            border-radius: 48px;
-            padding: 1.8rem;
-            margin: 2rem 0;
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            color: #9b5740;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px 18px;
-            border: 1px solid #ffded1;
-            border-radius: 40px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            background: white;
-        }
-
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: #e7b49e;
-            box-shadow: 0 0 0 3px rgba(231, 180, 158, 0.2);
-        }
-
-        .submit-btn {
-            background: #b56748;
-            border: none;
-            padding: 14px 32px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: white;
-            border-radius: 50px;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.25s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .submit-btn:hover {
-            background: #9b4f36;
-            transform: scale(0.98);
-        }
-
-        .submit-btn:disabled {
-            background: #d4a58e;
-            cursor: not-allowed;
-        }
-
-        .form-message {
-            margin-top: 1rem;
-            padding: 10px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            text-align: center;
-        }
-
-        .form-message.success {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-
-        .form-message.error {
-            background: #ffebee;
-            color: #c62828;
-        }
-
-        footer {
-            background: #fae9e1;
-            text-align: center;
-            padding: 1rem;
-            font-size: 0.7rem;
-            color: #b6886e;
-        }
-
+        .flower-icon { font-size: 2rem; color: #e7b49e; margin-bottom: 1rem; animation: sway 3s infinite ease; display: inline-block; }
+        @keyframes sway { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(6deg); } }
+        .invitation-title { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 600; color: #9b5a45; }
+        .invitation-sub { font-size: 1rem; color: #ad7762; border-top: 1px dashed #eccaba; display: inline-block; padding-top: 0.6rem; }
+        .content { padding: 2rem; }
+        .couple-names { text-align: center; margin: 1.5rem 0; }
+        .names-main { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700; background: linear-gradient(125deg, #be7c62, #9b5740); background-clip: text; -webkit-background-clip: text; color: transparent; }
+        .and-icon { font-size: 2rem; margin: 0 12px; color: #b77b62; }
+        .date-block { background: #fff5f0; border-radius: 54px; padding: 1.6rem; text-align: center; margin: 2rem 0; }
+        .date-big { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700; color: #b56144; }
+        .timer-wrapper { background: #fef3ed; border-radius: 42px; padding: 1.5rem; margin: 2rem 0; text-align: center; }
+        .timer-grid { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+        .timer-cell { background: white; border-radius: 30px; padding: 0.8rem; min-width: 85px; }
+        .timer-number { font-size: 2.6rem; font-weight: 700; color: #a1573d; }
+        .timer-label { font-size: 0.75rem; text-transform: uppercase; color: #c2947e; }
+        .info-item { background: white; border-radius: 60px; padding: 1rem 1.8rem; display: flex; align-items: center; gap: 1.2rem; margin: 1rem 0; border: 1px solid #ffded1; }
+        .info-icon { font-size: 2rem; color: #cc8e72; width: 48px; }
+        .rsvp-form { background: linear-gradient(115deg, #fef1ea, #fff7f2); border-radius: 48px; padding: 1.8rem; margin: 2rem 0; }
+        .form-group { margin-bottom: 1.2rem; text-align: left; }
+        .form-group label { display: block; font-weight: 600; color: #9b5740; margin-bottom: 0.5rem; font-size: 0.9rem; }
+        .form-group input, .form-group select { width: 100%; padding: 12px 18px; border: 1px solid #ffded1; border-radius: 40px; font-family: 'Montserrat', sans-serif; font-size: 1rem; background: white; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: #e7b49e; box-shadow: 0 0 0 3px rgba(231, 180, 158, 0.2); }
+        .submit-btn { background: #b56748; border: none; padding: 14px 32px; font-size: 1.1rem; font-weight: 600; color: white; border-radius: 50px; cursor: pointer; width: 100%; transition: all 0.25s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .submit-btn:hover { background: #9b4f36; transform: scale(0.98); }
+        .submit-btn:disabled { background: #d4a58e; cursor: not-allowed; }
+        .form-message { margin-top: 1rem; padding: 10px; border-radius: 40px; font-size: 0.85rem; text-align: center; }
+        .form-message.success { background: #e8f5e9; color: #2e7d32; }
+        .form-message.error { background: #ffebee; color: #c62828; }
+        footer { background: #fae9e1; text-align: center; padding: 1rem; font-size: 0.7rem; color: #b6886e; }
         @media (max-width: 550px) {
             .names-main { font-size: 2.5rem; }
             .date-big { font-size: 1.8rem; }
@@ -544,7 +305,7 @@
     updateTimer();
     setInterval(updateTimer, 1000);
 
-    // ВАША НОВАЯ ССЫЛКА УЖЕ ВСТАВЛЕНА!
+    // ВАША ССЫЛКА — ВСТАВЬТЕ НОВУЮ ПОСЛЕ ПЕРЕРАЗВЕРТЫВАНИЯ
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyg3OAyebTCuWCVhXhZXkn-SjxASiuopKRbnOU_HQJ7B8MxEaXOS_w6m5F95m-n6uDf/exec';
     
     const form = document.getElementById('rsvpForm');
@@ -575,6 +336,7 @@
         try {
             const response = await fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
+                mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
                 },
