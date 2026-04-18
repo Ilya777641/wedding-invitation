@@ -28,7 +28,7 @@
             padding: 20px;
         }
 
-        /* === КОНВЕРТ (СВЕТЛЫЙ, ЭЛЕГАНТНЫЙ) === */
+        /* === НОВЫЙ РЕАЛИСТИЧНЫЙ КОНВЕРТ === */
         .envelope-container {
             position: fixed;
             top: 0;
@@ -50,35 +50,42 @@
             pointer-events: none;
         }
 
+        /* Конверт — увеличенный и объёмный */
         .envelope {
             position: relative;
-            width: 380px;
-            height: 260px;
-            background: #fffef7;
-            border-radius: 20px;
-            box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1), 0 0 0 2px #d4b896, 0 0 0 6px #f5ede8;
-            transition: transform 0.4s ease;
+            width: 480px;
+            height: 320px;
+            background: linear-gradient(145deg, #fffef7 0%, #faf5ed 100%);
+            border-radius: 12px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25),
+                        0 0 0 1px rgba(212, 184, 150, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             animation: floatEnvelope 3s ease-in-out infinite;
+            cursor: pointer;
         }
 
         @keyframes floatEnvelope {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(1deg); }
+            50% { transform: translateY(-10px) rotate(0.5deg); }
         }
 
         .envelope:hover {
-            transform: scale(1.02);
+            transform: scale(1.02) translateY(-5px);
+            box-shadow: 0 40px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(212, 184, 150, 0.6);
         }
 
+        /* Верхний клапан (треугольник) */
         .envelope-flap {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #fffef7;
-            border-radius: 20px;
+            background: transparent;
+            border-radius: 12px;
             overflow: hidden;
+            z-index: 2;
         }
 
         .envelope-flap::before {
@@ -88,66 +95,103 @@
             left: 0;
             width: 100%;
             height: 0;
-            border-top: 130px solid #f0e0d4;
-            border-left: 190px solid transparent;
-            border-right: 190px solid transparent;
-            border-radius: 20px 20px 0 0;
+            border-top: 170px solid #f7efe7;
+            border-left: 240px solid transparent;
+            border-right: 240px solid transparent;
+            border-radius: 12px 12px 0 0;
+            box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
         }
 
+        /* Тень под клапаном */
         .envelope-flap::after {
-            display: none;
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.05), transparent);
+            pointer-events: none;
         }
 
+        /* Декоративная линия (как будто конверт склеен) */
+        .envelope-line {
+            position: absolute;
+            bottom: 60px;
+            left: 20px;
+            right: 20px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 184, 150, 0.4), transparent);
+            z-index: 3;
+        }
+
+        /* Содержимое конверта */
         .envelope-content {
             position: relative;
-            z-index: 2;
+            z-index: 5;
             height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 20px;
+            padding: 25px;
+            background: transparent;
         }
 
         .envelope-heart {
-            font-size: 48px;
+            font-size: 58px;
             color: #c4a27a;
             margin-bottom: 15px;
-            animation: pulse 1.8s ease-in-out infinite;
-            text-shadow: 0 0 10px rgba(196, 162, 122, 0.2);
+            animation: pulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 5px 15px rgba(196, 162, 122, 0.3));
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
+            0%, 100% { transform: scale(1); opacity: 0.9; text-shadow: 0 0 5px rgba(196, 162, 122, 0.3); }
+            50% { transform: scale(1.12); opacity: 1; text-shadow: 0 0 20px rgba(196, 162, 122, 0.5); }
         }
 
         .envelope-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 28px;
+            font-size: 34px;
+            font-weight: 600;
             color: #5a4a3e;
             margin-bottom: 8px;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.5);
         }
 
         .envelope-sub {
-            font-size: 14px;
+            font-size: 16px;
             color: #c4a27a;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+            font-weight: 400;
         }
 
         .envelope-tap {
-            font-size: 13px;
+            font-size: 14px;
             color: #8a7a6e;
-            background: rgba(196, 162, 122, 0.1);
-            padding: 10px 24px;
+            background: rgba(196, 162, 122, 0.12);
+            padding: 12px 28px;
             border-radius: 50px;
-            border: 1px solid rgba(196, 162, 122, 0.3);
+            border: 1px solid rgba(196, 162, 122, 0.4);
+            backdrop-filter: blur(2px);
+            transition: all 0.2s;
         }
 
-        /* === ОСНОВНОЕ ПРИГЛАШЕНИЕ (СВЕТЛЫЙ СТИЛЬ) === */
+        .envelope-tap i {
+            margin-right: 8px;
+        }
+
+        .envelope-tap:hover {
+            background: rgba(196, 162, 122, 0.2);
+            transform: scale(1.02);
+        }
+
+        /* === ОСНОВНОЕ ПРИГЛАШЕНИЕ === */
         .invitation-wrapper {
             opacity: 0;
             transform: scale(0.95);
@@ -171,7 +215,6 @@
             position: relative;
         }
 
-        /* Декоративная рамка */
         .invitation-card::before {
             content: "";
             position: absolute;
@@ -185,7 +228,6 @@
             z-index: 1;
         }
 
-        /* Верхняя линия */
         .invitation-card::after {
             content: "";
             position: absolute;
@@ -403,14 +445,14 @@
 
         .phone-section {
             text-align: center;
-            margin: 2rem 0 1rem;
-            padding: 1rem;
+            margin: 1rem 0 0.2rem;
+            padding: 0.5rem;
         }
 
         .phone-row {
             display: flex;
             justify-content: center;
-            gap: 1.2rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
             margin: 12px 0;
         }
@@ -445,16 +487,21 @@
         footer {
             background: rgba(196, 162, 122, 0.05);
             text-align: center;
-            padding: 1rem;
+            padding: 0.6rem 1rem;
             font-size: 0.75rem;
             color: #8a7a6e;
             letter-spacing: 1px;
-            margin-top: 10px;
+            margin-top: 0px;
             position: relative;
             z-index: 2;
         }
 
         @media (max-width: 550px) {
+            .envelope { width: 320px; height: 230px; }
+            .envelope-flap::before { border-top: 125px solid #f7efe7; border-left: 160px solid transparent; border-right: 160px solid transparent; }
+            .envelope-title { font-size: 24px; }
+            .envelope-heart { font-size: 42px; }
+            .envelope-tap { font-size: 11px; padding: 8px 18px; }
             .greeting-text { font-size: 1.5rem; }
             .names-main { font-size: 2.3rem; }
             .date-big { font-size: 1.6rem; }
@@ -462,21 +509,19 @@
             .timer-cell { min-width: 55px; }
             .invitation-title { font-size: 1.5rem; }
             .content { padding: 1.5rem; }
-            .envelope { width: 300px; height: 220px; }
-            .envelope-flap::before { border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 110px solid #f0e0d4; }
             .phone-row { gap: 0.8rem; }
             .phone-number { font-size: 0.85rem; padding: 6px 14px; }
             .invitation-card::before { top: 12px; left: 12px; right: 12px; bottom: 12px; }
-            footer { margin-top: 5px; padding: 0.8rem; }
         }
     </style>
 </head>
 <body>
 
-<!-- КОНВЕРТ-ОБЛОЖКА -->
+<!-- РЕАЛИСТИЧНЫЙ КОНВЕРТ -->
 <div class="envelope-container" id="envelopeContainer">
     <div class="envelope">
         <div class="envelope-flap"></div>
+        <div class="envelope-line"></div>
         <div class="envelope-content">
             <div class="envelope-heart"><i class="fas fa-heart"></i></div>
             <div class="envelope-title">Вам пришло письмо</div>
@@ -498,7 +543,7 @@
         <div class="content">
             <div class="greeting" id="greetingBlock">
                 <div class="greeting-text" id="guestGreeting">Дорогие друзья!</div>
-                <div class="greeting-sub">Имеем честь пригласить вас</div>
+                <div class="greeting-sub">Приглашаем Вас на наш праздник</div>
             </div>
 
             <div class="couple-names">
@@ -509,7 +554,7 @@
 
             <div class="date-block">
                 <div class="date-big">31 ИЮЛЯ 2026</div>
-                <div class="date-details">16:00 • Торжественная церемония и банкет</div>
+                <div class="date-details">16:00 • Торжественная церемония</div>
             </div>
 
             <div class="timer-wrapper">
@@ -534,23 +579,23 @@
             </div>
 
             <div class="phone-section">
-    <div style="font-size: 0.8rem; margin-bottom: 10px; color: #c4a27a; letter-spacing: 1px;">По всем вопросам:</div>
-    <div class="phone-row">
-        <div style="text-align: center;">
-            <div class="phone-number" data-phone="89997577769">
-                <i class="fas fa-phone-alt"></i> 8-999-757-7769
+                <div style="font-size: 0.8rem; margin-bottom: 10px; color: #c4a27a; letter-spacing: 1px;">По всем вопросам:</div>
+                <div class="phone-row">
+                    <div style="text-align: center;">
+                        <div class="phone-number" data-phone="89997577769">
+                            <i class="fas fa-phone-alt"></i> 8-999-757-7769
+                        </div>
+                        <div style="font-size: 0.7rem; color: #c4a27a; margin-top: 5px;">👨‍💼 Илья (жених)</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="phone-number" data-phone="89870483010">
+                            <i class="fas fa-phone-alt"></i> 8-987-048-3010
+                        </div>
+                        <div style="font-size: 0.7rem; color: #c4a27a; margin-top: 5px;">👰‍♀️ Диана (невеста)</div>
+                    </div>
+                </div>
+                <div class="copy-notice"><i class="fas fa-copy"></i> Нажмите на номер, чтобы скопировать</div>
             </div>
-            <div style="font-size: 0.7rem; color: #c4a27a; margin-top: 5px;">👨‍💼 Илья (жених)</div>
-        </div>
-        <div style="text-align: center;">
-            <div class="phone-number" data-phone="89870483010">
-                <i class="fas fa-phone-alt"></i> 8-987-048-3010
-            </div>
-            <div style="font-size: 0.7rem; color: #c4a27a; margin-top: 5px;">👰‍♀️ Диана (невеста)</div>
-        </div>
-    </div>
-    <div class="copy-notice"><i class="fas fa-copy"></i> Нажмите на номер, чтобы скопировать</div>
-</div>
         </div>
         <footer>
             С любовью, Илья и Диана ♥ Ждём вас разделить с нами этот день
@@ -559,15 +604,12 @@
 </div>
 
 <script>
-    // === ОПРЕДЕЛЕНИЕ РОДА (Дорогой / Дорогая / Дорогие) ===
     function getCorrectGreeting(name) {
         if (!name) return 'Дорогие друзья!';
         if (name.includes(' и ')) return `Дорогие ${name}!`;
-        
         name = name.trim();
         const lastChar = name.slice(-1).toLowerCase();
         const femaleEndings = ['а', 'я', 'ия'];
-        
         if (femaleEndings.includes(lastChar)) {
             return `Дорогая ${name}!`;
         } else {
@@ -588,23 +630,19 @@
 
     const guestName = getGuestNameFromURL();
     const greetingDiv = document.getElementById('guestGreeting');
-    
     if (guestName) {
         greetingDiv.textContent = getCorrectGreeting(guestName);
     } else {
         greetingDiv.textContent = 'Дорогие друзья!';
     }
 
-    // === ОТКРЫТИЕ КОНВЕРТА ===
     const envelopeContainer = document.getElementById('envelopeContainer');
     const invitationWrapper = document.getElementById('invitationWrapper');
-    
     envelopeContainer.addEventListener('click', function() {
         envelopeContainer.classList.add('fade-out');
         invitationWrapper.classList.add('show');
     });
 
-    // === ТАЙМЕР ===
     function getWeddingDate() {
         return new Date(2026, 6, 31, 16, 0, 0);
     }
@@ -636,9 +674,7 @@
     updateTimer();
     setInterval(updateTimer, 1000);
 
-    // === КОПИРОВАНИЕ НОМЕРОВ ===
     const phoneNumbers = document.querySelectorAll('.phone-number');
-    
     const notice = document.createElement('div');
     notice.style.position = 'fixed';
     notice.style.bottom = '30px';
@@ -660,7 +696,6 @@
         phoneDiv.addEventListener('click', function() {
             const phoneNumber = this.getAttribute('data-phone');
             const displayNumber = this.innerText.trim();
-            
             navigator.clipboard.writeText(phoneNumber).then(() => {
                 notice.textContent = '✅ Номер скопирован: ' + displayNumber;
                 notice.style.opacity = '1';
