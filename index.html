@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Свадебное приглашение | Илья & Диана</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -14,9 +18,9 @@
         }
 
         body {
-            background: linear-gradient(145deg, #f9e9e0 0%, #fce9e6 100%);
+            background: linear-gradient(145deg, #f5ede8 0%, #efe5df 100%);
             font-family: 'Montserrat', sans-serif;
-            color: #3e2c2a;
+            color: #3a2e2a;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -25,14 +29,14 @@
             overflow-x: hidden;
         }
 
-        /* === НОВЫЙ КОНВЕРТ (в стиле вашего скриншота) === */
+        /* === КОНВЕРТ С ЗОЛОТИСТЫМ СВЕЧЕНИЕМ === */
         .envelope-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(145deg, #f9e9e0 0%, #fce9e6 100%);
+            background: linear-gradient(145deg, #f5ede8 0%, #efe5df 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -47,31 +51,32 @@
             pointer-events: none;
         }
 
-        /* Конверт */
+        /* Анимация раскрытия конверта */
         .envelope {
             position: relative;
-            width: 360px;
-            height: 260px;
-            background: #fffef7;
-            border-radius: 8px;
-            box-shadow: 0 25px 45px rgba(89, 53, 46, 0.2);
-            transition: transform 0.4s ease, box-shadow 0.3s ease;
-            animation: floatEnvelope 3s ease-in-out infinite;
-            overflow: hidden;
+            width: 480px;
+            height: 320px;
+            background: linear-gradient(145deg, #fffef7 0%, #faf5ed 100%);
+            border-radius: 12px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(212, 184, 150, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: floatEnvelope 3s ease-in-out infinite, goldenGlow 2s ease-in-out infinite;
+            cursor: pointer;
+            transform-origin: center;
         }
 
-        @keyframes floatEnvelope {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
+        /* Мягкое золотистое свечение */
+        @keyframes goldenGlow {
+            0%, 100% {
+                box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(212, 184, 150, 0.4), 0 0 20px rgba(196, 162, 122, 0.3), 0 0 40px rgba(196, 162, 122, 0.15);
+            }
+            50% {
+                box-shadow: 0 30px 50px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(212, 184, 150, 0.6), 0 0 35px rgba(196, 162, 122, 0.6), 0 0 60px rgba(196, 162, 122, 0.3);
+            }
         }
 
-        .envelope:hover {
-            transform: scale(1.01);
-            box-shadow: 0 30px 55px rgba(89, 53, 46, 0.25);
-        }
-
-        /* Анимация открытия */
-        .envelope.open {
+        /* Анимация раскрытия (при клике) */
+        .envelope.open-envelope {
             animation: openEnvelope 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
         }
 
@@ -80,49 +85,119 @@
                 transform: scale(1) rotate(0deg);
                 opacity: 1;
             }
-            40% {
-                transform: scale(1.08) rotate(2deg);
+            30% {
+                transform: scale(1.05) rotate(2deg);
             }
             100% {
-                transform: scale(1.3) rotate(4deg);
+                transform: scale(1.3) rotate(5deg);
                 opacity: 0;
             }
         }
 
-        /* Верхний клапан */
+        @keyframes floatEnvelope {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(0.5deg); }
+        }
+
+        .envelope:hover {
+            transform: scale(1.02) translateY(-5px);
+        }
+
         .envelope-flap {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 0;
-            border-top: 130px solid #ffe0d4;
-            border-left: 180px solid transparent;
-            border-right: 180px solid transparent;
-            border-radius: 8px 8px 0 0;
-            transition: all 0.3s ease;
+            height: 100%;
+            background: transparent;
+            border-radius: 12px;
+            overflow: hidden;
             z-index: 2;
         }
 
-        /* Декоративные линии как на скриншоте */
-        .envelope-line-top {
+        .envelope-flap::before {
+            content: "";
             position: absolute;
-            top: 50%;
-            left: 30px;
-            right: 30px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            border-top: 170px solid #f7efe7;
+            border-left: 240px solid transparent;
+            border-right: 240px solid transparent;
+            border-radius: 12px 12px 0 0;
+            box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .envelope-flap::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.05), transparent);
+            pointer-events: none;
+        }
+
+        /* Декоративная линия */
+        .envelope-line {
+            position: absolute;
+            bottom: 60px;
+            left: 20px;
+            right: 20px;
             height: 1px;
-            background: linear-gradient(90deg, transparent, #d4b896, #d4b896, transparent);
+            background: linear-gradient(90deg, transparent, rgba(212, 184, 150, 0.4), transparent);
             z-index: 3;
         }
 
-        .envelope-line-bottom {
+        /* СУРГУЧНАЯ ПЕЧАТЬ ПО ЦЕНТРУ */
+        .seal {
             position: absolute;
-            bottom: 60px;
-            left: 30px;
-            right: 30px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #d4b896, #d4b896, transparent);
-            z-index: 3;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle at 30% 30%, #c41e1e, #8b0000);
+            border-radius: 50%;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), inset 0 2px 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(196, 162, 122, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: bold;
+            font-size: 28px;
+            color: #f5e6d3;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Инициалы на печати */
+        .seal::after {
+            content: "И Д";
+            position: absolute;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: #f0dbb2;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+        }
+
+        /* Волнистый край печати */
+        .seal::before {
+            content: "";
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255, 215, 120, 0.6);
+            pointer-events: none;
         }
 
         /* Содержимое конверта */
@@ -135,33 +210,46 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 20px;
+            padding: 25px;
             background: transparent;
         }
 
-        .envelope-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 600;
-            color: #b56748;
-            letter-spacing: 4px;
+        .envelope-heart {
+            font-size: 58px;
+            color: #c4a27a;
             margin-bottom: 15px;
+            animation: pulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 5px 15px rgba(196, 162, 122, 0.3));
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.12); opacity: 1; }
+        }
+
+        .envelope-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 34px;
+            font-weight: 600;
+            color: #5a4a3e;
+            margin-bottom: 8px;
+            letter-spacing: 4px;
         }
 
         .envelope-sub {
-            font-size: 13px;
+            font-size: 16px;
             color: #c4a27a;
+            margin-bottom: 25px;
             letter-spacing: 2px;
-            margin-bottom: 20px;
         }
 
         .envelope-tap {
-            font-size: 12px;
-            color: #a09080;
+            font-size: 14px;
+            color: #8a7a6e;
             background: rgba(196, 162, 122, 0.12);
-            padding: 8px 20px;
-            border-radius: 40px;
-            border: 1px solid rgba(196, 162, 122, 0.3);
+            padding: 12px 28px;
+            border-radius: 50px;
+            border: 1px solid rgba(196, 162, 122, 0.4);
         }
 
         /* === ОСНОВНОЕ ПРИГЛАШЕНИЕ === */
@@ -170,8 +258,10 @@
             transform: scale(0.95);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
-            max-width: 750px;
+            max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 10;
         }
 
         .invitation-wrapper.show {
@@ -182,8 +272,8 @@
 
         .invitation-card {
             background: #fffef7;
-            border-radius: 58px 58px 68px 68px;
-            box-shadow: 0 35px 65px rgba(89, 53, 46, 0.2);
+            border-radius: 64px 64px 72px 72px;
+            box-shadow: 0 35px 65px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(196, 162, 122, 0.2);
             overflow: hidden;
             position: relative;
         }
@@ -201,18 +291,28 @@
             z-index: 1;
         }
 
+        .invitation-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #c4a27a, #e8ddd3, #c4a27a);
+        }
+
         .hero {
-            background: linear-gradient(135deg, #ffe9df, #ffe0d4);
+            background: linear-gradient(135deg, rgba(196, 162, 122, 0.05), rgba(196, 162, 122, 0.02));
             padding: 2rem 2rem 1.5rem;
             text-align: center;
             position: relative;
-            border-bottom: 2px solid #ffcfbc;
+            border-bottom: 1px solid rgba(196, 162, 122, 0.15);
         }
 
         .hero::before, .hero::after {
-            content: "❀";
-            font-size: 2rem;
-            color: #d9a78b;
+            content: "✦";
+            font-size: 1.8rem;
+            color: #c4a27a;
             position: absolute;
             top: 20px;
             opacity: 0.4;
@@ -234,39 +334,45 @@
         }
 
         .invitation-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 600;
-            color: #9b5a45;
-            letter-spacing: 2px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 500;
+            color: #5a4a3e;
+            letter-spacing: 4px;
         }
 
         .invitation-sub {
-            font-size: 0.9rem;
-            color: #ad7762;
-            border-top: 1px dashed #eccaba;
+            font-size: 0.85rem;
+            color: #c4a27a;
+            border-top: 1px dashed rgba(196, 162, 122, 0.3);
             display: inline-block;
-            padding-top: 0.5rem;
-            margin-top: 0.5rem;
+            padding-top: 0.6rem;
+            margin-top: 0.6rem;
         }
 
         .content {
-            padding: 2rem;
+            padding: 2.2rem;
         }
 
         .greeting {
             text-align: center;
             margin-bottom: 1.8rem;
             padding-bottom: 1rem;
-            border-bottom: 2px dotted #f0cfc0;
+            border-bottom: 2px dotted rgba(196, 162, 122, 0.3);
         }
 
         .greeting-text {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 2rem;
-            font-weight: 600;
-            color: #b56748;
+            font-weight: 500;
+            color: #c4a27a;
             line-height: 1.3;
+        }
+
+        .greeting-sub {
+            font-size: 0.9rem;
+            color: #8a7a6e;
+            margin-top: 8px;
         }
 
         .couple-names {
@@ -275,183 +381,239 @@
         }
 
         .names-main {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 700;
-            background: linear-gradient(125deg, #be7c62, #9b5740);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: #5a4a3e;
             display: inline-block;
+            letter-spacing: 3px;
         }
 
         .and-icon {
-            font-size: 1.8rem;
-            margin: 0 10px;
-            color: #b77b62;
+            font-size: 2rem;
+            margin: 0 15px;
+            color: #c4a27a;
             vertical-align: middle;
         }
 
         .date-block {
-            background: #fff5f0;
-            border-radius: 50px;
-            padding: 1.2rem;
+            background: rgba(196, 162, 122, 0.05);
+            border-radius: 60px;
+            padding: 1.3rem;
             text-align: center;
-            margin: 1.5rem 0;
+            margin: 1.8rem 0;
+            border: 1px solid rgba(196, 162, 122, 0.15);
         }
 
         .date-big {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #b56144;
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 500;
+            color: #c4a27a;
+            letter-spacing: 3px;
         }
 
         .date-details {
+            font-family: 'Outfit', sans-serif;
             font-size: 1rem;
-            color: #aa735e;
-            margin-top: 5px;
+            color: #8a7a6e;
+            margin-top: 6px;
         }
 
         .timer-wrapper {
-            background: #fef3ed;
-            border-radius: 42px;
+            background: rgba(196, 162, 122, 0.04);
+            border-radius: 60px;
             padding: 1.2rem;
-            margin: 1.5rem 0;
+            margin: 1.8rem 0;
             text-align: center;
+            border: 1px solid rgba(196, 162, 122, 0.1);
+        }
+
+        .timer-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #c4a27a;
+            margin-bottom: 1rem;
         }
 
         .timer-grid {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
         }
 
         .timer-cell {
-            background: white;
-            border-radius: 25px;
-            padding: 0.6rem;
-            min-width: 75px;
+            text-align: center;
+            min-width: 70px;
         }
 
         .timer-number {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #a1573d;
+            font-size: 2.5rem;
+            font-weight: 500;
+            font-family: 'Outfit', monospace;
+            color: #5a4a3e;
             line-height: 1;
         }
 
         .timer-label {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
-            color: #c2947e;
+            color: #a09080;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        .info-section {
+            margin: 1.5rem 0;
         }
 
         .info-item {
-            background: white;
-            border-radius: 50px;
-            padding: 0.9rem 1.5rem;
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin: 1rem 0;
-            border: 1px solid #ffded1;
+            padding: 1rem 1.2rem;
+            margin: 0.8rem 0;
+            background: rgba(196, 162, 122, 0.03);
+            border-radius: 50px;
+            border: 1px solid rgba(196, 162, 122, 0.12);
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            background: rgba(196, 162, 122, 0.07);
+            border-color: rgba(196, 162, 122, 0.3);
+            transform: translateX(5px);
         }
 
         .info-icon {
-            font-size: 1.8rem;
-            color: #cc8e72;
+            font-size: 1.6rem;
+            color: #c4a27a;
             width: 45px;
             text-align: center;
         }
 
         .info-text {
             flex: 1;
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: #4d3128;
+            font-size: 0.9rem;
+            color: #5a4a3e;
+            line-height: 1.4;
         }
 
         .info-text strong {
-            color: #a75839;
+            color: #c4a27a;
+            font-weight: 500;
         }
 
         .phone-section {
-            background: linear-gradient(115deg, #fef1ea, #fff7f2);
-            border-radius: 50px;
-            padding: 1.2rem;
             text-align: center;
-            margin: 1.8rem 0 0.5rem;
+            margin: 1rem 0 0.2rem;
+            padding: 0.5rem;
         }
 
         .phone-row {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
-            margin: 10px 0;
+            margin: 12px 0;
         }
 
         .phone-number {
             font-size: 1rem;
-            font-weight: 600;
-            color: #a75839;
-            background: white;
+            font-weight: 500;
+            color: #c4a27a;
+            background: rgba(196, 162, 122, 0.08);
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 18px;
+            gap: 10px;
+            padding: 8px 22px;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.2s;
-            border: 1px solid #ffded1;
+            border: 1px solid rgba(196, 162, 122, 0.2);
         }
 
         .phone-number:hover {
-            background: #fff1ea;
+            background: rgba(196, 162, 122, 0.15);
             transform: scale(1.02);
+            border-color: rgba(196, 162, 122, 0.5);
         }
 
         .copy-notice {
             font-size: 0.7rem;
-            color: #b8836a;
-            margin-top: 8px;
+            color: #a09080;
+            margin-top: 10px;
         }
 
         footer {
-            background: #fae9e1;
+            background: rgba(196, 162, 122, 0.05);
             text-align: center;
-            padding: 0.8rem;
-            font-size: 0.65rem;
-            color: #b6886e;
+            padding: 0.6rem 1rem;
+            font-size: 0.75rem;
+            color: #8a7a6e;
+            letter-spacing: 1px;
+            margin-top: 0px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* === АНИМАЦИЯ ПАДАЮЩИХ ЛЕПЕСТКОВ === */
+        .petal {
+            position: fixed;
+            top: -20px;
+            pointer-events: none;
+            z-index: 999;
+            font-size: 1.2rem;
+            opacity: 0.7;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-20px) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         @media (max-width: 550px) {
+            .envelope { width: 320px; height: 230px; }
+            .envelope-flap::before { border-top: 125px solid #f7efe7; border-left: 160px solid transparent; border-right: 160px solid transparent; }
+            .envelope-title { font-size: 24px; }
+            .envelope-heart { font-size: 42px; }
+            .envelope-tap { font-size: 11px; padding: 8px 18px; }
+            .seal { width: 50px; height: 50px; }
+            .seal::after { font-size: 18px; }
             .greeting-text { font-size: 1.5rem; }
-            .names-main { font-size: 2.2rem; }
+            .names-main { font-size: 2.3rem; }
             .date-big { font-size: 1.6rem; }
-            .timer-number { font-size: 1.6rem; }
-            .timer-cell { min-width: 65px; }
+            .timer-number { font-size: 1.8rem; }
+            .timer-cell { min-width: 55px; }
             .invitation-title { font-size: 1.5rem; }
             .content { padding: 1.5rem; }
-            .envelope { width: 280px; height: 210px; }
-            .envelope-flap { border-top: 105px solid #ffe0d4; border-left: 140px solid transparent; border-right: 140px solid transparent; }
-            .envelope-title { font-size: 22px; }
+            .phone-row { gap: 0.8rem; }
+            .phone-number { font-size: 0.85rem; padding: 6px 14px; }
+            .invitation-card::before { top: 12px; left: 12px; right: 12px; bottom: 12px; }
         }
     </style>
 </head>
 <body>
 
-<!-- КОНВЕРТ (НОВЫЙ СТИЛЬ) -->
+<!-- КОНВЕРТ С ПЕЧАТЬЮ, СВЕЧЕНИЕМ И АНИМАЦИЕЙ РАСКРЫТИЯ -->
 <div class="envelope-container" id="envelopeContainer">
     <div class="envelope" id="envelope">
         <div class="envelope-flap"></div>
-        <div class="envelope-line-top"></div>
-        <div class="envelope-line-bottom"></div>
+        <div class="envelope-line"></div>
+        <div class="seal"></div>
         <div class="envelope-content">
-            <div class="envelope-title">ПРИГЛАШЕНИЕ</div>
-            <div class="envelope-sub">ILYADIANA</div>
+            <div class="envelope-heart"><i class="fas fa-heart"></i></div>
+            <div class="envelope-title">Вам пришло письмо</div>
+            <div class="envelope-sub">Свадебное приглашение</div>
             <div class="envelope-tap"><i class="fas fa-hand-pointer"></i> Нажмите, чтобы открыть</div>
         </div>
     </div>
@@ -461,7 +623,7 @@
 <div class="invitation-wrapper" id="invitationWrapper">
     <div class="invitation-card">
         <div class="hero">
-            <div class="flower-icon"><i class="fas fa-seedling"></i></div>
+            <div class="flower-icon"><i class="fas fa-feather-alt"></i></div>
             <div class="invitation-title">СВАДЕБНОЕ ПРИГЛАШЕНИЕ</div>
             <div class="invitation-sub">Тепло наших сердец для вас</div>
         </div>
@@ -469,6 +631,7 @@
         <div class="content">
             <div class="greeting" id="greetingBlock">
                 <div class="greeting-text" id="guestGreeting">Дорогие друзья!</div>
+                <div class="greeting-sub">Имеем честь пригласить вас</div>
             </div>
 
             <div class="couple-names">
@@ -492,23 +655,31 @@
                 </div>
             </div>
 
-            <div class="info-item">
-                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                <div class="info-text"><strong>Ресторан «Версаль»</strong><br>Элеваторная ул., 13, посёлок Мелькомбинат</div>
-            </div>
-            <div class="info-item">
-                <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
-                <div class="info-text"><strong>Программа:</strong> 15:30 – Сбор гостей | 16:00 – Церемония | 17:00 – Фуршет | 18:00 – Банкет и танцы</div>
+            <div class="info-section">
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="info-text"><strong>Ресторан «Версаль»</strong><br>Элеваторная ул., 13, посёлок Мелькомбинат</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="info-text"><strong>Программа:</strong> 15:30 – Сбор гостей | 16:00 – Церемония | 17:00 – Фуршет | 18:00 – Банкет и танцы</div>
+                </div>
             </div>
 
             <div class="phone-section">
-                <div style="font-size: 0.8rem; margin-bottom: 8px; color: #9b5740;">По всем вопросам:</div>
+                <div style="font-size: 0.8rem; margin-bottom: 10px; color: #c4a27a; letter-spacing: 1px;">По всем вопросам:</div>
                 <div class="phone-row">
-                    <div class="phone-number" data-phone="89997577769">
-                        <i class="fas fa-phone-alt"></i> 8-999-757-7769
+                    <div style="text-align: center;">
+                        <div class="phone-number" data-phone="89997577769">
+                            <i class="fas fa-phone-alt"></i> 8-999-757-7769
+                        </div>
+                        <div style="font-size: 0.7rem; color: #c4a27a; margin-top: 5px;">👨‍💼 Илья (жених)</div>
                     </div>
-                    <div class="phone-number" data-phone="89870483010">
-                        <i class="fas fa-phone-alt"></i> 8-987-048-3010
+                    <div style="text-align: center;">
+                        <div class="phone-number" data-phone="89870483010">
+                            <i class="fas fa-phone-alt"></i> 8-987-048-3010
+                        </div>
+                        <div style="font-size: 0.7rem; color: #c4a27a; margin-top: 5px;">👰‍♀️ Диана (невеста)</div>
                     </div>
                 </div>
                 <div class="copy-notice"><i class="fas fa-copy"></i> Нажмите на номер, чтобы скопировать</div>
@@ -521,7 +692,63 @@
 </div>
 
 <script>
-    // === ОПРЕДЕЛЕНИЕ РОДА (Дорогой / Дорогая / Дорогие) ===
+    // === АНИМАЦИЯ РАСКРЫТИЯ КОНВЕРТА ===
+    const envelopeContainer = document.getElementById('envelopeContainer');
+    const envelope = document.getElementById('envelope');
+    const invitationWrapper = document.getElementById('invitationWrapper');
+
+    envelopeContainer.addEventListener('click', function() {
+        // Добавляем класс анимации раскрытия
+        envelope.classList.add('open-envelope');
+        
+        // После анимации раскрытия скрываем контейнер и показываем приглашение
+        setTimeout(() => {
+            envelopeContainer.classList.add('fade-out');
+            invitationWrapper.classList.add('show');
+            startPetals(); // Запускаем лепестки
+        }, 800);
+    });
+
+    // === ПАДАЮЩИЕ ЛЕПЕСТКИ ===
+    function createPetal() {
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        
+        const petals = ['🌸', '🌼', '🌺', '🌸', '🌷', '🌸'];
+        petal.innerHTML = petals[Math.floor(Math.random() * petals.length)];
+        
+        const size = Math.random() * 20 + 16;
+        petal.style.fontSize = size + 'px';
+        petal.style.left = Math.random() * 100 + '%';
+        const duration = Math.random() * 7 + 5;
+        petal.style.animationDuration = duration + 's';
+        petal.style.animationDelay = Math.random() * 5 + 's';
+        petal.style.opacity = Math.random() * 0.5 + 0.3;
+        
+        document.body.appendChild(petal);
+        
+        setTimeout(() => {
+            petal.remove();
+        }, duration * 1000);
+    }
+
+    let petalsInterval = null;
+    
+    function startPetals() {
+        if (petalsInterval) return;
+        petalsInterval = setInterval(() => {
+            createPetal();
+        }, 800);
+    }
+
+    function stopPetals() {
+        if (petalsInterval) {
+            clearInterval(petalsInterval);
+            petalsInterval = null;
+        }
+    }
+
+    // === ПЕРСОНАЛИЗАЦИЯ ===
     function getCorrectGreeting(name) {
         if (!name) return 'Дорогие друзья!';
         if (name.includes(' и ')) return `Дорогие ${name}!`;
@@ -553,22 +780,6 @@
     } else {
         greetingDiv.textContent = 'Дорогие друзья!';
     }
-
-    // === ОТКРЫТИЕ КОНВЕРТА С АНИМАЦИЕЙ ===
-    const envelopeContainer = document.getElementById('envelopeContainer');
-    const envelope = document.getElementById('envelope');
-    const invitationWrapper = document.getElementById('invitationWrapper');
-    
-    envelopeContainer.addEventListener('click', function() {
-        // Добавляем класс анимации раскрытия
-        envelope.classList.add('open');
-        
-        // После анимации скрываем контейнер и показываем приглашение
-        setTimeout(() => {
-            envelopeContainer.classList.add('fade-out');
-            invitationWrapper.classList.add('show');
-        }, 600);
-    });
 
     // === ТАЙМЕР ===
     function getWeddingDate() {
@@ -604,7 +815,6 @@
 
     // === КОПИРОВАНИЕ НОМЕРОВ ===
     const phoneNumbers = document.querySelectorAll('.phone-number');
-    
     const notice = document.createElement('div');
     notice.style.position = 'fixed';
     notice.style.bottom = '30px';
@@ -626,7 +836,6 @@
         phoneDiv.addEventListener('click', function() {
             const phoneNumber = this.getAttribute('data-phone');
             const displayNumber = this.innerText.trim();
-            
             navigator.clipboard.writeText(phoneNumber).then(() => {
                 notice.textContent = '✅ Номер скопирован: ' + displayNumber;
                 notice.style.opacity = '1';
