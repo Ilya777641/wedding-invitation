@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Свадебное приглашение | Ива & Драга</title>
+    <title>Свадебное приглашение | Илья & Диана</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background: linear-gradient(145deg, #f9e9e0 0%, #fce9e6 100%);
             font-family: 'Montserrat', sans-serif;
@@ -18,6 +23,7 @@
             justify-content: center;
             padding: 20px;
         }
+
         .envelope-container {
             position: fixed;
             top: 0;
@@ -32,19 +38,33 @@
             cursor: pointer;
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .envelope-container.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        .envelope-container.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
         .envelope {
             position: relative;
-            width: 320px;
-            height: 220px;
+            width: 340px;
+            height: 230px;
             background: #fffef7;
-            border-radius: 12px;
-            box-shadow: 0 25px 45px rgba(89, 53, 46, 0.25);
+            border-radius: 16px;
+            box-shadow: 0 30px 50px rgba(89, 53, 46, 0.3);
             transition: transform 0.3s ease;
-            animation: floatEnvelope 2s ease-in-out infinite;
+            animation: floatEnvelope 2.5s ease-in-out infinite;
         }
-        @keyframes floatEnvelope { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
-        .envelope:hover { transform: scale(1.02); }
+
+        @keyframes floatEnvelope {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
+        }
+
+        .envelope:hover {
+            transform: scale(1.02);
+        }
+
         .envelope-flap {
             position: absolute;
             top: 0;
@@ -52,9 +72,10 @@
             width: 100%;
             height: 100%;
             background: #fffef7;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
         }
+
         .envelope-flap::before {
             content: "";
             position: absolute;
@@ -62,21 +83,23 @@
             left: 0;
             width: 100%;
             height: 0;
-            border-top: 110px solid #ffe0d4;
-            border-left: 160px solid transparent;
-            border-right: 160px solid transparent;
-            border-radius: 12px 12px 0 0;
+            border-top: 115px solid #ffe0d4;
+            border-left: 170px solid transparent;
+            border-right: 170px solid transparent;
+            border-radius: 16px 16px 0 0;
         }
+
         .envelope-flap::after {
             content: "✉";
             position: absolute;
             bottom: 25px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 48px;
+            font-size: 52px;
             color: #e7b49e;
-            opacity: 0.7;
+            opacity: 0.8;
         }
+
         .envelope-content {
             position: relative;
             z-index: 2;
@@ -86,97 +109,313 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            padding: 20px;
         }
+
         .envelope-heart {
-            font-size: 32px;
+            font-size: 36px;
             color: #e7b49e;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             animation: pulse 1.5s ease-in-out infinite;
         }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.2); opacity: 1; } }
-        .envelope-title { font-family: 'Playfair Display', serif; font-size: 22px; color: #9b5a45; }
-        .envelope-sub { font-size: 13px; color: #ad7762; margin: 8px 0 15px; }
-        .envelope-tap { font-size: 12px; color: #c89a82; background: rgba(255, 235, 225, 0.9); padding: 6px 16px; border-radius: 30px; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        .envelope-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #9b5a45;
+            margin-bottom: 5px;
+        }
+
+        .envelope-sub {
+            font-size: 13px;
+            color: #ad7762;
+            margin-bottom: 15px;
+        }
+
+        .envelope-tap {
+            font-size: 12px;
+            color: #c89a82;
+            background: rgba(255, 235, 225, 0.9);
+            padding: 8px 20px;
+            border-radius: 40px;
+        }
+
+        .envelope-tap i {
+            margin-right: 6px;
+        }
+
+        /* ОСНОВНОЕ ПРИГЛАШЕНИЕ */
         .invitation-wrapper {
             opacity: 0;
             transform: scale(0.95);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
-            max-width: 800px;
+            max-width: 750px;
             margin: 0 auto;
         }
-        .invitation-wrapper.show { opacity: 1; transform: scale(1); pointer-events: auto; }
+
+        .invitation-wrapper.show {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
         .invitation-card {
             background: #fffef7;
-            border-radius: 58px;
+            border-radius: 58px 58px 68px 68px;
             box-shadow: 0 35px 65px rgba(89, 53, 46, 0.2);
             overflow: hidden;
         }
+
         .hero {
             background: linear-gradient(135deg, #ffe9df, #ffe0d4);
-            padding: 2.5rem 2rem 1.8rem;
+            padding: 2rem 2rem 1.5rem;
             text-align: center;
             position: relative;
             border-bottom: 2px solid #ffcfbc;
         }
-        .hero::before, .hero::after { content: "❀"; font-size: 2rem; color: #d9a78b; position: absolute; top: 15px; opacity: 0.5; }
-        .hero::before { left: 30px; }
-        .hero::after { right: 30px; }
-        .flower-icon { font-size: 2rem; color: #e7b49e; margin-bottom: 1rem; animation: sway 3s infinite ease; display: inline-block; }
-        @keyframes sway { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(6deg); } }
-        .invitation-title { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 600; color: #9b5a45; }
-        .invitation-sub { font-size: 1rem; color: #ad7762; border-top: 1px dashed #eccaba; display: inline-block; padding-top: 0.6rem; }
-        .content { padding: 2rem; }
-        .couple-names { text-align: center; margin: 1.5rem 0; }
-        .names-main { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 700; background: linear-gradient(125deg, #be7c62, #9b5740); background-clip: text; -webkit-background-clip: text; color: transparent; }
-        .and-icon { font-size: 2rem; margin: 0 12px; color: #b77b62; }
-        .date-block { background: #fff5f0; border-radius: 54px; padding: 1.6rem; text-align: center; margin: 2rem 0; }
-        .date-big { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700; color: #b56144; }
-        .timer-wrapper { background: #fef3ed; border-radius: 42px; padding: 1.5rem; margin: 2rem 0; text-align: center; }
-        .timer-grid { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
-        .timer-cell { background: white; border-radius: 30px; padding: 0.8rem; min-width: 85px; }
-        .timer-number { font-size: 2.6rem; font-weight: 700; color: #a1573d; }
-        .timer-label { font-size: 0.75rem; text-transform: uppercase; color: #c2947e; }
-        .info-item { background: white; border-radius: 60px; padding: 1rem 1.8rem; display: flex; align-items: center; gap: 1.2rem; margin: 1rem 0; border: 1px solid #ffded1; }
-        .info-icon { font-size: 2rem; color: #cc8e72; width: 48px; }
-        .rsvp-form {
-            background: linear-gradient(115deg, #fef1ea, #fff7f2);
-            border-radius: 48px;
-            padding: 1.8rem;
-            margin: 2rem 0;
-            text-align: center;
+
+        .hero::before, .hero::after {
+            content: "❀";
+            font-size: 2rem;
+            color: #d9a78b;
+            position: absolute;
+            top: 15px;
+            opacity: 0.5;
         }
-        .form-container {
-            width: 100%;
-            border-radius: 32px;
-            overflow: hidden;
-            margin-top: 1rem;
-        }
-        .form-container iframe {
-            width: 100%;
-            height: 580px;
-            border: none;
-            background: white;
-            border-radius: 32px;
-        }
-        .phone-note {
-            margin-top: 1.5rem;
-            font-size: 0.85rem;
-            color: #a76348;
-            padding: 10px;
-            background: rgba(255,255,255,0.7);
-            border-radius: 50px;
+        .hero::before { left: 20px; }
+        .hero::after { right: 20px; }
+
+        .flower-icon {
+            font-size: 2rem;
+            color: #e7b49e;
+            margin-bottom: 0.8rem;
+            animation: sway 3s infinite ease;
             display: inline-block;
         }
-        footer { background: #fae9e1; text-align: center; padding: 1rem; font-size: 0.7rem; color: #b6886e; }
-        @media (max-width: 650px) {
-            .names-main { font-size: 2.5rem; }
-            .date-big { font-size: 1.8rem; }
-            .timer-number { font-size: 1.9rem; }
-            .timer-cell { min-width: 70px; }
-            .invitation-title { font-size: 1.7rem; }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(6deg); }
+        }
+
+        .invitation-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #9b5a45;
+            letter-spacing: 2px;
+        }
+
+        .invitation-sub {
+            font-size: 0.9rem;
+            color: #ad7762;
+            border-top: 1px dashed #eccaba;
+            display: inline-block;
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        /* ПЕРСОНАЛЬНОЕ ОБРАЩЕНИЕ */
+        .greeting {
+            text-align: center;
+            margin-bottom: 1.8rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px dotted #f0cfc0;
+        }
+
+        .greeting-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #b56748;
+            line-height: 1.3;
+        }
+
+        .greeting-sub {
+            font-size: 1rem;
+            color: #c48a6e;
+            margin-top: 8px;
+        }
+
+        .couple-names {
+            text-align: center;
+            margin: 1rem 0 1.2rem;
+        }
+
+        .names-main {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(125deg, #be7c62, #9b5740);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .and-icon {
+            font-size: 1.8rem;
+            margin: 0 10px;
+            color: #b77b62;
+            vertical-align: middle;
+        }
+
+        .date-block {
+            background: #fff5f0;
+            border-radius: 50px;
+            padding: 1.2rem;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .date-big {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #b56144;
+        }
+
+        .date-details {
+            font-size: 1rem;
+            color: #aa735e;
+            margin-top: 5px;
+        }
+
+        .timer-wrapper {
+            background: #fef3ed;
+            border-radius: 42px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .timer-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #bc826a;
+            margin-bottom: 0.8rem;
+        }
+
+        .timer-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .timer-cell {
+            background: white;
+            border-radius: 25px;
+            padding: 0.6rem;
+            min-width: 75px;
+        }
+
+        .timer-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: 'Montserrat', monospace;
+            color: #a1573d;
+            line-height: 1;
+        }
+
+        .timer-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #c2947e;
+        }
+
+        .info-item {
+            background: white;
+            border-radius: 50px;
+            padding: 0.9rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #ffded1;
+        }
+
+        .info-icon {
+            font-size: 1.8rem;
+            color: #cc8e72;
+            width: 45px;
+            text-align: center;
+        }
+
+        .info-text {
+            flex: 1;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: #4d3128;
+        }
+
+        .info-text strong {
+            color: #a75839;
+        }
+
+        .phone-section {
+            background: linear-gradient(115deg, #fef1ea, #fff7f2);
+            border-radius: 50px;
+            padding: 1.2rem;
+            text-align: center;
+            margin: 1.8rem 0 0.5rem;
+        }
+
+        .phone-number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #a75839;
+            background: white;
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin: 8px 0;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .phone-number:hover {
+            background: #fff1ea;
+            transform: scale(1.02);
+        }
+
+        .copy-notice {
+            font-size: 0.7rem;
+            color: #b8836a;
+            margin-top: 5px;
+        }
+
+        footer {
+            background: #fae9e1;
+            text-align: center;
+            padding: 0.8rem;
+            font-size: 0.65rem;
+            color: #b6886e;
+        }
+
+        @media (max-width: 550px) {
+            .greeting-text { font-size: 1.5rem; }
+            .names-main { font-size: 2.2rem; }
+            .date-big { font-size: 1.6rem; }
+            .timer-number { font-size: 1.6rem; }
+            .timer-cell { min-width: 65px; }
+            .invitation-title { font-size: 1.5rem; }
+            .content { padding: 1.5rem; }
             .envelope { width: 280px; height: 200px; }
-            .form-container iframe { height: 520px; }
+            .envelope-flap::before { border-left: 140px solid transparent; border-right: 140px solid transparent; border-top: 100px solid #ffe0d4; }
+            .phone-number { font-size: 1rem; }
         }
     </style>
 </head>
@@ -205,15 +444,21 @@
         </div>
 
         <div class="content">
+            <!-- ПЕРСОНАЛЬНОЕ ОБРАЩЕНИЕ (вставляется из ссылки) -->
+            <div class="greeting" id="greetingBlock">
+                <div class="greeting-text" id="guestGreeting">Дорогой гость!</div>
+                <div class="greeting-sub">Имеем честь пригласить вас</div>
+            </div>
+
             <div class="couple-names">
-                <span class="names-main">Ива</span>
+                <span class="names-main">Илья</span>
                 <span class="and-icon"><i class="fas fa-heart"></i></span>
-                <span class="names-main">Драга</span>
+                <span class="names-main">Диана</span>
             </div>
 
             <div class="date-block">
                 <div class="date-big">31 ИЮЛЯ 2026</div>
-                <div class="date-details">17:00 • Торжественная церемония и банкет</div>
+                <div class="date-details">16:00 • Торжественная церемония и банкет</div>
             </div>
 
             <div class="timer-wrapper">
@@ -228,60 +473,146 @@
 
             <div class="info-item">
                 <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                <div class="info-text"><strong>Замок «Лесная Сказка»</strong><br>Московская область, пос. Ромашково, ул. Цветочная 12</div>
+                <div class="info-text"><strong>Ресторан «Версаль»</strong><br>Элеваторная ул., 13, посёлок Мелькомбинат</div>
             </div>
             <div class="info-item">
                 <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
-                <div class="info-text"><strong>Программа:</strong> 16:30 – Сбор | 17:00 – Церемония | 18:00 – Фуршет | 19:00 – Банкет</div>
+                <div class="info-text"><strong>Программа:</strong> 15:30 – Сбор гостей | 16:00 – Церемония | 17:00 – Фуршет | 18:00 – Банкет и танцы</div>
             </div>
             <div class="info-item">
                 <div class="info-icon"><i class="fas fa-dress-code"></i></div>
-                <div class="info-text"><strong>Дресс-код:</strong> Вечерний, приветствуются цветочные оттенки</div>
+                <div class="info-text"><strong>Дресс-код:</strong> Вечерний, приветствуются цветочные оттенки и элегантные наряды</div>
             </div>
 
-            <!-- ВСТРОЕННАЯ GOOGLE ФОРМА (ВАША ССЫЛКА УЖЕ ВСТАВЛЕНА) -->
-            <div class="rsvp-form">
-                <i class="fas fa-pen-alt" style="font-size: 2rem; color: #b56748;"></i>
-                <h3 style="margin: 0.5rem 0; color: #9b5740;">Подтвердите присутствие</h3>
-                <p style="margin-bottom: 0.5rem;">Заполните форму — данные сразу попадут в таблицу</p>
-                
-                <div class="form-container">
-                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf6JBakqXtYMqvepb87iHGYTUEiCzYHbFHSME4J45-lKOqZFA/viewform?embedded=true" width="100%" height="580" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
+            <div class="phone-section">
+                <div style="font-size: 0.9rem; margin-bottom: 5px;">По всем вопросам:</div>
+                <div class="phone-number" id="phoneNumber">
+                    <i class="fas fa-phone-alt"></i> 8-999-757-7769
                 </div>
-                
-                <div class="phone-note">
-                    <i class="fas fa-phone-alt"></i> Или подтвердите по телефону/СМС: <strong>8-999-757-7769</strong>
-                </div>
+                <div class="copy-notice"><i class="fas fa-copy"></i> Нажмите на номер, чтобы скопировать</div>
             </div>
         </div>
         <footer>
-            С любовью, Ива и Драга ♥ Ждём вас разделить с нами этот день
+            С любовью, Илья и Диана ♥ Ждём вас разделить с нами этот день
         </footer>
     </div>
 </div>
 
 <script>
-    // Открытие конверта
-    document.getElementById('envelopeContainer').addEventListener('click', function() {
-        this.classList.add('fade-out');
-        document.getElementById('invitationWrapper').classList.add('show');
+    // === ПОЛУЧАЕМ ИМЯ ГОСТЯ ИЗ ССЫЛКИ ===
+    function getGuestNameFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        let guest = urlParams.get('guest');
+        if (guest) {
+            // Декодируем (например, "Александр+и+Мария" -> "Александр и Мария")
+            guest = decodeURIComponent(guest);
+            // Заменяем плюсы на пробелы (на всякий случай)
+            guest = guest.replace(/\+/g, ' ');
+            return guest;
+        }
+        return null;
+    }
+
+    function formatGreeting(guestName) {
+        if (!guestName) {
+            return 'Дорогие друзья!';
+        }
+        // Проверяем, есть ли "и" в имени (для пар)
+        if (guestName.includes(' и ')) {
+            return `Дорогие ${guestName}!`;
+        }
+        return `Дорогой ${guestName}!`;
+    }
+
+    const guestName = getGuestNameFromURL();
+    const greetingDiv = document.getElementById('guestGreeting');
+    if (guestName) {
+        greetingDiv.textContent = formatGreeting(guestName);
+    } else {
+        greetingDiv.textContent = 'Дорогие друзья!';
+    }
+
+    // === ОТКРЫТИЕ КОНВЕРТА ===
+    const envelopeContainer = document.getElementById('envelopeContainer');
+    const invitationWrapper = document.getElementById('invitationWrapper');
+    
+    envelopeContainer.addEventListener('click', function() {
+        envelopeContainer.classList.add('fade-out');
+        invitationWrapper.classList.add('show');
     });
 
-    // Таймер обратного отсчёта
+    // === ТАЙМЕР ===
+    function getWeddingDate() {
+        // 31 июля 2026 года, 16:00:00
+        return new Date(2026, 6, 31, 16, 0, 0);
+    }
+
     function updateTimer() {
-        const target = new Date(2026, 6, 31, 17, 0, 0);
-        const diff = target - new Date();
-        if (diff <= 0) {
-            ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).innerText = '00');
+        const now = new Date().getTime();
+        const target = getWeddingDate().getTime();
+        const distance = target - now;
+
+        if (distance < 0) {
+            document.getElementById('days').innerText = "00";
+            document.getElementById('hours').innerText = "00";
+            document.getElementById('minutes').innerText = "00";
+            document.getElementById('seconds').innerText = "00";
             return;
         }
-        document.getElementById('days').innerText = Math.floor(diff / 86400000);
-        document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000);
-        document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000);
-        document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000);
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (86400000)) / (3600000));
+        const minutes = Math.floor((distance % 3600000) / 60000);
+        const seconds = Math.floor((distance % 60000) / 1000);
+
+        document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+        document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+        document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
     }
+
     updateTimer();
     setInterval(updateTimer, 1000);
+
+    // === КОПИРОВАНИЕ НОМЕРА ТЕЛЕФОНА ===
+    const phoneDiv = document.getElementById('phoneNumber');
+    const phoneNumber = '8-999-757-7769';
+    const cleanPhone = '89997577769';
+    
+    // Создаём элемент для уведомления
+    const notice = document.createElement('div');
+    notice.style.position = 'fixed';
+    notice.style.bottom = '30px';
+    notice.style.left = '50%';
+    notice.style.transform = 'translateX(-50%)';
+    notice.style.backgroundColor = '#4caf50';
+    notice.style.color = 'white';
+    notice.style.padding = '10px 20px';
+    notice.style.borderRadius = '50px';
+    notice.style.fontSize = '14px';
+    notice.style.zIndex = '1001';
+    notice.style.opacity = '0';
+    notice.style.transition = 'opacity 0.3s';
+    notice.style.pointerEvents = 'none';
+    document.body.appendChild(notice);
+    
+    phoneDiv.addEventListener('click', function() {
+        navigator.clipboard.writeText(cleanPhone).then(() => {
+            notice.textContent = '✅ Номер скопирован: ' + phoneNumber;
+            notice.style.opacity = '1';
+            setTimeout(() => {
+                notice.style.opacity = '0';
+            }, 2000);
+        }).catch(() => {
+            notice.textContent = '❌ Не удалось скопировать';
+            notice.style.backgroundColor = '#c62828';
+            notice.style.opacity = '1';
+            setTimeout(() => {
+                notice.style.opacity = '0';
+                notice.style.backgroundColor = '#4caf50';
+            }, 2000);
+        });
+    });
 </script>
 </body>
 </html>
